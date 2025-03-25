@@ -27,3 +27,47 @@
   - Using commas automatically adds spaces between the values in the output.
 - To print a blank line: `print()`.
 
+
+
+## Strings
+- **Defining Strings**: Strings can be defined using `'`, `"`, or `'''`. Triple quotes allow you to include line breaks directly within the text.
+- **Character Indexing**:
+  - Characters are indexed from `0` to `length-1`.
+  - Negative indexing allows access from the end of the string: `string[-1]` accesses the last character.
+  - **Immutability**: Strings cannot be modified once they are created.
+
+
+
+### Concatenating Strings
+- **Using the `+` operator**
+- Using `split_string.join([list of strings])`
+	* Note: if `' '.join(stringX)` is used, it splits characters with a space.
+
+### String format
+* f-string: `f' Hola {variable}'`
+* format method (more complex and les used): `'Hola {}'.format(variable)`
+
+
+#### Special Characters
+- The backslash (`\`) is used to include special characters:
+  - `\n`: New line.
+  - `\t`: Tab.
+  - `\\`: Backslash (`\`).
+  - `\'`: Single quote within single-quoted strings.
+
+
+
+### String Methods (do not replace the original string!)
+- Upper and lower case: `str1.upper()`, `str1.lower()`
+- Remove beginning and ending spaces: `str1.strip()`
+- Length: `len(str1)`
+- Slicing (get substring): `str1[start:end]` *The end index character is not included.*
+- Find substring: `str1.find(substring)` Returns the index of the first occurrence of the searched substring (-1 if not found).
+- Replace method: `new_str = str1.replace(old_substr, new_substr)`
+- Split method: Divides the string into a list of elements split by a separator *(default space)*: `str1.split(sep)`
+- Repeat the same string: `str1 * n` Repeats the string `str1` `n` times.
+
+
+
+
+
