@@ -1,0 +1,51 @@
+# Test file
+cosas.py
+
+# IntelliJ IDEA / PyCharm specific files
+.idea/
+*.iml
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+env/
+venv/
+*.env
+*.venv
+
+# Logs and temporary files
+*.log
+*.temp
+*.tmp
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Test coverage reports
+htmlcov/
+.tox/
+.coverage
+*.cover
+
+# Output files
+*.out
+*.pid
+*.gz
+*.zip
+*.tar
+*.bz2
+*.sqlite
+*.sqlite3
+
+# Ignore settings and config files
+*.config
+*.settings
