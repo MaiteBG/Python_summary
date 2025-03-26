@@ -67,7 +67,15 @@
 - Split method: Divides the string into a list of elements split by a separator *(default space)*: `str1.split(sep)`
 - Repeat the same string: `str1 * n` Repeats the string `str1` `n` times.
 
+## Data type conversion (for MD)
+
+- `int(x)` *if x is bool: 0 (False), 1 (True)*
+- `float(x)` *Converts x to a floating-point number.*
+- `str(x)` *if x is bool: "False" (False), "True" (True)*
+- `bool(x)` *`False` value if x is 0, None, or an empty string, list, or collection.*
+
+With variable and dot: `x.` (*possible type operations*)
 
 
-
-
+## Input data
+- input function: `input("Message")` asks the user for data and always returns a string (type conversion is needed afterward).
