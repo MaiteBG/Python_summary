@@ -23,9 +23,9 @@
   - Apply prefixes or suffixes to provide context (e.g., `is_valid`, `user_count`).
 
 ### Print Statement
-- Basic example: `print(x, "y", z)`.
+  - Basic example: `print(x, "y", z)`.
   - Using commas automatically adds spaces between the values in the output.
-- To print a blank line: `print()`.
+  - To print a blank line: `print()`.
 
 
 
@@ -44,8 +44,11 @@
 	* Note: if `' '.join(stringX)` is used, it splits characters with a space.
 
 ### String format
-* f-string: `f' Hola {variable}'`
-* format method (more complex and les used): `'Hola {}'.format(variable)`
+- f-string: `f' Hola {variable}'`   
+	* *Specify float decimals: `f"{float_var1:.2f}"`*
+	* *Evaluates expressions inside the string. `f"{num1 + num2}"`*
+
+- format method (more complex and les used): `'Hola {}'.format(variable)`
 
 
 #### Special Characters
@@ -67,7 +70,15 @@
 - Split method: Divides the string into a list of elements split by a separator *(default space)*: `str1.split(sep)`
 - Repeat the same string: `str1 * n` Repeats the string `str1` `n` times.
 
-## Data type conversion (for MD)
+
+
+## Input data
+
+- **User data**: `input("Message")` prompts the user for input and always returns a string. Type conversion is necessary afterward if a different data type is needed.
+- **Random number**: `randint(a, b)` from the `random` module returns a random integer between `a` and `b` (inclusive).
+
+
+### Data type conversion (for MD)
 
 - `int(x)` *if x is bool: 0 (False), 1 (True)*
 - `float(x)` *Converts x to a floating-point number.*
@@ -77,5 +88,56 @@
 With variable and dot: `x.` (*possible type operations*)
 
 
-## Input data
-- input function: `input("Message")` asks the user for data and always returns a string (type conversion is needed afterward).
+
+## Operators
+
+### Arithmetic operators
+
+- `+ - *` `/` *float division* `//` *integer division* `%` *modulo* `**` *power*
+
+### Assignment
+
+- `var_x = value` *Assigns a value to a variable.*
+- Multiple assignment: `var_x, var_y, var_z = value_x, value_y, value_z` *Assigns values to multiple variables in a single line.*
+- Chained assignment: `var1 = var2 = … = value` *Assigns the same value to multiple variables.*
+
+#### Value exchange without temporary variable
+- `x, y = y, x` *Swaps the values of `x` and `y` without using a temporary variable.*
+
+#### Compound assignments
+- `variable OPERATOR = value` *Equivalent to `variable = variable OPERATOR value` (e.g., `x += 5` is equivalent to `x = x + 5`).*
+
+### Conditional and logical operators
+
+- **Return a boolean result**
+- **Conditional**: `< > <= >= == !=`
+  - *Can use multiple operands: `value_min <= value_x <= value_max`.*
+  - *For strings, compares based on ASCII values.*
+
+- **Logical**: `and` `or` `not`
+  - *Use `not` to check if a variable is empty. For example: `if not var_x`, returns `True` if `var_x` is empty.*
+
+### Operator Precedence in Python
+Python follows a specific order of precedence for operators:
+
+1. **Parentheses**
+   - `()` have the highest precedence and are used to force the evaluation order.
+
+2. **Exponentiation**
+   - `**`
+
+3. **Unary Operators**
+   - Unary Plus and Minus: `+`, `-`
+
+4. **Arithmetic Operators**
+   - Multiplication, Division, Floor Division, Modulus: `*`, `/`, `//`, `%`
+   - Addition and Subtraction: `+`, `-`
+
+5. **Comparisons**
+   - Equality and Relational: `==`, `!=`, `>`, `<`, `>=`, `<=`
+
+6. **Logical Operators**
+   - `and`, `or`, `not`
+
+7. **Assignment and Compound Assignments**
+   - `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `**=`, `//=`
