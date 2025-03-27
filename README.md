@@ -1,4 +1,39 @@
 # Python Summary
+<!-- TOC -->
+  * [Basic Concepts and Conventions](#basic-concepts-and-conventions)
+    * [Comments](#comments)
+    * [Variables](#variables)
+    * [Naming conventions](#naming-conventions)
+    * [Print Statement](#print-statement)
+  * [Strings](#strings)
+    * [Concatenating Strings](#concatenating-strings)
+    * [String format](#string-format)
+    * [String Methods (do not replace the original string!)](#string-methods-do-not-replace-the-original-string)
+  * [Input data](#input-data)
+    * [Data type conversion (for MD)](#data-type-conversion-for-md)
+  * [Operators](#operators)
+    * [Arithmetic operators](#arithmetic-operators)
+    * [Assignment](#assignment)
+    * [Conditional and logical operators](#conditional-and-logical-operators)
+    * [Operator Precedence in Python](#operator-precedence-in-python)
+  * [Sentences](#sentences)
+    * [Control Sentences](#control-sentences)
+    * [Loop sentences](#loop-sentences)
+  * [Collections](#collections)
+    * [List `my_list = [item_1, item_2, item3]`](#list-my_list--item_1-item_2-item3)
+    * [Tuple `my_tuple = (item_1, item_2, item_3)`](#tuple-my_tuple--item_1-item_2-item_3-)
+    * [Set `my_set = {item_1, item_2, item_3}`](#set-my_set--item_1-item_2-item_3)
+    * [Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#dictionary-my_dictionary--key_1-value_1-key_2-value_2)
+    * [List comprehension `[operation for element in iterable if condition]`](#list-comprehension-operation-for-element-in-iterable-if-condition)
+  * [Modules](#modules)
+    * [Modules characteristics](#modules-characteristics)
+  * [Functions](#functions)
+    * [Arguments](#arguments)
+    * [Use of globla varaible inside a function](#use-of-globla-varaible-inside-a-function)
+    * [Recursive functions](#recursive-functions)
+<!-- TOC -->
+
+
 
 ## Basic Concepts and Conventions
 
@@ -151,6 +186,7 @@ Python follows a specific order of precedence for operators:
 ---
 
 ---
+
 ## Sentences
 ### Control Sentences
 
@@ -206,6 +242,7 @@ def switch_demo_v2(argument):
 print(switch_demo_v2(2))  # Salida: Opción 2 seleccionada
 ```
 ---
+
 ### Loop sentences
 
 ``` python
@@ -324,5 +361,81 @@ or `my_tuple = item_1, item_2, item_3`
 ---
 
 ---
+
+## Modules
+
+A **module** in Python is a `.py` file containing:
+- Functions
+- Classes 
+- Variables
+- Runnable code
+
+### Modules characteristics
+- Designed for code reusability and organization
+- Can be imported into other Python files using `import`
+- Creates its own namespace to avoid naming conflicts
+- May include documentation (docstrings) at the top
+
+``` python
+if __name__ = '__main__': #__name__ varaible that indicate the name of the module that we are ejecuting 
+  #Instrucción only if we ejecute the module direcly
+```
+
+
+---
+
+---
 ## Functions
 
+``` python
+def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
+    # Function body
+    return resultado
+```
+* Can return a single value or a tuple of values (with or without unpacking).
+
+### Arguments
+
+* Parameters can have default values: `param = default_value`.
+* Variable-length Arguments:
+  * `*args`: Receives multiple arguments as a tuple.
+  * `**kwargs`: Receives keyword arguments as a dictionary.
+
+Arguments must be specified in this order: `function(req_arg, default_arg="default", *args, **kwargs)`.
+
+```python
+# Function example
+def example_function(req_arg, default_arg="default", *args, **kwargs):
+    pass
+
+# Calling the function
+example_function(
+    "value1",                      # req_arg
+    "not_default",                 # default_arg
+    "extra1", "extra2", "extra3",  # *args
+    key1="val1", key2="val2"       # **kwargs
+)
+```
+
+### Use of a global variable inside a function
+``` python
+variable_name = value
+
+def function(...):
+    global variable_name
+    variable_name = values...  # or other use of variable_name
+```
+
+### Recursive functions
+* Functions that call themselves.
+* Must reach a base case to avoid infinite loops.
+
+``` python
+def function_recursiva(...):
+    # Base case
+    if condition:
+        ...
+    else:  # Recursive case
+        ...
+        function_recursiva(...)
+```
