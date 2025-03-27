@@ -10,10 +10,10 @@
 - **Objects**: Variables in Python are references stored in the *stack* and point to data in the *heap*.
 - **Mutability**: If the value of a variable changes, a new object is created with the updated data, and the variable points to this new reference.
 - **Initialization**: Variables must be declared with an initial value.
-- **Constants**: By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and should not be modified.
 
-### Snake Case
-- **Naming conventions**:
+### Naming conventions
+- **Constants**: By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and should not be modified.
+- **Snake Case** for common variables and file names:
   - Use the snake_case format: `[a-z][A-Z,a-z,0-9,_]+`.
   - Avoid:
     - Python's reserved keywords.
@@ -21,14 +21,13 @@
     - Names starting with numbers or uppercase letters.
   - Use underscores (`_`) to compose multi-word names (e.g., `file_txt`).
   - Apply prefixes or suffixes to provide context (e.g., `is_valid`, `user_count`).
+  - Use of plural names only on collections.
 
 ### Print Statement
   - Basic example: `print(x, "y", z)`.
   - Using commas automatically adds spaces between the values in the output.
   - To print a blank line: `print()`.
   - To change final character (default break line) `print(var1, end=' ')`
-
-
 
 ## Strings
 - **Defining Strings**: Strings can be defined using `'`, `"`, or `'''`. Triple quotes allow you to include line breaks directly within the text.
@@ -71,8 +70,6 @@
 - Split method: Divides the string into a list of elements split by a separator *(default space)*: `str1.split(sep)`
 - Repeat the same string: `str1 * n` Repeats the string `str1` `n` times.
 
-
-
 ## Input data
 
 - **User data**: `input("Message")` prompts the user for input and always returns a string. Type conversion is necessary afterward if a different data type is needed.
@@ -87,8 +84,6 @@
 - `bool(x)` *`False` value if x is 0, None, or an empty string, list, or collection.*
 
 With variable and dot: `x.` (*possible type operations*)
-
-
 
 ## Operators
 
@@ -142,8 +137,8 @@ Python follows a specific order of precedence for operators:
 7. **Assignment and Compound Assignments**
    - `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `**=`, `//=`
 
-
-## Control Sentences
+## Sentences
+### Control Sentences
 
 - `if`, `elif`, `else`
 - Ternary operator: `result = true_value if condition else false_value`
@@ -196,8 +191,108 @@ def switch_demo_v2(argument):
 
 print(switch_demo_v2(2))  # Salida: Opción 2 seleccionada
 ```
-## Loop sentences
 
-```python
+### Loop sentences
+
+``` python
 while condition:  # while statement
 for current_val in sequence:  # for statement
+```
+For `sequence` we can use the python functions 
+
+* `range(ini, fin+1, increment)`
+    * Default `ini = 0` and `increment = 1`
+    * If don't use current_val, can be indicated with a `for _ in ...`
+* `for counter, item  in enumerate(collection)`
+
+
+* `break`: out of the loop
+
+* `continue`:  go to next iteration
+
+## Collections
+
+### List `my_list = [item_1, item_2, item3]`
+- Items can be of different types
+- Ordered and mutable *Dynamic: can add, modify, and remove elements*
+
+#### Operations with lists
+
+- **Consult and order**
+  * `len(my_list)` - Get the length of the list
+  * `my_list[index_x]` - Access an item at index `x`
+  * `my_list[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`
+  * `for value in my_list:` - Iterate through the list
+  * **Order:** Ascending `my_list.sort()`, Descending `my_list.sort(reverse=True)`
+
+- **Add**
+  * At the end of the list: `my_list.append(new_item)`
+  * At a specific index: `my_list.insert(index_x, new_item)` (*other elements shift to the right*)
+
+- **Remove**
+  * By value: `my_list.remove(value)`
+  * By index: `my_list.pop(index_x)` or `del my_list[index_x]`
+
+### Tuple `my_tuple = (item_1, item_2, item_3)`  or `my_tuple = item_1, item_2, item_3`
+
+*only one element with a comma at end `my_tuple = item_1,`*
+
+- Items can be of different types
+- Ordered but **immutable** (No can add, modify and drop elements)
+
+#### Operations with tuples
+
+**Consult and order**
+* `my_tuple[index_x]` - Access an item at index `x`
+* `my_tuple[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`
+
+* **Unpacking:** `var_1, var_2, var3 = my_tuple #(item1, item2, item3)`
+
+### Set `my_set = {item_1, item_2, item_3}`
+
+- Items can be of different types
+- Not ordened and unique (no duplicated elements)
+- Mutabe
+
+#### Operations with sets
+
+**Consult**
+- `len(my_set)`
+- `for item in my_set:`
+- Check if value exisit: `value_x in my_set `
+
+**Add and remove**
+- `my_set.add(new_item)`
+- `my_set.remove(value)`
+
+**Set operations**
+- Union: `set_1 | set_2`
+- Interseccion: `set1 & set_2`
+- Diference: `set1 - set_2`
+
+### Dictionary   `my_dicionary = {key_1: value_1, key_2: value_2}`
+
+- Items can be of different types (keys are always strings)
+- Ordered and mutable
+- Key must be unique (like set items)
+
+#### Operations with dictionaries
+* **Consult:** `my_dicionary['key_x']` or  `my_dicionary.get(key_x)`
+
+* **Add or modify:** `my_dicionary['key_x']:value_x` 
+
+* **Delete:** `my_dicionary.pop('key_x')` or `del my_dicionary['key_x']` 
+
+* **Iteration of elements**
+  * tuple (key,value)   `for key, value in my_dicionary.items():`
+  * only values  `for value in my_dicionary.values():`
+  * only keys `for keyin my_dicionary.keys():`
+
+
+
+### List compression `[operatrion for element in itereable if condicion]`
+
+* Crea listas a partir de otros iterables (filtrar o aplicar expresiones a cada elemento)
+  * Example: `[x**2 for x in numbers] #do square` 
+
+
