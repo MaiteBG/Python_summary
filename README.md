@@ -28,6 +28,9 @@
   - Using commas automatically adds spaces between the values in the output.
   - To print a blank line: `print()`.
   - To change final character (default break line) `print(var1, end=' ')`
+---
+
+---
 
 ## Strings
 - **Defining Strings**: Strings can be defined using `'`, `"`, or `'''`. Triple quotes allow you to include line breaks directly within the text.
@@ -70,6 +73,10 @@
 - Split method: Divides the string into a list of elements split by a separator *(default space)*: `str1.split(sep)`
 - Repeat the same string: `str1 * n` Repeats the string `str1` `n` times.
 
+---
+
+---
+
 ## Input data
 
 - **User data**: `input("Message")` prompts the user for input and always returns a string. Type conversion is necessary afterward if a different data type is needed.
@@ -85,6 +92,9 @@
 
 With variable and dot: `x.` (*possible type operations*)
 
+---
+
+---
 ## Operators
 
 ### Arithmetic operators
@@ -102,6 +112,8 @@ With variable and dot: `x.` (*possible type operations*)
 
 #### Compound assignments
 - `variable OPERATOR = value` *Equivalent to `variable = variable OPERATOR value` (e.g., `x += 5` is equivalent to `x = x + 5`).*
+
+---
 
 ### Conditional and logical operators
 
@@ -136,7 +148,9 @@ Python follows a specific order of precedence for operators:
    - `and`, `or`, `not`
 7. **Assignment and Compound Assignments**
    - `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `**=`, `//=`
+---
 
+---
 ## Sentences
 ### Control Sentences
 
@@ -191,7 +205,7 @@ def switch_demo_v2(argument):
 
 print(switch_demo_v2(2))  # Salida: Opción 2 seleccionada
 ```
-
+---
 ### Loop sentences
 
 ``` python
@@ -210,6 +224,10 @@ For `sequence` we can use the python functions
 
 * `continue`:  go to next iteration
 
+---
+
+---
+
 ## Collections
 
 ### List `my_list = [item_1, item_2, item3]`
@@ -218,22 +236,25 @@ For `sequence` we can use the python functions
 
 #### Operations with lists
 
-- **Consult and order**
-  * `len(my_list)` - Get the length of the list
-  * `my_list[index_x]` - Access an item at index `x`
-  * `my_list[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`
-  * `for value in my_list:` - Iterate through the list
+- **Consult and order**  
+  * `len(my_list)` - Get the length of the list  
+  * `my_list[index_x]` - Access an item at index `x`  
+  * `my_list[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`  
+  * `for value in my_list:` - Iterate through the list  
   * **Order:** Ascending `my_list.sort()`, Descending `my_list.sort(reverse=True)`
 
-- **Add**
-  * At the end of the list: `my_list.append(new_item)`
-  * At a specific index: `my_list.insert(index_x, new_item)` (*other elements shift to the right*)
+- **Add**  
+  * At the end of the list: `my_list.append(new_item)`  
+  * At a specific index: `my_list.insert(index_x, new_item)` (*other elements shift to the right*)  
 
-- **Remove**
-  * By value: `my_list.remove(value)`
-  * By index: `my_list.pop(index_x)` or `del my_list[index_x]`
+- **Remove**  
+  * By value: `my_list.remove(value)`  
+  * By index: `my_list.pop(index_x)` or `del my_list[index_x}`  
 
-### Tuple `my_tuple = (item_1, item_2, item_3)`  or `my_tuple = item_1, item_2, item_3`
+---
+
+### Tuple `my_tuple = (item_1, item_2, item_3)` 
+or `my_tuple = item_1, item_2, item_3`
 
 *only one element with a comma at end `my_tuple = item_1,`*
 
@@ -242,57 +263,66 @@ For `sequence` we can use the python functions
 
 #### Operations with tuples
 
-**Consult and order**
-* `my_tuple[index_x]` - Access an item at index `x`
-* `my_tuple[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`
+**Consult and order**  
+* `my_tuple[index_x]` - Access an item at index `x`  
+* `my_tuple[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`  
 
-* **Unpacking:** `var_1, var_2, var3 = my_tuple #(item1, item2, item3)`
+* **Unpacking:** `var_1, var_2, var_3 = my_tuple #(item1, item2, item3)`  
+
+---
 
 ### Set `my_set = {item_1, item_2, item_3}`
 
 - Items can be of different types
-- Not ordened and unique (no duplicated elements)
-- Mutabe
+- Not ordered and unique (no duplicated elements)
+- Mutable
 
 #### Operations with sets
 
-**Consult**
-- `len(my_set)`
-- `for item in my_set:`
-- Check if value exisit: `value_x in my_set `
+**Consult**  
+- `len(my_set)`  
+- `for item in my_set:`  
+- Check if value exists: `value_x in my_set`
 
-**Add and remove**
-- `my_set.add(new_item)`
-- `my_set.remove(value)`
+**Add and remove**  
+- `my_set.add(new_item)`  
+- `my_set.remove(value)`  
 
-**Set operations**
-- Union: `set_1 | set_2`
-- Interseccion: `set1 & set_2`
-- Diference: `set1 - set_2`
+**Set operations**  
+- Union: `set_1 | set_2`  
+- Intersection: `set_1 & set_2`  
+- Difference: `set_1 - set_2`  
 
-### Dictionary   `my_dicionary = {key_1: value_1, key_2: value_2}`
+---
+
+### Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
 
 - Items can be of different types (keys are always strings)
 - Ordered and mutable
-- Key must be unique (like set items)
+- Keys must be unique (like set items)
 
 #### Operations with dictionaries
-* **Consult:** `my_dicionary['key_x']` or  `my_dicionary.get(key_x)`
 
-* **Add or modify:** `my_dicionary['key_x']:value_x` 
+* **Consult:** `my_dictionary['key_x']` or `my_dictionary.get(key_x)`  
 
-* **Delete:** `my_dicionary.pop('key_x')` or `del my_dicionary['key_x']` 
+* **Add or modify:** `my_dictionary['key_x'] = value_x`  
 
-* **Iteration of elements**
-  * tuple (key,value)   `for key, value in my_dicionary.items():`
-  * only values  `for value in my_dicionary.values():`
-  * only keys `for keyin my_dicionary.keys():`
+* **Delete:** `my_dictionary.pop('key_x')` or `del my_dictionary['key_x']`  
 
+* **Iteration of elements**  
+  * Tuple (key, value): `for key, value in my_dictionary.items():`  
+  * Only values: `for value in my_dictionary.values():`  
+  * Only keys: `for key in my_dictionary.keys():`  
 
+---
 
-### List compression `[operatrion for element in itereable if condicion]`
+### List comprehension `[operation for element in iterable if condition]`
 
-* Crea listas a partir de otros iterables (filtrar o aplicar expresiones a cada elemento)
-  * Example: `[x**2 for x in numbers] #do square` 
+* Create lists from other iterables (filter or apply expressions to each element)  
+  * Example: `[x**2 for x in numbers] # do square`
+  
+---
 
+---
+## Functions
 
