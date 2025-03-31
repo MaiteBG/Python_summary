@@ -1,5 +1,5 @@
-from exercises.sistema_bibliotecas.biblioteca import Biblioteca
-from exercises.sistema_bibliotecas.libro import Libro
+from exercises.sistema_bibliotecas_210.biblioteca import Biblioteca
+from exercises.sistema_bibliotecas_210.libro import Libro
 
 biblioteca_nacional = Biblioteca("Biblioteca Nacional")
 

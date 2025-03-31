@@ -24,3 +24,5 @@ class Libro:
         return self._genero
 
 
+    def __str__(self):
+        return f" Título = {self._titulo}; Autor = {self._autor}; Titulo = {self._genero};"
