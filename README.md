@@ -44,9 +44,11 @@
 - **Dynamic typing**: Variables can store any type of data and change their type without explicit casting.
 - **Objects**: Variables in Python are references stored in the *stack* and point to data in the *heap*.
 - **Mutability**: If the value of a variable changes, a new object is created with the updated data, and the variable points to this new reference.
-- **Initialization**: Variables must be declared with an initial value.
-
+- **Initialization**: Variables must be declared with an initial value. 
+- `ìd(objecto)`: position of memory of the variable object
 ### Naming conventions
+
+- *No debemos tener fihceros y directorios con el mismo nombre para evitar errores en Python.*
 - **Constants**: By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and should not be modified.
 - **Snake Case** for common variables and file names:
   - Use the snake_case format: `[a-z][A-Z,a-z,0-9,_]+`.
@@ -124,6 +126,7 @@
 - `float(x)` *Converts x to a floating-point number.*
 - `str(x)` *if x is bool: "False" (False), "True" (True)*
 - `bool(x)` *`False` value if x is 0, None, or an empty string, list, or collection.*
+- Other conversions `hex(x)` *hexadecimal*
 
 With variable and dot: `x.` (*possible type operations*)
 
@@ -403,7 +406,7 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
 
 Arguments must be specified in this order: `function(req_arg, default_arg="default", *args, **kwargs)`.
 
-```python
+``` python
 # Function example
 def example_function(req_arg, default_arg="default", *args, **kwargs):
     pass
@@ -439,3 +442,94 @@ def function_recursiva(...):
         ...
         function_recursiva(...)
 ```
+
+
+## Class and objects
+
+Las clases de definen con la primera letra en mayuscuala. 
+``` python
+class Class_name:
+```
+
+Para obtener los atributos de un objecto `object.__dict__`.
+
+### Contexto dinámico
+
+#### Constructor y metodos de objecto
+``` python
+    # Constructor (called went ( Class_name())
+    def __init__(self, params...):
+    # Atributes 
+    self.params = params
+    ...
+    
+    #Método de objecto lleva el parametro self que hace referncia a la instacia desde la qula se llama
+    def metodo_de_classe(self, params...):
+        ...
+```
+
+En Python no se puede hacer sobrecarga de constructores, solo utiliza el último constructor. 
+Para solucionarlo podemos poner valor por defecto a los parameteros opcionales, noramlmente, `None`.
+
+
+#### Encapsulamiento de atributos
+Generalement se usan atributos protegidos para las clases.  Permite más control sobre escritura y lectura de atributos. Python no hace ningún cotrol pero hay convensión de defincion con `_`(protegido) y `__` (privado) delante del nombre del atributo.
+Para una buena practica, se crean y usan los metodos `get_atributo()` y `set_atributo()` para leer y modificar los parametros fuera de la clase. 
+
+``` python
+    self.atributo_publico
+    self._atributo_protegido
+    self.__atributo_privado
+```
+
+##### Mejoras de encapsulamiento (más pythonica)
+
+Para modficar los atributos protegidos y privados como si fueran públicos.
+
+``` python
+    @property # definir el metodo get de manera más pythonica
+    def atributo(self):
+        retrun self._atributo
+    
+    @atributo.setter # definir el metodo set de manera más pythonica
+    def atributo(self, value):
+        self._atributo = value
+
+```
+
+#### Agregar un nuevo atributo a un objecto determinado (atributos dinamicos)
+
+`setattr(objecto, 'nombre_atrbibuto', 'valor')`
+
+
+### Contexto estatico
+
+#### Atributos  y  métodos de clase
+``` python
+class Class_name:
+    atributo_de_clase  # fuera de cualquiler metodo de esta classe
+    # Constructor (called went ( Class_name())
+    def __init__(self, params...):
+```
+``` python
+    Class_name.atributo_de_clase  # acceder al atributo de classe
+```
+
+Los métods de clase no tiene el parametro self.
+
+``` python
+    @staticmethod # indicar que es metodo estatico
+    def metodos_estatico():
+        ...
+```
+
+ **Más pythonico**: Usar la etiqueta  `@classmethod` con el atributo `cls`
+
+``` python
+    @classmethod
+    def metodo_clase(cls):
+        ...
+```
+
+
+
