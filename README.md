@@ -532,4 +532,34 @@ Los métods de clase no tiene el parametro self.
 ```
 
 
+## Herencia y polimorfismo
+
+`class Subclase(Superclase):`
+
+* *Para solo definir una clase `pass` (más claro y explicito), tambien se puede usar `...` (ellipsis, en contextos más especificos) (para cualquier bloque de código que quieras dejar vacío)*
+
+    * Evitar errores y/o Marcador de posición para código futuro
+    * Mantener la estructura sintáctica
+    * Para depurar
+
+Override: Para sobreescribr un metodo de la superclase en una clase hija, tenemos de definir el metodo con el mismo nombre y paramentros. Siempre se llamara sera el de menor jerarquia.
+Polimorfismo: Usamos sobrescritura para mantener estandar en las disntias clases hijas. 
+
+Para acceder al comporatiento de la calse padre podemos usar `super.clase_padre` dentro de la clase hija.
+
+### Funcion polimorfica
+
+Puede recibir distitnos tipos de datos (por ejemplo clase padre o alguna de las hijas siempre que todos tengan el metodo con el mismo nombre y paramentros)
+
+
+
+### Clase object
+
+Es la clase padre de todas las clases en Python de manera directa (por defecto) o indirecta. 
+Podemos sobreescrir los metodos de la clase object:
+* `__init__()`: Costructor
+* `__str__()`: Para cambiar como se muestra la inforamción del object
+* `__eq__()`: Para modificar la forma de identificar si son iguales
+
+
 
