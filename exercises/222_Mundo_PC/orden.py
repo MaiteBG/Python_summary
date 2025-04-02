@@ -9,7 +9,7 @@ class Orden:
 
         self.computadoras = comptuadoras
 
-    def agregar_computadora(self,computadora):
+    def agregar_computadora(self, computadora):
         self.computadoras.append(computadora)
 
     def __str__(self):

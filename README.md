@@ -78,7 +78,7 @@
 
 
 
-### Concatenating Strings
+### String concatenation
 - **Using the `+` operator**
 - Using `split_string.join([list of strings])`
 	* Note: if `' '.join(stringX)` is used, it splits characters with a space.
@@ -89,7 +89,7 @@
 	* *Evaluates expressions inside the string. `f"{num1 + num2}"`*
 
 - format method (more complex and les used): `'Hola {}'.format(variable)`
-
+- other formats `string.center(num,character)` to put bettwen `num` `character`'s the content of string. (for example, to print titles)
 
 #### Special Characters
 - The backslash (`\`) is used to include special characters:
@@ -101,7 +101,7 @@
 
 
 ### String Methods (do not replace the original string!)
-- Upper and lower case: `str1.upper()`, `str1.lower()`
+- Upper and lower case: `str1.upper()`, `str1.lower()`. `str1.title()`...
 - Remove beginning and ending spaces: `str1.strip()`
 - Length: `len(str1)`
 - Slicing (get substring): `str1[start:end]` *The end index character is not included.*
@@ -290,6 +290,8 @@ For `sequence` we can use the python functions
 - **Remove**  
   * By value: `my_list.remove(value)`  
   * By index: `my_list.pop(index_x)` or `del my_list[index_x}`  
+  * 
+Only lists and tuples can be concatenated using `list_1 + list_2`
 
 ---
 
@@ -300,6 +302,8 @@ or `my_tuple = item_1, item_2, item_3`
 
 - Items can be of different types
 - Ordered but **immutable** (No can add, modify and drop elements)
+
+Only lists and tuples can be concatenated using `list_1 + list_2`
 
 #### Operations with tuples
 
@@ -333,6 +337,7 @@ or `my_tuple = item_1, item_2, item_3`
 - Intersection: `set_1 & set_2`  
 - Difference: `set_1 - set_2`  
 
+
 ---
 
 ### Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
@@ -353,6 +358,8 @@ or `my_tuple = item_1, item_2, item_3`
   * Tuple (key, value): `for key, value in my_dictionary.items():`  
   * Only values: `for value in my_dictionary.values():`  
   * Only keys: `for key in my_dictionary.keys():`  
+
+
 
 ---
 
@@ -443,123 +450,221 @@ def function_recursiva(...):
         function_recursiva(...)
 ```
 
+## Class and Objects
 
-## Class and objects
-
-Las clases de definen con la primera letra en mayuscuala. 
-``` python
-class Class_name:
+Classes are defined with the first letter capitalized.
+```python
+class ClassName:
 ```
 
-Para obtener los atributos de un objecto `object.__dict__`.
+To get an object's attributes: `object.__dict__`.
 
-### Contexto dinámico
+### Dynamic Context
 
-#### Constructor y metodos de objecto
-``` python
-    # Constructor (called went ( Class_name())
+#### Constructor and Object Methods
+```python
+    # Constructor (called when (ClassName()))
     def __init__(self, params...):
-    # Atributes 
+    # Attributes
     self.params = params
     ...
     
-    #Método de objecto lleva el parametro self que hace referncia a la instacia desde la qula se llama
-    def metodo_de_classe(self, params...):
+    # Object method takes the 'self' parameter which refers to the instance from which it is called
+    def class_method(self, params...):
         ...
 ```
 
-En Python no se puede hacer sobrecarga de constructores, solo utiliza el último constructor. 
-Para solucionarlo podemos poner valor por defecto a los parameteros opcionales, noramlmente, `None`.
+In Python, constructor overloading is not allowed; only the last constructor is used.
+To work around this, we can assign default values to optional parameters, usually `None`.
 
+#### Attribute and Method Encapsulation
+Protected attributes are generally used for classes. This allows more control over attribute reading and writing. Python does not enforce control but follows a naming convention with `_` (protected) and `__` (private) before the attribute name.
+For good practice, getter and setter methods `get_attribute()` and `set_attribute()` are created and used to access and modify parameters outside the class.
 
-#### Encapsulamiento de atributos
-Generalement se usan atributos protegidos para las clases.  Permite más control sobre escritura y lectura de atributos. Python no hace ningún cotrol pero hay convensión de defincion con `_`(protegido) y `__` (privado) delante del nombre del atributo.
-Para una buena practica, se crean y usan los metodos `get_atributo()` y `set_atributo()` para leer y modificar los parametros fuera de la clase. 
-
-``` python
-    self.atributo_publico
-    self._atributo_protegido
-    self.__atributo_privado
+```python
+    self.public_attribute
+    self._protected_attribute
+    self.__private_attribute
 ```
+Methods can also be indicated as protected/private using `_`/`__` at the beginning. For example, for data validation functions or methods used only within the class methods.
 
-##### Mejoras de encapsulamiento (más pythonica)
+##### Improved Encapsulation (More Pythonic with Decorators)
+To modify protected and private attributes as if they were public, use decorators.
 
-Para modficar los atributos protegidos y privados como si fueran públicos.
-
-``` python
-    @property # definir el metodo get de manera más pythonica
-    def atributo(self):
-        retrun self._atributo
+```python
+    @property  # Define the getter method in a more Pythonic way
+    def attribute(self):
+        return self._attribute
     
-    @atributo.setter # definir el metodo set de manera más pythonica
-    def atributo(self, value):
-        self._atributo = value
-
+    @attribute.setter  # Define the setter method in a more Pythonic way
+    def attribute(self, value):
+        self._attribute = value
 ```
 
-#### Agregar un nuevo atributo a un objecto determinado (atributos dinamicos)
+#### Adding a New Attribute to a Specific Object (Dynamic Attributes)
 
-`setattr(objecto, 'nombre_atrbibuto', 'valor')`
+`setattr(object, 'attribute_name', 'value')`
 
 
-### Contexto estatico
+### Static Context
 
-#### Atributos  y  métodos de clase
-``` python
-class Class_name:
-    atributo_de_clase  # fuera de cualquiler metodo de esta classe
-    # Constructor (called went ( Class_name())
+#### Class Attributes and Methods
+```python
+class ClassName:
+    class_attribute  # Defined outside any method in this class
+    # Constructor (called when (ClassName()))
     def __init__(self, params...):
 ```
-``` python
-    Class_name.atributo_de_clase  # acceder al atributo de classe
+```python
+    ClassName.class_attribute  # Access class attribute
 ```
 
-Los métods de clase no tiene el parametro self.
+Class methods do not take `self` as a parameter.
 
-``` python
-    @staticmethod # indicar que es metodo estatico
-    def metodos_estatico():
+```python
+    @staticmethod  # Decorator indicating a static method
+    def static_method():
         ...
 ```
 
- **Más pythonico**: Usar la etiqueta  `@classmethod` con el atributo `cls`
+ **More Pythonic**: Use the `@classmethod` decorator with the `cls` attribute.
 
-``` python
+```python
     @classmethod
-    def metodo_clase(cls):
+    def class_method(cls):
         ...
 ```
 
 
-## Herencia y polimorfismo
+## Inheritance and Polymorphism
 
-`class Subclase(Superclase):`
+`class Subclass(Superclass):`
 
-* *Para solo definir una clase `pass` (más claro y explicito), tambien se puede usar `...` (ellipsis, en contextos más especificos) (para cualquier bloque de código que quieras dejar vacío)*
+* To define an empty class use `pass` (clearer and explicit). `...` (ellipsis) can also be used in more specific contexts to keep a placeholder for future code.
 
-    * Evitar errores y/o Marcador de posición para código futuro
-    * Mantener la estructura sintáctica
-    * Para depurar
+    * Avoid errors and/or serve as a placeholder for future code.
+    * Maintain syntactic structure.
+    * Debugging purposes.
 
-Override: Para sobreescribr un metodo de la superclase en una clase hija, tenemos de definir el metodo con el mismo nombre y paramentros. Siempre se llamara sera el de menor jerarquia.
-Polimorfismo: Usamos sobrescritura para mantener estandar en las disntias clases hijas. 
+Override: To override a superclass method in a subclass, define the method with the same name and parameters. The method in the subclass will always be called first.
+Polymorphism: Overriding is used to maintain a standard among different subclasses.
 
-Para acceder al comporatiento de la calse padre podemos usar `super.clase_padre` dentro de la clase hija.
+To access the superclass behavior, use `super().method_name` inside the subclass.
 
-### Funcion polimorfica
+### Polymorphic Function
 
-Puede recibir distitnos tipos de datos (por ejemplo clase padre o alguna de las hijas siempre que todos tengan el metodo con el mismo nombre y paramentros)
-
-
-
-### Clase object
-
-Es la clase padre de todas las clases en Python de manera directa (por defecto) o indirecta. 
-Podemos sobreescrir los metodos de la clase object:
-* `__init__()`: Costructor
-* `__str__()`: Para cambiar como se muestra la inforamción del object
-* `__eq__()`: Para modificar la forma de identificar si son iguales
+It can receive different data types (e.g., a parent class or any of its subclasses) as long as they all have the method with the same name and parameters.
 
 
+### Object Class
+
+It is the parent class of all classes in Python, either directly (by default) or indirectly.
+We can override the object class methods:
+* `__init__()`: Constructor
+* `__str__()`: To change how object information is displayed
+* `__eq__()`: To modify the way equality is determined
+
+
+
+### Multiple Inheritance
+
+`class Subclass(Superclass1, Superclass2):`
+
+MRO - Method Resolution Order `Subclass.mro()` *to obtain the order in which method calls are resolved*.
+
+The order of superclasses is important because a method is searched first in the subclass, then in `Superclass1`, then in the classes inherited by `Superclass1`, then in `Superclass2`, then in the classes inherited by `Superclass2`, and finally in the `object` class.
+
+To refer to a specific superclass, do not use `super()` to avoid confusion. Instead, use `SuperclassX.method(self,...)`, where `self` refers to the instance of the subclass.
+
+
+### Abstract Class
+
+To enforce method implementation in subclasses, the parent class must extend `ABC` (Abstract Base Class) and import the `abstractmethod` decorator.
+`from abc import ABC, abstractmethod`  
+
+```python
+class AbstractClass(ABC):
+    @abstractmethod
+    def abstract_method(...):
+        pass
+```
+
+A class that has an abstract method or extends an abstract class without defining the abstract method becomes an abstract class and cannot be instantiated.
+
+
+### Operator Overloading
+To modify or implement the behavior of certain operators, override the following methods:![sobrecarga-operadores1.png](static_md/sobrecarga-operadores1.png)
+![sobrecarga-operadores2.png](static_md/sobrecarga-operadores2.png)
+![sobrecarga-operadores2.png](static_md/sobrecarga-operadores3.png)
+![sobrecarga-operadores2.png](static_md/sobrecarga-operadores4.png)
+
+
+## Exceptions
+
+To prevent the program from terminating abruptly:
+```python
+try:
+    pass  # Code that may raise an error
+except xError as e:
+    pass
+except Exception as e:
+    print(f"An error occurred: {e}")
+else:
+    # Only executed if no exception was raised (optional)
+finally:
+    # Always executed, whether an exception occurred or not (optional)
+# Continuation
+```
+
+Normally, exceptions are caught using the generic `Exception` class, but more specific ones can also be used.
+A try/except block can have multiple except clauses for different error types (more generic classes should be at the end).
+`type(e)` to get the error type (error class).
+
+If variables need to be used after the try/except block, they should be defined before the try block.
+
+To define a new exception class:
+
+```python
+# Define new error
+class NewException(Exception):
+    def __init__(self, message):
+        self.message = message  # Message to display in the exception
+
+# Raise new error
+raise NewException(message)  # Throws the error to be caught later in the except block
+```
+
+## File Handling
+
+Files can be opened in modes "r" (read), "a" (append), "w" (overwrite), "x" (create), and these can be concatenated with `+`.
+Files can also be specified as text files "t" or binary files "b".
+```python
+try:
+    file = open("file.txt", "w", encoding='utf8')  # Open or create files
+    file.write("bla bla bla")  # Write to file
+except Exception as e:
+    print(e)
+finally:
+    file.close()  # Always close
+```
+```python
+file.read(num_characters)  # Read all file content if no number is specified
+```
+```python
+file.readline()  # Read a full line
+```
+```python
+file.readlines()  # Get a list with each line's content
+```
+```python
+for line in file:  # Iterate through file
+    print(line)
+```
+
+### Context Manager 'with'
+Automatically closes the resource (e.g., file) using `__enter__` and `__exit__` methods.
+```python
+with open("file.txt", "w", encoding='utf8') as file:
+    file.write("bla bla bla")
+```
 
