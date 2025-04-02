@@ -663,6 +663,11 @@ for line in file:  # Iterate through file
     print(line)
 ```
 
+To remove a file:
+```python
+import os
+os.remove(path_file)
+```
 ### Context Manager 'with'
 Automatically closes the resource (e.g., file) using `__enter__` and `__exit__` methods.
 ```python
