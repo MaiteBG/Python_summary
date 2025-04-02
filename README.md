@@ -291,7 +291,7 @@ For `sequence` we can use the python functions
   * By value: `my_list.remove(value)`  
   * By index: `my_list.pop(index_x)` or `del my_list[index_x}`  
   * 
-Only lists and tuples can be concatenated using `list_1 + list_2`
+Only for list and tuples can concatenate `list_1 + list_2`
 
 ---
 
@@ -303,7 +303,7 @@ or `my_tuple = item_1, item_2, item_3`
 - Items can be of different types
 - Ordered but **immutable** (No can add, modify and drop elements)
 
-Only lists and tuples can be concatenated using `list_1 + list_2`
+Only for list and tuples can concatenate `tuple_1 + tuple_2`
 
 #### Operations with tuples
 
@@ -385,6 +385,7 @@ A **module** in Python is a `.py` file containing:
 - Can be imported into other Python files using `import`
 - Creates its own namespace to avoid naming conflicts
 - May include documentation (docstrings) at the top
+- 
 
 ``` python
 if __name__ = '__main__': #__name__ varaible that indicate the name of the module that we are ejecuting 
@@ -593,10 +594,11 @@ A class that has an abstract method or extends an abstract class without definin
 
 
 ### Operator Overloading
-To modify or implement the behavior of certain operators, override the following methods:![sobrecarga-operadores1.png](static_md/sobrecarga-operadores1.png)
-![sobrecarga-operadores2.png](static_md/sobrecarga-operadores2.png)
-![sobrecarga-operadores2.png](static_md/sobrecarga-operadores3.png)
-![sobrecarga-operadores2.png](static_md/sobrecarga-operadores4.png)
+To modify or implement the behavior of certain operators, override the following methods:
+![operator-overloading1.png](static_md/operator-overloading1.png)
+![operator-overloading2.png](static_md/operator-overloading2.png)
+![operator-overloading3.png](static_md/operator-overloading3.png)
+![operator-overloading4.png](static_md/operator-overloading4.png)
 
 
 ## Exceptions
@@ -668,3 +670,24 @@ with open("file.txt", "w", encoding='utf8') as file:
     file.write("bla bla bla")
 ```
 
+We can also create our own class for file handling.  
+By overriding the `__enter__` and `__exit__` methods, which are already present in the `Object` class (we do not need to explicitly inherit anything).  
+
+```python
+class FileHandler:
+    def __init__(self, name):
+        self.name = name
+    
+    # Executed when enter to with clause.
+    def __enter__(self):
+        self.name = open(self.name, 'r', encoding='utf8')
+        return self.name
+        
+    # Executed when exit with clause. These parameters must always be specified
+    def __exit__(self, exception_type, exception_value, traceback):  
+        print("Closing resource")
+        if self.name:
+            self.name.close()
+
+with FileHandler("file.txt") as file:
+    ...
