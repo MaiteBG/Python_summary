@@ -697,6 +697,44 @@ class FileHandler:
 with FileHandler("file.txt") as file:
     ...
 ```
+
+## Logging in Python
+
+You can configure log messages using the <u>[`logging`](https://docs.python.org/3/howto/logging.html)</u> library.
+
+This is used to manage error/debug messages that we send to the console. It is divided into different levels ordered by importance:  
+![logging_levels.png](static_md/logging_levels.png)
+
+To change the minimum level we want to display on the screen, use `log.basicConfig(level=log.X)`. By default, this level is set to WARNING.
+
+```python
+import logging as log
+# We change to DEBUG level; since it is the lowest level, messages of all levels will be shown
+log.basicConfig(level=log.DEBUG)
+
+if __name__ == '__main__':
+    log.debug('Debug level message')
+    log.info('Info level message')
+    log.warning('Warning level message')
+    log.error('Error level message')
+    log.critical('Critical level message')
+```
+
+To specify the format of the log messages, we can use log.basicConfig(...).
+```python
+import logging as log
+
+log.basicConfig(level=log.DEBUG,
+                format='%(asctime)s: %(levelname)s [%(filename)s:%(lineno)s] %(message)s',  # Message format
+                datefmt='%I:%M:%S %p',  # Time format
+                handlers=[  # Where we send the messages
+                    log.FileHandler('archivo_log.log'),  # Send messages to a file
+                    log.StreamHandler()  # Send messages to the console
+                ])
+```
+
+
+
 ## Databases
 
 ### Basic SQL Queries
