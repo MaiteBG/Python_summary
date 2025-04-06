@@ -696,3 +696,97 @@ class FileHandler:
 
 with FileHandler("file.txt") as file:
     ...
+```
+## Databases
+
+### Basic SQL Queries
+
+Examples of basic queries
+
+```sql
+-- Select
+SELECT * FROM person
+SELECT name FROM person WHERE id_person = 1 
+SELECT id_person, name FROM person WHERE id_person IN (1,2)
+-- Insert
+INSERT INTO person(name, lastname, email) VALUES('Susana','Lara','slara@mail.com')
+-- Update
+UPDATE person SET name = 'Ivonne' WHERE id_person=3
+UPDATE person SET name = 'Ivonne' WHERE id_person IN (3,6)
+-- Delete
+DELETE FROM person WHERE id_person=3 
+DELETE FROM person WHERE id_person IN (2,3)
+```
+
+### PostgreSQL in Pytho
+#### pgAdmin4 (graphical interface for PostgreSQL)
+To create a new database:
+![pgadmin4_createdb.png](static_md/pgadmin4_createdb.png)
+
+To create a new table:
+![pgadmin4_create_table.png](static_md/pgadmin4_create_table.png)
+
+To view and manually edit the content:
+![pgadmin4_view_table_data.png](static_md/pgadmin4_view_table_data.png)
+
+
+### Creating connection and executing statements
+We'll use the psycopg2 module to create a database connection.
+
+```python
+import psycopg2 as db
+# To connect to the database
+connection = db.connect(
+    user='postgres',
+    password='admin',
+    host='127.0.0.1',
+    port='5432',
+    database='test_db'
+)
+```
+If we open a **connection object** with `with`, it doesn't close automatically - we need to use `connection.close()` at the end in a try/finally block. 
+
+In the case of the **cursor**, when the `with` block ends, close are executed automatically.
+
+``` python
+try:
+    with connection:
+        # We need a cursor to execute statements
+        with connection.cursor() as cursor:
+            statement = 'SELECT * FROM person'
+            cursor.execute(statement)
+            records = cursor.fetchall() # Get all records
+            print(records)
+# Catch exceptions
+except Exception as e:
+    print(f'An error occurred: {e}')
+# Always close connection
+finally:
+    connection.close()
+```
+Values to pass as **variables** are indicated with `%s` and provided as the second parameter in `cursor.execute(statement, values_tuple)`.
+
+To process multiple records using the `IN` statement, we'll indicate the values in `values_tuple` as a tuple of tuples. For example:
+``` python
+ sentencia = 'SELECT * FROM persona WHERE id_persona IN %s'
+            # llaves_primarias = ((1,2,3),)
+            entrada = input('Proporciona los id\'s a buscar (separado por comas): ')
+            llaves_primarias = (tuple(entrada.split(',')),)
+            cursor.execute(sentencia, llaves_primarias)
+            registros = cursor.fetchall()
+            # Mostramos registros
+            for registro in registros:
+                print(registro)
+```
+
+To get the  results:
+- All records: cursor.fetchall()
+- First record: cursor.fetchone()
+
+### Transaction management (commit/rollback)
+A transaction consists of one or more statements that we want to execute as a block (all or none).
+
+*If we **use** the `with`statement for the cursor, it's handled automatically.*
+
+If we do **NOT** use the with statement for the cursor, we must save changes with `connection.commit()` at the end of our transaction (by default `connection.autocommit = False`). Also, if an error occurs, we must indicate `connection.rollback()` in the except blocks.
+
