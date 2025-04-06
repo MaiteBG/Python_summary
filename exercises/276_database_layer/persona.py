@@ -1,14 +1,20 @@
+from logger_base import log
 
 class Persona:
 
-    def __init__(self, nombre, apellido, id_persona=None, email = None):
-        self._id_persona = ...
+    def __init__(self, id_persona = None, nombre = None, apellido = None, email = None):
+        self._id_persona = id_persona
         self._nombre = nombre
         self._apellido = apellido
-        self._email = ...
+        self._email = email
 
     def __str__(self):
-        ...
+        return f'''
+            Id Persona: {self._id_persona}, 
+             Nombre: {self._nombre},
+             Apellido: {self._apellido},
+             Email: {self._email}
+        '''
 
     # get/set id_persona
     @property
@@ -45,5 +51,15 @@ class Persona:
     @email.setter
     def email(self, email):
         self._email = email
+
+if __name__ == '__main__':
+    persona1 = Persona(1, 'Juan', 'Perez', 'jperez@mail.com')
+    log.warning(persona1)
+    # Simular un insert
+    persona1 = Persona(nombre='Juan', apellido='Perez', email='jperez@mail.com')
+    log.debug(persona1)
+    # Simular un delete
+    persona1 = Persona(id_persona=1)
+    log.debug(persona1)
 
 

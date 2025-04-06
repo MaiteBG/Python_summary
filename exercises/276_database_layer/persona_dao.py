@@ -20,3 +20,4 @@ class PersonaDao:
     def eliminar(cls):
         ...
 
+
