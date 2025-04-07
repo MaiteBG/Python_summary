@@ -32,8 +32,8 @@ class Conexion:
             except Exception as e:
                 log.error((f"Ocurrio una excepcion al obtener la conexion: {e}"))
                 sys.exit() # Terminamos el programa
-
-        return cls._conexion
+        else:
+            return cls._conexion
 
 
     @classmethod
@@ -42,14 +42,20 @@ class Conexion:
             try:
                 cls._cursor = cls.obtenerConexion().cursor()
                 log.debug(f"Se abrio correctaemtne el cursor: {cls._cursor}")
+                return cls._cursor
             except Exception as e:
                 log.error(f"Ocurrio una excepción al obtener el cursor: {e}")
                 sys.exit()  # Terminamos el programa
-        return cls._cursor
+        else:
+            return cls._cursor
 
     @classmethod
-    def cerrar(cls):
-        ...
+    def cerrarConexion(cls):
+        if cls._conexion is not None:  # Si no hay conexión extablecida
+            try:
+                cls._conexion.close()
+            except Exception as e:
+                log.error(f"Ocurrio una excepción al cerrar la conexion: {e}")
 
 
 

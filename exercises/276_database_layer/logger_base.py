@@ -6,7 +6,8 @@ log.basicConfig(level=log.DEBUG,
                 format='%(asctime)s: %(levelname)s [%(filename)s:%(lineno)s] %(message)s',
                 datefmt='%I:%M:%S %p',
                 handlers=[
-                    log.FileHandler(LOG_FILE_NAME),
+                    log.FileHandler(LOG_FILE_NAME, encoding='utf-8'
+),
                     log.StreamHandler()
                 ])
 

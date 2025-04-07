@@ -54,12 +54,12 @@ class Persona:
 
 if __name__ == '__main__':
     persona1 = Persona(1, 'Juan', 'Perez', 'jperez@mail.com')
-    log.warning(persona1)
+    log.debug(persona1)
     # Simular un insert
     persona1 = Persona(nombre='Juan', apellido='Perez', email='jperez@mail.com')
     log.debug(persona1)
     # Simular un delete
-    persona1 = Persona(id_persona=1)
+    persona1 = Persona(id_persona=1) # solo es necesario el id persona para borrarlo
     log.debug(persona1)
 
 
