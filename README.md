@@ -1,12 +1,13 @@
 # Python Summary
 <!-- TOC -->
+* [Python Summary](#python-summary)
   * [Basic Concepts and Conventions](#basic-concepts-and-conventions)
     * [Comments](#comments)
     * [Variables](#variables)
     * [Naming conventions](#naming-conventions)
     * [Print Statement](#print-statement)
   * [Strings](#strings)
-    * [Concatenating Strings](#concatenating-strings)
+    * [String concatenation](#string-concatenation)
     * [String format](#string-format)
     * [String Methods (do not replace the original string!)](#string-methods-do-not-replace-the-original-string)
   * [Input data](#input-data)
@@ -20,19 +21,37 @@
     * [Control Sentences](#control-sentences)
     * [Loop sentences](#loop-sentences)
   * [Collections](#collections)
-    * [List `my_list = [item_1, item_2, item3]`](#list-my_list--item_1-item_2-item3)
-    * [Tuple `my_tuple = (item_1, item_2, item_3)`](#tuple-my_tuple--item_1-item_2-item_3-)
-    * [Set `my_set = {item_1, item_2, item_3}`](#set-my_set--item_1-item_2-item_3)
-    * [Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#dictionary-my_dictionary--key_1-value_1-key_2-value_2)
-    * [List comprehension `[operation for element in iterable if condition]`](#list-comprehension-operation-for-element-in-iterable-if-condition)
+    * [List](#list-my_list--item_1-item_2-item3)
+    * [Tuple](#tuple-my_tuple--item_1-item_2-item_3-)
+    * [Set](#set-my_set--item_1-item_2-item_3)
+    * [Dictionary](#dictionary-my_dictionary--key_1-value_1-key_2-value_2)
+    * [List comprehension](#list-comprehension-operation-for-element-in-iterable-if-condition)
   * [Modules](#modules)
     * [Modules characteristics](#modules-characteristics)
   * [Functions](#functions)
     * [Arguments](#arguments)
-    * [Use of globla varaible inside a function](#use-of-globla-varaible-inside-a-function)
+    * [Use of a global variable inside a function](#use-of-a-global-variable-inside-a-function)
     * [Recursive functions](#recursive-functions)
+  * [Class and Objects](#class-and-objects)
+    * [Dynamic Context](#dynamic-context)
+    * [Static Context](#static-context)
+  * [Inheritance and Polymorphism](#inheritance-and-polymorphism)
+    * [Polymorphic Function](#polymorphic-function)
+    * [Object Class](#object-class)
+    * [Multiple Inheritance](#multiple-inheritance)
+    * [Abstract Class](#abstract-class)
+    * [Operator Overloading](#operator-overloading)
+  * [Exceptions](#exceptions)
+  * [File Handling](#file-handling)
+    * [Context Manager 'with'](#context-manager-with)
+  * [Logging in Python](#logging-in-python)
+  * [.env file](#env-file)
+  * [Databases](#databases)
+    * [Basic SQL Queries](#basic-sql-queries)
+    * [PostgreSQL in Pytho](#postgresql-in-pytho)
+    * [Creating connection and executing statements](#creating-connection-and-executing-statements)
+    * [Transaction management (commit/rollback)](#transaction-management-commitrollback)
 <!-- TOC -->
-
 
 
 ## Basic Concepts and Conventions
@@ -595,25 +614,31 @@ A class that has an abstract method or extends an abstract class without definin
 
 ### Operator Overloading
 To modify or implement the behavior of certain operators, override the following methods:
-![operator-overloading1.png](static_md/operator-overloading1.png)
-![operator-overloading2.png](static_md/operator-overloading2.png)
-![operator-overloading3.png](static_md/operator-overloading3.png)
-![operator-overloading4.png](static_md/operator-overloading4.png)
+![sobrecarga-operadores1.png](static_md/sobrecarga-operadores1.png)
+![sobrecarga-operadores2.png](static_md/sobrecarga-operadores2.png)
+![sobrecarga-operadores3.png](static_md/sobrecarga-operadores3.png)
+![sobrecarga-operadores4.png](static_md/sobrecarga-operadores4.png)
 
 
 ## Exceptions
 
 To prevent the program from terminating abruptly:
+
 ```python
+import sys
+
 try:
     pass  # Code that may raise an error
 except xError as e:
     pass
 except Exception as e:
     print(f"An error occurred: {e}")
+    #sys.exit() #To ending de program
 else:
+    ...
     # Only executed if no exception was raised (optional)
 finally:
+    ...
     # Always executed, whether an exception occurred or not (optional)
 # Continuation
 ```
@@ -621,6 +646,8 @@ finally:
 Normally, exceptions are caught using the generic `Exception` class, but more specific ones can also be used.
 A try/except block can have multiple except clauses for different error types (more generic classes should be at the end).
 `type(e)` to get the error type (error class).
+
+If we want to end the program `sys.exit()`.
 
 If variables need to be used after the try/except block, they should be defined before the try block.
 
@@ -733,7 +760,35 @@ log.basicConfig(level=log.DEBUG,
                 ])
 ```
 
+## .env file
 
+In Python, `.env` files are used to store environment variables in a simple key-value format. These files are helpful for managing sensitive information, such as API keys, database credentials, or configuration settings, without hardcoding them into your application.
+
+The  library `python-dotenv` allows you to easily load the variables from a `.env' file into your environment. 
+- You can use the `load_dotenv()` function provided by the library to access these variables, which can then be retrieved using `os.getenv()`.
+
+This approach improves security, facilitates collaboration, and keeps your code clean and adaptable across different environments (development, testing, production).
+
+`.env` file fromat example:
+```
+POSTGRE_USER=postgres
+POSTGRE_HOST=localhost
+POSTGRE_PORT=5432
+POSTGRE_DB=test_db
+```
+
+Use of `python-dotenv` libray to get variable content from `.env` :
+
+```python
+import os
+from dotenv import load_dotenv  # para importar las varaibles del .env
+load_dotenv()
+_USERNAME = os.getenv('POSTGRE_USER')
+_PASSWORD = os.getenv('POSTGRE_PASSWORD')
+_HOST = os.getenv('POSTGRE_HOST')
+_DB_PORT = os.getenv('POSTGRE_PORT')
+_DATABASE = os.getenv('POSTGRE_DB')
+```
 
 ## Databases
 
