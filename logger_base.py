@@ -1,7 +1,10 @@
 import logging as log
 import os
-
-LOG_FILE_NAME = 'capa_datos.log'
+print()
+_LOG_PATH = './log'
+LOG_FILE_NAME = f'{_LOG_PATH}/{__name__}.log'
+if not os.path.exists(_LOG_PATH):
+    os.makedirs(_LOG_PATH)
 log.basicConfig(level=log.DEBUG,
                 format='%(asctime)s: %(levelname)s [%(filename)s:%(lineno)s] %(message)s',
                 datefmt='%I:%M:%S %p',
