@@ -676,16 +676,16 @@ except Exception as e:
 finally:
     file.close()  # Always close
 ```
-```python
+``` python
 file.read(num_characters)  # Read all file content if no number is specified
 ```
-```python
+``` python
 file.readline()  # Read a full line
 ```
-```python
+``` python
 file.readlines()  # Get a list with each line's content
 ```
-```python
+``` python
 for line in file:  # Iterate through file
     print(line)
 ```
@@ -811,8 +811,8 @@ DELETE FROM person WHERE id_person=3
 DELETE FROM person WHERE id_person IN (2,3)
 ```
 
-### PostgreSQL in Pytho
-#### pgAdmin4 (graphical interface for PostgreSQL)
+## PostgreSQL in python
+### pgAdmin4 (graphical interface for PostgreSQL)
 To create a new database:
 ![pgadmin4_createdb.png](static_md/pgadmin4_createdb.png)
 
@@ -883,3 +883,46 @@ A transaction consists of one or more statements that we want to execute as a bl
 
 If we do **NOT** use the with statement for the cursor, we must save changes with `connection.commit()` at the end of our transaction (by default `connection.autocommit = False`). Also, if an error occurs, we must indicate `connection.rollback()` in the except blocks.
 
+## MySQL
+Use MySQL databases is similar to postgres.
+Connexion to MySQL database 
+``` python
+import mysql.connector
+# Crear una conexion 
+x_db = mysql.connector.connect(host =...,
+                               user = ...,
+                               password=...,
+                               database=...)
+
+cursor = x_db.cursor() # Crear un cursor
+cursor.execute(sentence,values_tuple) # Ejecutar una sentencia
+x_db.close() # Cerrar conexion
+
+```
+
+### Pool
+
+``` python
+from mysql.connector import  pooling, Error
+
+try:
+# Crear objecto de pool
+  pool = pooling.MySQLConnectionPool(
+    pool_name= ...,
+    pool_size =...,
+    host = ...,
+    port = ...,
+    database = ...,
+    user = ...,
+    password = ...)
+
+except Error as e:
+  ...
+
+## obtener conexion
+conn = pool.get_connection()
+# obtener cursor
+cursor = conn.cursor()
+... # Hacer operaciones
+conn.close() #liberamos la conexion, no la cerramos del todo!
+```
