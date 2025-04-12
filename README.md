@@ -1,178 +1,432 @@
-# Python Summary
+# 1. Python Summary
+
 <!-- TOC -->
-* [Python Summary](#python-summary)
-  * [Basic Concepts and Conventions](#basic-concepts-and-conventions)
-    * [Comments](#comments)
-    * [Variables](#variables)
-    * [Naming conventions](#naming-conventions)
-    * [Print Statement](#print-statement)
-  * [Strings](#strings)
-    * [String concatenation](#string-concatenation)
-    * [String format](#string-format)
+* [1. Python Summary](#1-python-summary)
+* [2. Basic Concepts and Conventions](#2-basic-concepts-and-conventions)
+  * [2.1. Comments and Docstrings (Documentation)](#21-comments-and-docstrings-documentation)
+  * [2.2. Naming Conventions](#22-naming-conventions)
+      * [2.2.1. Other considerations](#221-other-considerations)
+  * [2.3. Input data](#23-input-data)
+* [3. Variables](#3-variables)
+  * [3.1. Numeric variables](#31-numeric-variables)
+    * [3.1.1. Class `int`](#311-class-int)
+      * [3.1.1.1. Numeric Bases](#3111-numeric-bases)
+      * [3.1.1.2. Using the `int` Constructor](#3112-using-the-int-constructor)
+      * [3.1.1.3. Random `int` number](#3113-random-int-number)
+    * [3.1.2. Class `float`](#312-class-float)
+      * [3.1.2.1. Float Formatting with `.xf`](#3121-float-formatting-with-xf)
+      * [3.1.2.2. Exponential Notation](#3122-exponential-notation)
+      * [3.1.2.3. Infinity values](#3123-infinity-values)
+      * [3.1.2.4. NaN(Not a Number)](#3124-nannot-a-number)
+  * [3.2. Class str ( Strings)](#32-class-str--strings)
+    * [3.2.1. String Operations](#321-string-operations)
+    * [3.2.2. String format](#322-string-format)
+    * [Special Characters](#special-characters)
     * [String Methods (do not replace the original string!)](#string-methods-do-not-replace-the-original-string)
-  * [Input data](#input-data)
-    * [Data type conversion (for MD)](#data-type-conversion-for-md)
-  * [Operators](#operators)
-    * [Arithmetic operators](#arithmetic-operators)
-    * [Assignment](#assignment)
-    * [Conditional and logical operators](#conditional-and-logical-operators)
-    * [Operator Precedence in Python](#operator-precedence-in-python)
-  * [Sentences](#sentences)
-    * [Control Sentences](#control-sentences)
-    * [Loop sentences](#loop-sentences)
-  * [Collections](#collections)
-    * [List](#list-my_list--item_1-item_2-item3)
-    * [Tuple](#tuple-my_tuple--item_1-item_2-item_3-)
-    * [Set](#set-my_set--item_1-item_2-item_3)
-    * [Dictionary](#dictionary-my_dictionary--key_1-value_1-key_2-value_2)
-    * [List comprehension](#list-comprehension-operation-for-element-in-iterable-if-condition)
-  * [Modules](#modules)
-    * [Modules characteristics](#modules-characteristics)
-  * [Functions](#functions)
-    * [Arguments](#arguments)
-    * [Use of a global variable inside a function](#use-of-a-global-variable-inside-a-function)
-    * [Recursive functions](#recursive-functions)
-  * [Class and Objects](#class-and-objects)
-    * [Dynamic Context](#dynamic-context)
-    * [Static Context](#static-context)
-  * [Inheritance and Polymorphism](#inheritance-and-polymorphism)
-    * [Polymorphic Function](#polymorphic-function)
-    * [Object Class](#object-class)
-    * [Multiple Inheritance](#multiple-inheritance)
-    * [Abstract Class](#abstract-class)
-    * [Operator Overloading](#operator-overloading)
-  * [Exceptions](#exceptions)
-  * [File Handling](#file-handling)
-    * [Context Manager 'with'](#context-manager-with)
-  * [Logging in Python](#logging-in-python)
-  * [.env file](#env-file)
-  * [Databases](#databases)
-    * [Basic SQL Queries](#basic-sql-queries)
-    * [PostgreSQL in Pytho](#postgresql-in-pytho)
-    * [Creating connection and executing statements](#creating-connection-and-executing-statements)
-    * [Transaction management (commit/rollback)](#transaction-management-commitrollback)
+      * [Case and Space Management](#case-and-space-management)
+      * [Substring Handling](#substring-handling)
+      * [String Modification and Repetition](#string-modification-and-repetition)
+    * [Codificación de caracteres](#codificación-de-caracteres)
+      * [Unicode](#unicode)
+      * [UTF-8](#utf-8)
+      * [ASCII](#ascii)
+    * [Print Statement](#print-statement)
+  * [Data type conversion](#data-type-conversion)
+* [Operators](#operators)
+  * [Arithmetic operators](#arithmetic-operators)
+  * [Assignment](#assignment)
+    * [Value exchange without temporary variable](#value-exchange-without-temporary-variable)
+    * [Compound assignments](#compound-assignments)
+  * [3.3. Conditional and logical operators](#33-conditional-and-logical-operators)
+  * [3.4. Operator Precedence in Python](#34-operator-precedence-in-python)
+* [4. Sentences](#4-sentences)
+  * [4.1. Control Sentences](#41-control-sentences)
+  * [Loop sentences](#loop-sentences)
+* [Collections](#collections)
+  * [List `my_list = [item_1, item_2, item3]`](#list-my_list--item_1-item_2-item3)
+    * [Operations with lists](#operations-with-lists)
+  * [4.2. Tuple `my_tuple = (item_1, item_2, item_3)`](#42-tuple-my_tuple--item_1-item_2-item_3)
+    * [4.2.1. Operations with tuples](#421-operations-with-tuples)
+  * [Set `my_set = {item_1, item_2, item_3}`](#set-my_set--item_1-item_2-item_3)
+    * [Operations with sets](#operations-with-sets)
+  * [4.3. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#43-dictionary-my_dictionary--key_1-value_1-key_2-value_2)
+    * [4.3.1. Operations with dictionaries](#431-operations-with-dictionaries)
+  * [List comprehension `[operation for element in iterable if condition]`](#list-comprehension-operation-for-element-in-iterable-if-condition)
+* [Modules](#modules)
+  * [Modules characteristics](#modules-characteristics)
+* [Functions](#functions)
+  * [Arguments](#arguments)
+  * [Use of a global variable inside a function](#use-of-a-global-variable-inside-a-function)
+  * [Recursive functions](#recursive-functions)
+* [Class and Objects](#class-and-objects)
+  * [Dynamic Context](#dynamic-context)
+    * [Constructor and Object Methods](#constructor-and-object-methods)
+    * [Attribute and Method Encapsulation](#attribute-and-method-encapsulation)
+      * [Improved Encapsulation (More Pythonic with Decorators)](#improved-encapsulation-more-pythonic-with-decorators)
+    * [Adding a New Attribute to a Specific Object (Dynamic Attributes)](#adding-a-new-attribute-to-a-specific-object-dynamic-attributes)
+  * [Static Context](#static-context)
+    * [Class Attributes and Methods](#class-attributes-and-methods)
+* [Inheritance and Polymorphism](#inheritance-and-polymorphism)
+  * [Polymorphic Function](#polymorphic-function)
+  * [Object Class](#object-class)
+  * [Multiple Inheritance](#multiple-inheritance)
+  * [Abstract Class](#abstract-class)
+  * [Operator Overloading](#operator-overloading)
+* [Exceptions](#exceptions)
+* [File Handling](#file-handling)
+  * [Context Manager 'with'](#context-manager-with)
+* [Logging in Python](#logging-in-python)
+* [.env file](#env-file)
+* [Databases](#databases)
+  * [Basic SQL Queries](#basic-sql-queries)
+* [PostgreSQL in python](#postgresql-in-python)
+  * [pgAdmin4 (graphical interface for PostgreSQL)](#pgadmin4-graphical-interface-for-postgresql)
+  * [Creating connection and executing statements](#creating-connection-and-executing-statements)
+  * [Transaction management (commit/rollback)](#transaction-management-commitrollback)
+* [MySQL](#mysql)
+  * [Pool](#pool)
 <!-- TOC -->
+# 2. Basic Concepts and Conventions
+
+## 2.1. Comments and Docstrings (Documentation)
+
+- Use `# [TEXT]` to write single-line comments that explain the code.
+- Use `''' [TEXT] '''` to write multi-line comments.  
+> ### Docstrings
+> 
+> Multi-line comments are also used to create ***docstrings*** for `classes, methods, and modules`. These are added immediately after their definition or at the beginning of the module to provide clear documentation.  
+>- `name.__doc__`: Returns the *docstring* of a class, method, or module, but **does not** include the documentation for its components.  
+>- `help(name)`: Displays the complete documentation for a class, method, or module, including all the associated *docstring*.*
+> 
+>*When called from an instance, it provides the *docstring* associated with the class of the object.*
+
+``` python
+def MyMethod(param1, param2):
+    '''
+    MyMethod Docstrings documentation
+    :param param1 This is de param1:
+    :param param2 This is the param2:
+    :return result This is the result:
+    '''
+    result= param1  + param2 
+    return result
+```
+
+## 2.2. Naming Conventions
+
+- *Avoid having files and directories with the same name to prevent errors in Python.*
+- **Constants**: By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and should remain unmodified during the program's execution.
+- **File names**, **functions** and **common variables**:
+
+  > ### Snake Case 
+  > Snake Case format is used for **file names**, **functions** and **common variables**: `[a-z][a-z0-9_]+`.
+  >   >- **Use underscores** (`_`) to separate words in multi-word names (e.g., `file_txt`).  
+  >   >  - **Add prefixes or suffixes** to provide context (e.g., `is_valid`, `user_count`)
+- **Classes**
+  > ### PascalCase  
+  >  PascalCase (also known as UpperCamelCase) is conventionally used only for naming **classes** in Python.  
+  > > - The name begins with an uppercase letter.  
+  > >   - Each subsequent word also starts with an uppercase letter, without spaces or underscores (e.g., `MyClass`, `UserProfile`).  
+
+#### 2.2.1. Other considerations
+
+- Be descriptive but concise: the name should clearly indicate the purpose or role of the variable or object.
+- Avoid
+  - Python's reserved keywords.  
+  - Single-letter variable names (except for specific cases like indices).  
+- **Use plural names exclusively** for collections (e.g., `items_list`).
+- **Protected and Private Attributes**:
+  - Protected attributes are used in classes to give more control over reading and writing attributes. By convention, these are prefixed with `_`.
+  - Private attributes are prefixed with `__` to prevent unintended overwriting or access, though Python does not strictly enforce this protection.
+- **Readable and Descriptive Names**:
+  - Always aim for clear and descriptive names to improve code readability.
+  - Avoid abbreviations unless they are widely recognized within your project or field (e.g., `img` for image).
+
+## 2.3. Input data
+
+- **User data**: `input("Message")` prompts the user for input and always returns a string. Type conversion is necessary afterward if a different data type is needed.
 
 
-## Basic Concepts and Conventions
-
-### Comments
-- Use `#` followed by a space to write comments that explain the code.
-
-### Variables
-- **Dynamic typing**: Variables can store any type of data and change their type without explicit casting.
-- **Objects**: Variables in Python are references stored in the *stack* and point to data in the *heap*.
+# 3. Variables
+- **Dynamic typing**: Variables can store any type of data and change its type without explicit casting.
+- **Objects**: Variables in Python are objects (from class of their type): references stored in the *stack* and point to data in the *heap*.
+  - `id(my_var)`: position of memory of the variable object.
+  - `type(my_var)`: class of the object stored in my_var (variable type of my_var)
+  -  With variable and dot: `x.` (*possible type operations of its class*)
 - **Mutability**: If the value of a variable changes, a new object is created with the updated data, and the variable points to this new reference.
 - **Initialization**: Variables must be declared with an initial value. 
-- `ìd(objecto)`: position of memory of the variable object
-### Naming conventions
 
-- *No debemos tener fihceros y directorios con el mismo nombre para evitar errores en Python.*
-- **Constants**: By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and should not be modified.
-- **Snake Case** for common variables and file names:
-  - Use the snake_case format: `[a-z][A-Z,a-z,0-9,_]+`.
-  - Avoid:
-    - Python's reserved keywords.
-    - Single-letter variable names (except for exceptions like indices).
-    - Names starting with numbers or uppercase letters.
-  - Use underscores (`_`) to compose multi-word names (e.g., `file_txt`).
-  - Apply prefixes or suffixes to provide context (e.g., `is_valid`, `user_count`).
-  - Use of plural names only on collections.
+
+## 3.1. Numeric variables
+
+### 3.1.1. Class `int`
+
+#### 3.1.1.1. Numeric Bases
+- **Decimal (base 10 - default)**: Any number without a prefix, like `123`.
+- **Binary (base 2)**: Prefixed with `0b` or `0B`. Example: `0b101` equals 5 in decimal.
+- **Octal (base 8)**: Prefixed with `0o` or `0O`. Example: `0o7` equals 7 in decimal.
+- **Hexadecimal (base 16)**: Prefixed with `0x` or `0X`. Example: `0xA` equals 10 in decimal, and `0x1F` equals 31 in decimal.
+
+#### 3.1.1.2. Using the `int` Constructor
+- Create integers from strings in any base using `int(string, base)`. Examples:
+  ```python
+  num = int("101", 2)  # Binary to decimal, result is 5
+  num = int("17", 8)   # Octal to decimal, result is 15
+  num = int("A", 16)   # Hexadecimal to decimal, result is 10
+
+#### 3.1.1.3. Random `int` number
+- Use the `randint(a, b)` function from the `random` module to generate a random integer between `a` and `b` (inclusive). Example:
+  ```python
+  import random
+  random_num = random.randint(1, 10)  # Generates a number between 1 and 10
+  ```
+
+
+### 3.1.2. Class `float`
+
+#### 3.1.2.1. Float Formatting with `.xf`
+
+The `.xf` notation is used to format floats by specifying the number of decimal places in the output. Here's how it works:
+- `{value:.xf}`
+  - `value`: The float to format.
+  - `x`: The number of decimal places.
+
+```python
+# Define the number
+value = 12.34567
+
+# Different string representations with expected results
+original = f"Original: {value}" # 'Original: 12.34567'
+f_string = f"Using f-strings with 3 decimal places: {value:.3f}"  # 'Using f-strings with 3 decimal places: 12.346'
+no_decimals = f"Without decimal places: {value:.0f}"  # 'Without decimal places: 12'
+left_align = f"Left alignment with 2 decimals: {value:<10.2f}"  # 'Left alignment with 2 decimals: 12.35     '
+right_align = f"Right alignment with 2 decimals: {value:>10.2f}"  # 'Right alignment with 2 decimals:      12.35'
+padded = f"Zero-padded (total 7 characters): {value:07.2f}"  # 'Zero-padded (total 7 characters): 0012.35'
+```
+
+
+#### 3.1.2.2. Exponential Notation
+- Floats can be represented in exponential (scientific) notation
+  ``` python
+  my_var = 3e5  # Equivalent to 300000.0
+  my_var = 0.00003  # Can also represent very small values
+  ```
+
+
+#### 3.1.2.3. Infinity values
+  - Python supports positive and negative infinity
+  ``` python
+  import math
+  from decimal import Decimal
+  
+  # Positive infinity
+  positive_infinity = float('inf')  # Using float
+  positive_infinity = math.inf      # Using math
+  positive_infinity = Decimal('Infinity')  # Using Decimal
+  
+  # Negative infinity
+  negative_infinity = float('-inf')  # Using float
+  negative_infinity = -math.inf      # Using math
+  negative_infinity = -Decimal('Infinity')  # Using Decimal
+  
+  # Check if a value is infinite
+  is_infinite = math.isinf(value)  # Returns True if the value is infinite
+  ```
+
+#### 3.1.2.4. NaN(Not a Number)
+  - Represents undefined or unrepresentable numeric data
+  ``` python
+  from decimal import Decimal
+  import math
+  
+  # Define NaN
+  my_var = float("NaN")  # Using float
+  my_var = Decimal("NaN")  # Using Decimal
+  
+  # Check if a value is NaN
+  is_nan = math.isnan(my_var)  # Returns True if the value is NaN
+  ```
+
+
+## 3.2. Class str ( Strings)
+- **Defining Strings**: Strings can be defined using `'`, `"`, or `'''`. Triple quotes allow line breaks to be included directly within the text.
+
+- **Character Indexing**:
+  - Characters are indexed from `0` to `length-1`.
+  - Negative indexing allows access to characters from the end of the string: `string[-1]` retrieves the last character.
+
+- **Immutability**: Strings cannot be modified after they are created.
+
+### 3.2.1. String Operations
+**Concatenation**:   Use `+` or `+=`: `string_1 + string_2` or `string_1 += string_2`
+- *For literals string only: an space `lit_string_1 lit_string_2`*
+
+**Joining**: Combine list elements using a separator:
+- Using `split_string.join([list of strings])`
+  - e.i. if `' '.join(stringX)` is used, it adds space bettween characters.
+
+**Splitting**: Divide a string into parts:
+- To split a string into a list, use `text.split(separator)`. By default, the separator is a space.
+
+### 3.2.2. String format
+**f-string** (recommended): `f' Hola {variable}'`
+	* *Can evaluate expressions inside the string. `f"{num1 + num2}"`*
+
+** `%` formatting **
+  - Insert values using placeholders (%s, %d, %.xf)
+    - "%s %d %.2f"%(string_var, int_var, float_var)
+
+**`format()` method (more complex and less commonly used)**: `'Hello {}'.format(variable)`
+  - You can specify the order of variables using indices `{0} {2} {1}`; otherwise, they are inserted in order.
+    - It is also possible to specify formats, for example: `{0:.2f}`.
+  - You can indicate variable names, e.g., `{name}` and use `.format(name=variable)`.
+    - With dictionaries, you can also use `{dict[key]}`: `.format(dict=dictionary)`.
+
+**Other formats**: `string.center(num, character)` can center the content of a string, padded with the specified `character` to make the total length `num` (useful for printing titles).
+  ```python
+  title = "Hello"
+  centered_title = title.center(10, "-")
+  print(centered_title)  # Output: "---Hello---"
+```
+
+### Special Characters
+- The backslash (`\`) is used to include special characters:
+  - `\n`: New line.
+  - `\t`: Tab.
+  - `\b`: Back space (delete last character)
+    - `\b\b`: Back spaces (delete last [\b items] characters)
+  - `\\`: Backslash (`\`).
+  - `\'`: Single quote within single-quoted strings.
+
+- User of raw string: `r'String with special caracteres showed literaly'`
+
+
+### String Methods (do not replace the original string!)
+#### Case and Space Management
+- **Change Case**: `str1.upper()`, `str1.lower()`, `str1.title()`, `str1.capitalize()`.
+- **Check Case**: `str1.islower()`, `str1.isupper()`.
+- **Trim Spaces**: `str1.strip()`.
+- **Measure Length**: `len(str1)`.
+
+#### Substring Handling
+- **Extract Substring**: `str1[start:end]` (end index is excluded).
+- **Find Substring**: `str1.find(substring)` (returns -1 if not found).
+- **Count Substring**: `str1.count(substring)`.
+- **Check Membership**: `"substring" in str1`.
+- **Starts or Ends With**: `str1.startswith(prefix)`, `str1.endswith(suffix)`.
+
+#### String Modification and Repetition
+- **Replace Substring**: `str1.replace(old_substr, new_substr)`.
+- **Split and Join**:
+  - `str1.split(sep)` Splits into a list using a separator (default is space).
+  - `"separator".join(list)` Joins list elements into a single string.
+- **Repeat String**: `str1 * n` Repeats the string `n` times.
+- **Format Strings**: `str1.center(width, character)` → Centers the string within a specified width, padded with `character`.
+
+
+### Codificación de caracteres
+
+#### Unicode
+  A universal standard assigning unique hexadecimal codes to all characters, including icons and symbols.  
+  - Example: `A` is `U+0041`, and `ñ` is `U+00F1`.  
+
+- **Usage in Python 2**:  
+  - Python 2 does not use Unicode by default; strings are **ASCII**.  
+  - To work with Unicode, use `u"..."` to define Unicode strings.  
+
+- **Usage in Python 3**:  
+  - Strings (`str`) are Unicode by default, requiring no additional declarations.  
+
+
+#### UTF-8
+
+  A widely-used encoding that represents Unicode characters using 1 to 4 bytes.  
+  - Example: `A` is encoded as `\x41` (1 byte), and `ñ` as `\xc3\xb1` (2 bytes).
+
+- **Usage in Python 2**:  
+  - You must explicitly set UTF-8 encoding at the beginning of the file using `# -*- coding: utf-8 -*-`.  
+  - Unicode strings can be encoded to UTF-8 with `.encode("utf-8")`.  
+
+- **Usage in Python 3**:  
+  - **UTF-8** is the default encoding for reading, writing files, and external data operations.  
+
+    ``` python
+    bstring = b"..." # Only ASCII literal characters
+    print(bstring[0]) # Print ASCII code from the character in position 0
+    ```
+  - Unicode strings are encoded to UTF-8 using `.encode("utf-8")`.  
+    ``` python
+    unicode_string = "Mañana 😀" # Unicode string
+    print(unicode_string)
+    utf8_string =unicode_string.encode('UTF-8') # Encode to utf8
+    print(utf8_string)  # > b'Ma\xc3\xb1ana \xef\xb7\xbc'
+    decode_utf8_string =utf8_string.decode('UTF-8') # Decode from utf8
+    print(decode_utf8_string) # > "Mañana 😀"
+    ```
+
+#### ASCII
+  A basic encoding representing 128 characters using 1 byte (7 bits). It includes English letters, digits, and common symbols.  
+  - Example: `A` is encoded as `65` in decimal or `\x41` in hexadecimal. It does not support special characters like `ñ`.  
+
+- **Usage in Python 2**:  
+  - Strings are encoded in **ASCII** by default, limited to 128 characters.  
+  - Attempting to use non-ASCII characters without proper setup causes errors. *`# -*- coding: utf-8 -*-` to chagne to UTF-8.*
+
+- **Usage in Python 3**:  
+  - ASCII is compatible as a subset of Unicode, and basic characters are handled similarly.  
+
+- Encode Unicode (or UTF-8) to ASCII with error handling:
+  ``` python
+  unicode_string = "Mañana 😀" # Unicode string
+  
+  # Attempt to encode as ASCII with error handling
+  ascii_string = unicode_string.encode("ascii", "ignore").decode("ascii")
+  print(ascii_string.decode("ascii"))  # Output: "Maana "(ñ and icon are removed)
+  
+  # Alternatively, replace unsupported characters
+  ascii_string_replace = unicode_string.encode("ascii", "replace")
+  print(ascii_string_replace.decode("ascii"))  # Output: "Ma?ana ?" (? replaces ñ and icon)
+  ```
+
 
 ### Print Statement
   - Basic example: `print(x, "y", z)`.
   - Using commas automatically adds spaces between the values in the output.
   - To print a blank line: `print()`.
-  - To change final character (default break line) `print(var1, end=' ')`
----
-
----
-
-## Strings
-- **Defining Strings**: Strings can be defined using `'`, `"`, or `'''`. Triple quotes allow you to include line breaks directly within the text.
-- **Character Indexing**:
-  - Characters are indexed from `0` to `length-1`.
-  - Negative indexing allows access from the end of the string: `string[-1]` accesses the last character.
-  - **Immutability**: Strings cannot be modified once they are created.
+  - To change final character (default break line) and/or separation character(s) `print(var1, end=' ', sep=', ')`
 
 
-
-### String concatenation
-- **Using the `+` operator**
-- Using `split_string.join([list of strings])`
-	* Note: if `' '.join(stringX)` is used, it splits characters with a space.
-
-### String format
-- f-string: `f' Hola {variable}'`   
-	* *Specify float decimals: `f"{float_var1:.2f}"`*
-	* *Evaluates expressions inside the string. `f"{num1 + num2}"`*
-
-- format method (more complex and les used): `'Hola {}'.format(variable)`
-- other formats `string.center(num,character)` to put bettwen `num` `character`'s the content of string. (for example, to print titles)
-
-#### Special Characters
-- The backslash (`\`) is used to include special characters:
-  - `\n`: New line.
-  - `\t`: Tab.
-  - `\\`: Backslash (`\`).
-  - `\'`: Single quote within single-quoted strings.
-
-
-
-### String Methods (do not replace the original string!)
-- Upper and lower case: `str1.upper()`, `str1.lower()`. `str1.title()`...
-- Remove beginning and ending spaces: `str1.strip()`
-- Length: `len(str1)`
-- Slicing (get substring): `str1[start:end]` *The end index character is not included.*
-- Find substring: `str1.find(substring)` Returns the index of the first occurrence of the searched substring (-1 if not found).
-- Replace method: `new_str = str1.replace(old_substr, new_substr)`
-- Split method: Divides the string into a list of elements split by a separator *(default space)*: `str1.split(sep)`
-- Repeat the same string: `str1 * n` Repeats the string `str1` `n` times.
-
----
-
----
-
-## Input data
-
-- **User data**: `input("Message")` prompts the user for input and always returns a string. Type conversion is necessary afterward if a different data type is needed.
-- **Random number**: `randint(a, b)` from the `random` module returns a random integer between `a` and `b` (inclusive).
-
-
-### Data type conversion (for MD)
+## Data type conversion
 
 - `int(x)` *if x is bool: 0 (False), 1 (True)*
-- `float(x)` *Converts x to a floating-point number.*
+- `float(x)` *Converts x to a floating-point number.*  
 - `str(x)` *if x is bool: "False" (False), "True" (True)*
-- `bool(x)` *`False` value if x is 0, None, or an empty string, list, or collection.*
+- `bool(x)` *`False` value if x is 0, None, or an empty string (" ") or empty collection ( [], (), {} ).*
 - Other conversions `hex(x)` *hexadecimal*
 
-With variable and dot: `x.` (*possible type operations*)
 
----
 
----
-## Operators
+# Operators
 
-### Arithmetic operators
+## Arithmetic operators
 
 - `+ - *` `/` *float division* `//` *integer division* `%` *modulo* `**` *power*
-
-### Assignment
+*If one of the operators is float result are always float. 
+## Assignment
 
 - `var_x = value` *Assigns a value to a variable.*
 - Multiple assignment: `var_x, var_y, var_z = value_x, value_y, value_z` *Assigns values to multiple variables in a single line.*
 - Chained assignment: `var1 = var2 = … = value` *Assigns the same value to multiple variables.*
 
-#### Value exchange without temporary variable
+### Value exchange without temporary variable
 - `x, y = y, x` *Swaps the values of `x` and `y` without using a temporary variable.*
 
-#### Compound assignments
+### Compound assignments
 - `variable OPERATOR = value` *Equivalent to `variable = variable OPERATOR value` (e.g., `x += 5` is equivalent to `x = x + 5`).*
 
 ---
 
-### Conditional and logical operators
+## 3.3. Conditional and logical operators
 
 - **Return a boolean result**
 - **Conditional**: `< > <= >= == !=`
@@ -182,7 +436,7 @@ With variable and dot: `x.` (*possible type operations*)
 - **Logical**: `and` `or` `not`
   - *Use `not` to check if a variable is empty. For example: `if not var_x`, returns `True` if `var_x` is empty.*
 
-### Operator Precedence in Python
+## 3.4. Operator Precedence in Python
 Python follows a specific order of precedence for operators:
 
 1. **Parentheses**
@@ -209,8 +463,10 @@ Python follows a specific order of precedence for operators:
 
 ---
 
-## Sentences
-### Control Sentences
+# 4. Sentences
+
+Note: It is not nesseray to convert a varaible to a bool to use the sentencies (conversions are automatic)
+## 4.1. Control Sentences
 
 - `if`, `elif`, `else`
 - Ternary operator: `result = true_value if condition else false_value`
@@ -265,7 +521,7 @@ print(switch_demo_v2(2))  # Salida: Opción 2 seleccionada
 ```
 ---
 
-### Loop sentences
+## Loop sentences
 
 ``` python
 while condition:  # while statement
@@ -287,13 +543,13 @@ For `sequence` we can use the python functions
 
 ---
 
-## Collections
+# Collections
 
-### List `my_list = [item_1, item_2, item3]`
+## List `my_list = [item_1, item_2, item3]`
 - Items can be of different types
 - Ordered and mutable *Dynamic: can add, modify, and remove elements*
 
-#### Operations with lists
+### Operations with lists
 
 - **Consult and order**  
   * `len(my_list)` - Get the length of the list  
@@ -314,7 +570,7 @@ Only for list and tuples can concatenate `list_1 + list_2`
 
 ---
 
-### Tuple `my_tuple = (item_1, item_2, item_3)` 
+## 4.2. Tuple `my_tuple = (item_1, item_2, item_3)`
 or `my_tuple = item_1, item_2, item_3`
 
 *only one element with a comma at end `my_tuple = item_1,`*
@@ -324,7 +580,7 @@ or `my_tuple = item_1, item_2, item_3`
 
 Only for list and tuples can concatenate `tuple_1 + tuple_2`
 
-#### Operations with tuples
+### 4.2.1. Operations with tuples
 
 **Consult and order**  
 * `my_tuple[index_x]` - Access an item at index `x`  
@@ -334,13 +590,13 @@ Only for list and tuples can concatenate `tuple_1 + tuple_2`
 
 ---
 
-### Set `my_set = {item_1, item_2, item_3}`
+## Set `my_set = {item_1, item_2, item_3}`
 
 - Items can be of different types
 - Not ordered and unique (no duplicated elements)
 - Mutable
 
-#### Operations with sets
+### Operations with sets
 
 **Consult**  
 - `len(my_set)`  
@@ -359,13 +615,13 @@ Only for list and tuples can concatenate `tuple_1 + tuple_2`
 
 ---
 
-### Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
+## 4.3. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
 
 - Items can be of different types (keys are always strings)
 - Ordered and mutable
 - Keys must be unique (like set items)
 
-#### Operations with dictionaries
+### 4.3.1. Operations with dictionaries
 
 * **Consult:** `my_dictionary['key_x']` or `my_dictionary.get(key_x)`  
 
@@ -382,7 +638,7 @@ Only for list and tuples can concatenate `tuple_1 + tuple_2`
 
 ---
 
-### List comprehension `[operation for element in iterable if condition]`
+## List comprehension `[operation for element in iterable if condition]`
 
 * Create lists from other iterables (filter or apply expressions to each element)  
   * Example: `[x**2 for x in numbers] # do square`
@@ -391,7 +647,7 @@ Only for list and tuples can concatenate `tuple_1 + tuple_2`
 
 ---
 
-## Modules
+# Modules
 
 A **module** in Python is a `.py` file containing:
 - Functions
@@ -399,7 +655,7 @@ A **module** in Python is a `.py` file containing:
 - Variables
 - Runnable code
 
-### Modules characteristics
+## Modules characteristics
 - Designed for code reusability and organization
 - Can be imported into other Python files using `import`
 - Creates its own namespace to avoid naming conflicts
@@ -415,7 +671,7 @@ if __name__ = '__main__': #__name__ varaible that indicate the name of the modul
 ---
 
 ---
-## Functions
+# Functions
 
 ``` python
 def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
@@ -424,7 +680,7 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
 ```
 * Can return a single value or a tuple of values (with or without unpacking).
 
-### Arguments
+## Arguments
 
 * Parameters can have default values: `param = default_value`.
 * Variable-length Arguments:
@@ -434,11 +690,11 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
 Arguments must be specified in this order: `function(req_arg, default_arg="default", *args, **kwargs)`.
 
 ``` python
-# Function example
+# 5. Function example
 def example_function(req_arg, default_arg="default", *args, **kwargs):
     pass
 
-# Calling the function
+# 6. Calling the function
 example_function(
     "value1",                      # req_arg
     "not_default",                 # default_arg
@@ -447,7 +703,7 @@ example_function(
 )
 ```
 
-### Use of a global variable inside a function
+## Use of a global variable inside a function
 ``` python
 variable_name = value
 
@@ -456,7 +712,7 @@ def function(...):
     variable_name = values...  # or other use of variable_name
 ```
 
-### Recursive functions
+## Recursive functions
 * Functions that call themselves.
 * Must reach a base case to avoid infinite loops.
 
@@ -470,7 +726,7 @@ def function_recursiva(...):
         function_recursiva(...)
 ```
 
-## Class and Objects
+# Class and Objects
 
 Classes are defined with the first letter capitalized.
 ```python
@@ -479,9 +735,9 @@ class ClassName:
 
 To get an object's attributes: `object.__dict__`.
 
-### Dynamic Context
+## Dynamic Context
 
-#### Constructor and Object Methods
+### Constructor and Object Methods
 ```python
     # Constructor (called when (ClassName()))
     def __init__(self, params...):
@@ -497,8 +753,7 @@ To get an object's attributes: `object.__dict__`.
 In Python, constructor overloading is not allowed; only the last constructor is used.
 To work around this, we can assign default values to optional parameters, usually `None`.
 
-#### Attribute and Method Encapsulation
-Protected attributes are generally used for classes. This allows more control over attribute reading and writing. Python does not enforce control but follows a naming convention with `_` (protected) and `__` (private) before the attribute name.
+### Attribute and Method Encapsulation
 For good practice, getter and setter methods `get_attribute()` and `set_attribute()` are created and used to access and modify parameters outside the class.
 
 ```python
@@ -508,7 +763,7 @@ For good practice, getter and setter methods `get_attribute()` and `set_attribut
 ```
 Methods can also be indicated as protected/private using `_`/`__` at the beginning. For example, for data validation functions or methods used only within the class methods.
 
-##### Improved Encapsulation (More Pythonic with Decorators)
+#### Improved Encapsulation (More Pythonic with Decorators)
 To modify protected and private attributes as if they were public, use decorators.
 
 ```python
@@ -521,14 +776,14 @@ To modify protected and private attributes as if they were public, use decorator
         self._attribute = value
 ```
 
-#### Adding a New Attribute to a Specific Object (Dynamic Attributes)
+### Adding a New Attribute to a Specific Object (Dynamic Attributes)
 
 `setattr(object, 'attribute_name', 'value')`
 
 
-### Static Context
+## Static Context
 
-#### Class Attributes and Methods
+### Class Attributes and Methods
 ```python
 class ClassName:
     class_attribute  # Defined outside any method in this class
@@ -556,7 +811,7 @@ Class methods do not take `self` as a parameter.
 ```
 
 
-## Inheritance and Polymorphism
+# Inheritance and Polymorphism
 
 `class Subclass(Superclass):`
 
@@ -571,12 +826,12 @@ Polymorphism: Overriding is used to maintain a standard among different subclass
 
 To access the superclass behavior, use `super().method_name` inside the subclass.
 
-### Polymorphic Function
+## Polymorphic Function
 
 It can receive different data types (e.g., a parent class or any of its subclasses) as long as they all have the method with the same name and parameters.
 
 
-### Object Class
+## Object Class
 
 It is the parent class of all classes in Python, either directly (by default) or indirectly.
 We can override the object class methods:
@@ -586,7 +841,7 @@ We can override the object class methods:
 
 
 
-### Multiple Inheritance
+## Multiple Inheritance
 
 `class Subclass(Superclass1, Superclass2):`
 
@@ -597,7 +852,7 @@ The order of superclasses is important because a method is searched first in the
 To refer to a specific superclass, do not use `super()` to avoid confusion. Instead, use `SuperclassX.method(self,...)`, where `self` refers to the instance of the subclass.
 
 
-### Abstract Class
+## Abstract Class
 
 To enforce method implementation in subclasses, the parent class must extend `ABC` (Abstract Base Class) and import the `abstractmethod` decorator.
 `from abc import ABC, abstractmethod`  
@@ -612,7 +867,7 @@ class AbstractClass(ABC):
 A class that has an abstract method or extends an abstract class without defining the abstract method becomes an abstract class and cannot be instantiated.
 
 
-### Operator Overloading
+## Operator Overloading
 To modify or implement the behavior of certain operators, override the following methods:
 ![sobrecarga-operadores1.png](static_md/sobrecarga-operadores1.png)
 ![sobrecarga-operadores2.png](static_md/sobrecarga-operadores2.png)
@@ -620,7 +875,7 @@ To modify or implement the behavior of certain operators, override the following
 ![sobrecarga-operadores4.png](static_md/sobrecarga-operadores4.png)
 
 
-## Exceptions
+# Exceptions
 
 To prevent the program from terminating abruptly:
 
@@ -640,7 +895,7 @@ else:
 finally:
     ...
     # Always executed, whether an exception occurred or not (optional)
-# Continuation
+# 7. Continuation
 ```
 
 Normally, exceptions are caught using the generic `Exception` class, but more specific ones can also be used.
@@ -654,16 +909,16 @@ If variables need to be used after the try/except block, they should be defined 
 To define a new exception class:
 
 ```python
-# Define new error
+# 8. Define new error
 class NewException(Exception):
     def __init__(self, message):
         self.message = message  # Message to display in the exception
 
-# Raise new error
+# 9. Raise new error
 raise NewException(message)  # Throws the error to be caught later in the except block
 ```
 
-## File Handling
+# File Handling
 
 Files can be opened in modes "r" (read), "a" (append), "w" (overwrite), "x" (create), and these can be concatenated with `+`.
 Files can also be specified as text files "t" or binary files "b".
@@ -695,7 +950,7 @@ To remove a file:
 import os
 os.remove(path_file)
 ```
-### Context Manager 'with'
+## Context Manager 'with'
 Automatically closes the resource (e.g., file) using `__enter__` and `__exit__` methods.
 ```python
 with open("file.txt", "w", encoding='utf8') as file:
@@ -725,7 +980,7 @@ with FileHandler("file.txt") as file:
     ...
 ```
 
-## Logging in Python
+# Logging in Python
 
 You can configure log messages using the <u>[`logging`](https://docs.python.org/3/howto/logging.html)</u> library.
 
@@ -736,7 +991,7 @@ To change the minimum level we want to display on the screen, use `log.basicConf
 
 ```python
 import logging as log
-# We change to DEBUG level; since it is the lowest level, messages of all levels will be shown
+# 10. We change to DEBUG level; since it is the lowest level, messages of all levels will be shown
 log.basicConfig(level=log.DEBUG)
 
 if __name__ == '__main__':
@@ -760,7 +1015,7 @@ log.basicConfig(level=log.DEBUG,
                 ])
 ```
 
-## .env file
+# .env file
 
 In Python, `.env` files are used to store environment variables in a simple key-value format. These files are helpful for managing sensitive information, such as API keys, database credentials, or configuration settings, without hardcoding them into your application.
 
@@ -790,9 +1045,9 @@ _DB_PORT = os.getenv('POSTGRE_PORT')
 _DATABASE = os.getenv('POSTGRE_DB')
 ```
 
-## Databases
+# Databases
 
-### Basic SQL Queries
+## Basic SQL Queries
 
 Examples of basic queries
 
@@ -811,8 +1066,8 @@ DELETE FROM person WHERE id_person=3
 DELETE FROM person WHERE id_person IN (2,3)
 ```
 
-## PostgreSQL in python
-### pgAdmin4 (graphical interface for PostgreSQL)
+# PostgreSQL in python
+## pgAdmin4 (graphical interface for PostgreSQL)
 To create a new database:
 ![pgadmin4_createdb.png](static_md/pgadmin4_createdb.png)
 
@@ -823,12 +1078,12 @@ To view and manually edit the content:
 ![pgadmin4_view_table_data.png](static_md/pgadmin4_view_table_data.png)
 
 
-### Creating connection and executing statements
+## Creating connection and executing statements
 We'll use the psycopg2 module to create a database connection.
 
 ```python
 import psycopg2 as db
-# To connect to the database
+# 11. To connect to the database
 connection = db.connect(
     user='postgres',
     password='admin',
@@ -850,10 +1105,10 @@ try:
             cursor.execute(statement)
             records = cursor.fetchall() # Get all records
             print(records)
-# Catch exceptions
+# 12. Catch exceptions
 except Exception as e:
     print(f'An error occurred: {e}')
-# Always close connection
+# 13. Always close connection
 finally:
     connection.close()
 ```
@@ -876,19 +1131,19 @@ To get the  results:
 - All records: cursor.fetchall()
 - First record: cursor.fetchone()
 
-### Transaction management (commit/rollback)
+## Transaction management (commit/rollback)
 A transaction consists of one or more statements that we want to execute as a block (all or none).
 
 *If we **use** the `with`statement for the cursor, it's handled automatically.*
 
 If we do **NOT** use the with statement for the cursor, we must save changes with `connection.commit()` at the end of our transaction (by default `connection.autocommit = False`). Also, if an error occurs, we must indicate `connection.rollback()` in the except blocks.
 
-## MySQL
+# MySQL
 Use MySQL databases is similar to postgres.
 Connexion to MySQL database 
 ``` python
 import mysql.connector
-# Crear una conexion 
+# 14. Crear una conexion
 x_db = mysql.connector.connect(host =...,
                                user = ...,
                                password=...,
@@ -900,13 +1155,13 @@ x_db.close() # Cerrar conexion
 
 ```
 
-### Pool
+## Pool
 
 ``` python
 from mysql.connector import  pooling, Error
 
 try:
-# Crear objecto de pool
+# 15. Crear objecto de pool
   pool = pooling.MySQLConnectionPool(
     pool_name= ...,
     pool_size =...,
@@ -919,9 +1174,9 @@ try:
 except Error as e:
   ...
 
-## obtener conexion
+## 15.1. obtener conexion
 conn = pool.get_connection()
-# obtener cursor
+# 16. obtener cursor
 cursor = conn.cursor()
 ... # Hacer operaciones
 conn.close() #liberamos la conexion, no la cerramos del todo!
