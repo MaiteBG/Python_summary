@@ -2,8 +2,6 @@
 
 # Basic Variable Types
 
-
-
 <!-- TOC -->
   * [1. Numeric variables](#1-numeric-variables)
     * [1.1. Class `int`](#11-class-int)
@@ -32,14 +30,18 @@
   * [4. Data type conversion](#4-data-type-conversion)
 <!-- TOC -->
 
-- **Dynamic typing**: Variables can store any type of data and change its type without explicit casting.
-- **Objects**: Variables in Python are objects (from class of their type): references stored in the *stack* and point to data in the *heap*.
+
+## Variable in python
+**Dynamic typing**: Variables can store any type of data and change its type without explicit casting.
+**Objects**: Variables in Python are objects (from class of their type): references stored in the *stack* and point to data in the *heap*.
   - `id(my_var)`: position of memory of the variable object.
   - `type(my_var)`: class of the object stored in my_var (variable type of my_var)
   -  With variable and dot: `x.` (*possible type operations of its class*)
-- **Mutability**: If the value of a variable changes, a new object is created with the updated data, and the variable points to this new reference.
-- **Initialization**: Variables must be declared with an initial value. 
 
+**Mutability**: If the value of a variable changes, a new object is created with the updated data, and the variable points to this new reference.
+
+**Initialization**: Variables must be declared with an initial value.
+  - `NoneType`: Represents absence of value (`None`).  
 
 ## 1. Numeric variables
 
