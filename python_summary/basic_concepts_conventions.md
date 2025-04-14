@@ -1,4 +1,6 @@
 
+#### [Return to README.md](../README.md)
+
 # Basic Concepts and Conventions
 
 <!-- TOC -->
@@ -6,8 +8,8 @@
   * [2. Python REPL (Read-Eval-Print Loop)](#2-python-repl-read-eval-print-loop)
   * [3. Naming Conventions](#3-naming-conventions)
     * [3.1. Constants](#31-constants)
-    * [3.2. **File names**, **functions** and **common variables**](#32-file-names-functions-and-common-variables)
-    * [3.3. **Class names**](#33-class-names)
+    * [3.2. File names, functions and common variables](#32-file-names-functions-and-common-variables)
+    * [3.3. Class names](#33-class-names)
     * [3.4. Other considerations](#34-other-considerations)
 <!-- TOC -->
 
