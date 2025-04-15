@@ -3,32 +3,36 @@
 # Basic Variable Types
 
 <!-- TOC -->
-  * [1. Numeric variables](#1-numeric-variables)
-    * [1.1. Class `int`](#11-class-int)
-      * [1.1.1. Numeric Bases](#111-numeric-bases)
-      * [1.1.2. Using the `int` Constructor](#112-using-the-int-constructor)
-      * [1.1.3. Random `int` number](#113-random-int-number)
-    * [1.2. Class `float`](#12-class-float)
-      * [1.2.1. Float Formatting with `.xf`](#121-float-formatting-with-xf)
-      * [1.2.2. Exponential Notation](#122-exponential-notation)
-      * [1.2.3. Infinity values](#123-infinity-values)
-      * [1.2.4. NaN(Not a Number)](#124-nannot-a-number)
-  * [2. Class `bool`](#2-class-bool)
-  * [3. Class `str` ( Strings)](#3-class-str--strings)
-    * [3.1. String Operations](#31-string-operations)
-    * [3.2. String format](#32-string-format)
-    * [3.3. Special Characters](#33-special-characters)
-    * [3.4. String Methods (do not replace the original string!)](#34-string-methods-do-not-replace-the-original-string)
-      * [3.4.1. Case and Space Management](#341-case-and-space-management)
-      * [3.4.2. Substring Handling](#342-substring-handling)
-      * [3.4.3. String Modification and Repetition](#343-string-modification-and-repetition)
-    * [3.5. Codificación de caracteres](#35-codificación-de-caracteres)
-      * [3.5.1. Unicode](#351-unicode)
-      * [3.5.2. UTF-8](#352-utf-8)
-      * [3.5.3. ASCII](#353-ascii)
-    * [3.6. Print Statement](#36-print-statement)
-  * [4. Data type conversion](#4-data-type-conversion)
+* [Variable in python](#variable-in-python)
+* [1. Numeric variables](#1-numeric-variables)
+  * [1.1. Class `int`](#11-class-int)
+    * [1.1.1. Numeric Bases](#111-numeric-bases)
+    * [1.1.2. Using the `int` Constructor](#112-using-the-int-constructor)
+    * [1.1.3. Random `int` number](#113-random-int-number)
+  * [1.2. Class `float`](#12-class-float)
+    * [1.2.1. Float Formatting with `.xf`](#121-float-formatting-with-xf)
+    * [1.2.2. Exponential Notation](#122-exponential-notation)
+    * [1.2.3. Infinity values](#123-infinity-values)
+    * [1.2.4. NaN(Not a Number)](#124-nannot-a-number)
+* [2. Class `bool`](#2-class-bool)
+* [3. Class `str` ( Strings)](#3-class-str--strings)
+  * [3.1. String Operations](#31-string-operations)
+  * [3.2. String format](#32-string-format)
+  * [3.3. Special Characters](#33-special-characters)
+  * [3.4. String Methods (do not replace the original string!)](#34-string-methods-do-not-replace-the-original-string)
+    * [3.4.1. Case and Space Management](#341-case-and-space-management)
+    * [3.4.2. Substring Handling](#342-substring-handling)
+    * [3.4.3. String Modification and Repetition](#343-string-modification-and-repetition)
+  * [3.5. Codificación de caracteres](#35-codificación-de-caracteres)
+    * [3.5.1. Unicode](#351-unicode)
+    * [3.5.2. UTF-8](#352-utf-8)
+    * [3.5.3. ASCII](#353-ascii)
+  * [3.6. Print Statement](#36-print-statement)
+* [4. Data type conversion](#4-data-type-conversion)
+* [5. Environment variables (`.env` file)](#5-environment-variables-env-file)
 <!-- TOC -->
+
+
 
 
 ## Variable in python
@@ -306,3 +310,34 @@ print(title.rjust(10, "-"))  # Output: "-----Hello"
 To convert a variable to another type, we use de constructor of the new class type:
 - `int(x)`, `float(x)`, `str(x)`, `bool(x)`.
 - Other conversions: e.g. `hex(x)` *hexadecimal*.
+
+
+## 5. Environment variables (`.env` file)
+
+In Python, `.env` files are used to store environment variables in a simple key-value format. These files are helpful for managing sensitive information, such as API keys, database credentials, or configuration settings, without hardcoding them into your application.
+
+The  library `python-dotenv` allows you to easily load the variables from a `.env' file into your environment. 
+- You can use the `load_dotenv()` function provided by the library to access these variables, which can then be retrieved using `os.getenv()`.
+
+This approach improves security, facilitates collaboration, and keeps your code clean and adaptable across different environments (development, testing, production).
+
+`.env` file fromat example:
+```
+POSTGRE_USER=postgres
+POSTGRE_HOST=localhost
+POSTGRE_PORT=5432
+POSTGRE_DB=test_db
+```
+
+Use of `python-dotenv` libray to get variable content from `.env` :
+
+```python
+import os
+from dotenv import load_dotenv  # para importar las varaibles del .env
+load_dotenv()
+_USERNAME = os.getenv('POSTGRE_USER')
+_PASSWORD = os.getenv('POSTGRE_PASSWORD')
+_HOST = os.getenv('POSTGRE_HOST')
+_DB_PORT = os.getenv('POSTGRE_PORT')
+_DATABASE = os.getenv('POSTGRE_DB')
+```

@@ -1,17 +1,20 @@
- 1. [Return to README.md](../README.md)
+#### [Return to README.md](../README.md)
+
 
 <!-- TOC -->
-* [1. Modules](#1-modules)
-  * [1.1. Modules characteristics](#11-modules-characteristics)
+  * [1. Modules](#1-modules)
+    * [1.1. Module content](#11-module-content)
+    * [1.2. Modules characteristics](#12-modules-characteristics)
+    * [1.3. Who run code block only if we execute the module directly](#13-who-run-code-block-only-if-we-execute-the-module-directly)
 * [2. Functions](#2-functions)
-  * [2.1. Arguments](#21-arguments)
+  * [2.1. Function Parameters and Arguments](#21-function-parameters-and-arguments)
   * [2.2. Use of a global variable inside a function](#22-use-of-a-global-variable-inside-a-function)
   * [2.3. Recursive functions](#23-recursive-functions)
 * [3. Class and Objects](#3-class-and-objects)
   * [3.1. Dynamic Context](#31-dynamic-context)
     * [3.1.1. Constructor and Object Methods](#311-constructor-and-object-methods)
     * [3.1.2. Attribute and Method Encapsulation](#312-attribute-and-method-encapsulation)
-      * [3.1.2.1. Improved Encapsulation (More Pythonic with Decorators)](#3121-improved-encapsulation-more-pythonic-with-decorators)
+      * [3.1.2.1. Improved Encapsulation (Pythonic with decorators)](#3121-improved-encapsulation-pythonic-with-decorators)
     * [3.1.3. Adding a New Attribute to a Specific Object (Dynamic Attributes)](#313-adding-a-new-attribute-to-a-specific-object-dynamic-attributes)
   * [3.2. Static Context](#32-static-context)
     * [3.2.1. Class Attributes and Methods](#321-class-attributes-and-methods)
@@ -22,7 +25,6 @@
   * [4.4. Abstract Class](#44-abstract-class)
   * [4.5. Operator Overloading](#45-operator-overloading)
 <!-- TOC -->
-
 
 ## 1. Modules
 ### 1.1. Module content
