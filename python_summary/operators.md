@@ -9,7 +9,9 @@
     * [2.2. Compound assignments](#22-compound-assignments)
   * [3.3. Conditional and logical operators](#33-conditional-and-logical-operators)
   * [3.4. Operator Precedence in Python](#34-operator-precedence-in-python)
-  * [3. Unpaking operator  (act 36.367...)](#3-unpaking-operator-act-36367)
+  * [3. Unpacking Operator](#3-unpacking-operator)
+    * [3.1. For Lists (`*`)](#31-for-lists-)
+    * [3.2. For Dictionaries (`**`)](#32-for-dictionaries-)
 <!-- TOC -->
 
 ## 1. Arithmetic operators
@@ -79,15 +81,14 @@ Python follows a specific order of precedence for operators:
 
 The unpacking operator (`*` for iterables, `**` for dictionaries) expands collections into individual elements.
 
-
-### For Lists (`*`)
+### 3.1. For Lists (`*`)
 - Expanding elements in function calls `print(*[1, 2, 3])`  
 - Combining multiple lists `[*list1, *list2]`  
 - Unpacking into separate variables `a, b, c = *[1, 2, 3]`  
 - Flattening nested lists `[*sublist for sublist in nested_list]`  
 - Converting iterables to lists `list(range(3)) → [0, 1, 2]`  
 
-### For Dictionaries (`**`)
+### 3.2. For Dictionaries (`**`)
 - Merging multiple dictionaries `{**dict1, **dict2}`  
 - Passing dictionary contents as keyword arguments `func(**{'x': 1})`  
 - Updating dictionary contents `dict1.update(**dict2)`  
