@@ -164,6 +164,23 @@ def outer_function(...):
 ```
 
 
+A **closure** is an inner function (can be a lambda function) that:
+- Is defined inside another function (the enclosing function).
+- Refers to non-local variables from the environment where it was created.
+- Is returned or used outside its original scope, while still retaining access to those variables even after the outer function has finished executing.
+
+``` python
+def outer():
+    x = 10
+    def inner():
+        return x  # x no es un parámetro ni está en inner
+    return inner
+
+f = outer()
+print(f())  # Output: 10
+``` 
+
+
 ##  2.5. Lambda Functions
 
 Anonymous and small functions (one line of code). They can be directly assigned to a variable and called like a regular function with parameters in parentheses.
@@ -171,7 +188,15 @@ Anonymous and small functions (one line of code). They can be directly assigned 
 
 `my_lambda_function = lambda arg1, arg2=1: arg1 + arg2`
 
+**Nested Lambda Functions**
 
+You can nest lambda functions inside other lambdas. This allows you to return a lambda from another lambda, or define compact logic in multiple layers.
+
+```python
+multiply = lambda x: (lambda y: x * y)
+double = multiply(2)
+print(double(5))  # Output: 10
+```
 
 
 # 3. Class and Objects
