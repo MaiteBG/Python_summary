@@ -105,6 +105,28 @@ def function_recursiva(...):
         function_recursiva(...)
 ```
 
+
+## 2.4. Nested functions  
+* Functions defined inside other functions.  
+* Inner functions can access variables from the outer function (closure).  
+* If a helper function is only needed inside another function, nesting keeps it private and organized.
+* Decorators often use nested functions to modify the behavior of other functions.
+```python
+def outer_function(...):
+    # Outer function logic
+    ...
+
+    def inner_function(...):
+        # Inner function logic
+        ...
+    
+    # Call to inner function
+    inner_function(...)
+    ...
+```
+
+
+
 # 3. Class and Objects
 
 Classes are defined with the first letter capitalized.
