@@ -3,33 +3,35 @@
 # Basic Variable Types
 
 <!-- TOC -->
-* [Variable in python](#variable-in-python)
-* [1. Numeric variables](#1-numeric-variables)
-  * [1.1. Class `int`](#11-class-int)
-    * [1.1.1. Numeric Bases](#111-numeric-bases)
-    * [1.1.2. Using the `int` Constructor](#112-using-the-int-constructor)
-    * [1.1.3. Random `int` number](#113-random-int-number)
-  * [1.2. Class `float`](#12-class-float)
-    * [1.2.1. Float Formatting with `.xf`](#121-float-formatting-with-xf)
-    * [1.2.2. Exponential Notation](#122-exponential-notation)
-    * [1.2.3. Infinity values](#123-infinity-values)
-    * [1.2.4. NaN(Not a Number)](#124-nannot-a-number)
-* [2. Class `bool`](#2-class-bool)
-* [3. Class `str` ( Strings)](#3-class-str--strings)
-  * [3.1. String Operations](#31-string-operations)
-  * [3.2. String format](#32-string-format)
-  * [3.3. Special Characters](#33-special-characters)
-  * [3.4. String Methods (do not replace the original string!)](#34-string-methods-do-not-replace-the-original-string)
-    * [3.4.1. Case and Space Management](#341-case-and-space-management)
-    * [3.4.2. Substring Handling](#342-substring-handling)
-    * [3.4.3. String Modification and Repetition](#343-string-modification-and-repetition)
-  * [3.5. Codificación de caracteres](#35-codificación-de-caracteres)
-    * [3.5.1. Unicode](#351-unicode)
-    * [3.5.2. UTF-8](#352-utf-8)
-    * [3.5.3. ASCII](#353-ascii)
-  * [3.6. Print Statement](#36-print-statement)
-* [4. Data type conversion](#4-data-type-conversion)
-* [5. Environment variables (`.env` file)](#5-environment-variables-env-file)
+* [Basic Variable Types](#basic-variable-types)
+  * [Variable in python](#variable-in-python)
+  * [1. Numeric variables](#1-numeric-variables)
+    * [1.1. Class `int`](#11-class-int)
+      * [1.1.1. Numeric Bases](#111-numeric-bases)
+      * [1.1.2. Using the `int` Constructor](#112-using-the-int-constructor)
+      * [1.1.3. Random `int` number](#113-random-int-number)
+    * [1.2. Class `float`](#12-class-float)
+      * [1.2.1. Float Formatting with `.xf`](#121-float-formatting-with-xf)
+      * [1.2.2. Exponential Notation](#122-exponential-notation)
+      * [1.2.3. Infinity values](#123-infinity-values)
+      * [1.2.4. NaN(Not a Number)](#124-nannot-a-number)
+  * [2. Class `bool`](#2-class-bool)
+  * [3. Class `str` ( Strings)](#3-class-str--strings)
+    * [3.1. String Operations](#31-string-operations)
+    * [3.2. String format](#32-string-format)
+    * [3.3. Special Characters](#33-special-characters)
+    * [3.4. String Methods (do not replace the original string!)](#34-string-methods-do-not-replace-the-original-string)
+      * [3.4.1. Case and Space Management](#341-case-and-space-management)
+      * [3.4.2. Substring Handling](#342-substring-handling)
+      * [3.4.3. String Modification and Repetition](#343-string-modification-and-repetition)
+    * [3.5. Codificación de caracteres](#35-codificación-de-caracteres)
+      * [3.5.1. Unicode](#351-unicode)
+      * [3.5.2. UTF-8](#352-utf-8)
+      * [3.5.3. ASCII](#353-ascii)
+    * [3.6. Print Statements](#36-print-statements)
+  * [4. Data type conversion](#4-data-type-conversion)
+  * [5. Use of a global/nonlocal variable (~ SCOPE )](#5-use-of-a-globalnonlocal-variable--scope-)
+  * [6. Environment variables (`.env` file)](#6-environment-variables-env-file)
 <!-- TOC -->
 
 
@@ -313,7 +315,41 @@ To convert a variable to another type, we use de constructor of the new class ty
 - Other conversions: e.g. `hex(x)` *hexadecimal*.
 
 
-## 5. Environment variables (`.env` file)
+## 5. Use of a global/nonlocal variable (~ SCOPE )
+
+  - `global`: Use it to modify a variable defined at the **module/global scope**.
+
+    ``` python
+    variable_name = value  # varaible in global scope
+    
+    def function(...):
+       # indicate that we are going to use global scope variable
+        global variable_name     
+        variable_name = values...  # or other use of variable_name
+    ```
+  - `nonlocal`: Use it to modify a variable from the **enclosing function**, in a **nested function**.
+
+    ``` python
+    def outer():
+        count = 0
+    
+        def inner():
+            nonlocal count
+            count += 1
+    
+        inner()
+        return count
+    ```
+
+
+Coding standards (such as PEP 8) do **not** recommend using `global` and `nonlocal` unnecessarily.  
+Use it only when it's strictly necessary to modify a global or nonlocal variable, as it makes the code harder to understand and maintain, and can cause unintended side effects.
+- Use global variables only when you have a strong reason (e.g., shared configuration or state).
+
+
+
+
+## 6. Environment variables (`.env` file)
 
 In Python, `.env` files are used to store environment variables in a simple key-value format. These files are helpful for managing sensitive information, such as API keys, database credentials, or configuration settings, without hardcoding them into your application.
 

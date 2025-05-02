@@ -8,8 +8,10 @@
     * [1.3. Who run code block only if we execute the module directly](#13-who-run-code-block-only-if-we-execute-the-module-directly)
 * [2. Functions](#2-functions)
   * [2.1. Function Parameters and Arguments](#21-function-parameters-and-arguments)
-  * [2.2. Use of a global variable inside a function](#22-use-of-a-global-variable-inside-a-function)
+  * [Functions as First-Class Citizens](#functions-as-first-class-citizens)
   * [2.3. Recursive functions](#23-recursive-functions)
+  * [2.4. Nested functions](#24-nested-functions-)
+  * [2.5. Lambda Functions](#25-lambda-functions)
 * [3. Class and Objects](#3-class-and-objects)
   * [3.1. Dynamic Context](#31-dynamic-context)
     * [3.1.1. Constructor and Object Methods](#311-constructor-and-object-methods)
@@ -68,11 +70,11 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
 Parameters must be specified in this order: `function(req_arg, default_arg="default", *args, **kwargs)`.
 
 ``` python
-# 7. Function example
+# Function example
 def example_function(req_arg, default_arg="default", *args, **kwargs):
     pass
 
-# 8. Calling the function
+# Calling the function
 example_function(
     "value1",                      # req_arg
     "not_default",                 # default_arg
@@ -81,15 +83,51 @@ example_function(
 )
 ```
 
-## 2.2. Use of a global variable inside a function
-``` python
-variable_name = value  # varaible in global scope
 
-def function(...):
-   # indicate that we are going to use global scope variable
-    global variable_name     
-    variable_name = values...  # or other use of variable_name
-```
+## Functions as First-Class Citizens
+
+In Python, functions are treated as first-class citizens. This means:
+
+- Functions can be assigned to variables:
+  ``` python
+  def add(x, y):
+      return x + y
+
+  my_add = add
+  print(my_add(3, 4))  # Output: 7
+  ```
+  
+- Functions can be passed as arguments:
+  ``` python
+  def apply_func(func, value):
+    return func(value)
+  
+  def increment(x):
+      return x + 1
+  
+  print(apply_func(increment, 5))  # Output: 6
+   ``` 
+
+- Functions can return other functions:
+   ``` python
+    def outer():
+      def inner(x):
+          return x + 1
+      return inner
+  
+  add_one = outer()
+  print(add_one(5))  # Output: 6
+   ```
+
+- When is it necessary to treat functions as first-class citizens?
+
+  - When flexibility is needed to pass functions as arguments or return them from other functions.
+  - In functional programming, where functions are passed, returned, and stored dynamically.
+  - For creating higher-order functions, decorators, or event handlers.
+  - When you need to modify behavior at runtime, like with callbacks or dynamic function generation.
+
+
+
 
 ## 2.3. Recursive functions
 * Functions that call themselves.
@@ -124,6 +162,15 @@ def outer_function(...):
     inner_function(...)
     ...
 ```
+
+
+##  2.5. Lambda Functions
+
+Anonymous and small functions (one line of code). They can be directly assigned to a variable and called like a regular function with parameters in parentheses.
+* Can be without arguments or with default arguments, variable-length parameters, etc.
+
+`my_lambda_function = lambda arg1, arg2=1: arg1 + arg2`
+
 
 
 
