@@ -8,6 +8,7 @@
 * [Basic Sentences](python_summary/sentences.md)
 * [Resources and Files Input/Output Management](python_summary/resources_and_files_managment.md)
 * [Exceptions and Logging](python_summary/exceptions_and_logging.md)
+* [Databases](python_summary/databases.md)
 <!-- TOC -->
 
 

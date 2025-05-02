@@ -83,9 +83,12 @@ Oly for list and tuples can concatenate `tuple_1 + tuple_2`
 
 ## 6.2. Set `my_set = {item_1, item_2, item_3}`
 
-- Items can be of different types
+- The items can be of different types, but they must all be immutable.
 - Not ordered and unique (no duplicated elements)
 - Mutable
+
+To create an empty set in Python, use the set() constructor. This is important because {} by itself creates an empty dictionary, not an empty set.
+`my_set = set()`.
 
 ### 6.2.1. Operations with sets
 
@@ -97,24 +100,30 @@ Oly for list and tuples can concatenate `tuple_1 + tuple_2`
 **Add and remove**  
 - `my_set.add(new_item)`  
 - `my_set.remove(value)`  
+- `my_set.update(other_iterable)` Add elements from other_iterable to my_set.
 
 **Set operations**  
-- Union: `set_1 | set_2`  
-- Intersection: `set_1 & set_2`  
-- Difference: `set_1 - set_2`  
+- Union: `set_1 | set_2`  also `set1.union(set_2)`
+- Intersection: `set_1 & set_2`  also `set1.intersenction(set_2)`
+- Difference: `set_1 - set_2`   also `set1.difference(set_2)` (not commutative)
+- Symmetric difference ( is communicative)  set1.symetric_difference(set_2)
 
-
+- Subset: `set1.issubset(set_2)`
+- Superset: `set1.issuperset(set_2)`
+- Disjoint `set1.isdisjoint(set_2)`
 ---
 
 ## 3. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
 
 - Items can be of different types (keys are always strings)
 - Ordered and mutable
-- Keys must be unique (like set items)
+- Keys must be unique (like set items and immutable type)
 
 ### 3.1. Operations with dictionaries
 
-* **Consult:** `my_dictionary['key_x']` or `my_dictionary.get(key_x)`  
+* **Consult:** `my_dictionary['key_x']`
+  * `my_dictionary.get(key_x,default_if_not_exist)`  Do not modify diccionariy content
+  * `my_dictionary.setdefault(key_x,default_if_not_exist)` If key_x no exist add key_x with  default_if_not_exist value 
 
 * **Add or modify:** `my_dictionary['key_x'] = value_x`  
 
@@ -132,6 +141,7 @@ Oly for list and tuples can concatenate `tuple_1 + tuple_2`
 > - Using the `copy()` method ensures that modifications to the copied collection do not impact the original collection. 
 >  - This is particularly important when you need to work independently with a duplicate of the data.
 
+- `elem_1 is elem_2 `: compare the object reference, not the content.
 
 
 

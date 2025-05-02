@@ -298,12 +298,13 @@ print(title.rjust(10, "-"))  # Output: "-----Hello"
   ```
 
 
-### 3.6. Print Statement
+### 3.6. Print Statements
   - Basic example: `print(x, "y", z)`.
   - Using commas automatically adds spaces between the values in the output.
   - To print a blank line: `print()`.
   - To change final character (default break line) and/or separation character(s) `print(var1, end=' ', sep=', ')`
 
+Also, can use pretty print `from pprint import pprint` to print for example dictionary with better format.
 
 ## 4. Data type conversion
 
