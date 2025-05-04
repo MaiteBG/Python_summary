@@ -13,6 +13,7 @@
     * [4.1. Operations with dictionaries](#41-operations-with-dictionaries)
   * [5. List comprehension `[operation for element in iterable if condition]`](#5-list-comprehension-operation-for-element-in-iterable-if-condition)
   * [6. Unpacking (tuples, lists, strings)](#6-unpacking-tuples-lists-strings)
+  * [7. Zip function](#7-zip-function)
 <!-- TOC -->
 
 ## 1. List `my_list = [item_1, item_2, item3]`
@@ -189,3 +190,64 @@ print(f'Even numbers: {even_numbers}')
       * First: *start, x, y → start collects all before last 2
       * Middle: x, *mid, y → mid collects between first/last
       * End: x, y, *rest → rest collects all after first 2
+
+
+
+
+
+## 7. Zip function
+
+The `zip()` function allows us to combine multiple iterables (like lists, tuples, etc.) into a single iterable of tuples.
+Each tuple contains elements from the input iterables that share the same position.
+`zip()` returns a list of tuples as an object from zip class. 
+```python
+numbers = [1, 2, 3]
+letters = ['A', 'B', 'C']
+id = 34,234,34
+combined = zip(id, numbers, letters)
+print(list(combined))  #[(34, 1, 'A'), (234, 2, 'B'), (34, 3, 'C')]
+type(combined)  #zip
+```
+
+The zip() function will only iterate up to the shortest iterable provided. This means if the input iterables have different lengths, zip() stops at the end of the shortest one.
+* Note:  If we convert the result of zip() into a set, the order of the elements is not guaranteed.
+
+One of the most useful features of the zip() function is that it allows us to iterate over multiple iterables at the same time in parallel.
+
+```python
+numbers = [1, 2, 3]
+letters = ['a', 'b', 'c']
+ids = ('X', 'Y', 'Z')
+random_set = {'@', '#', '$'}
+
+for number, letter, id_, symbol in zip(numbers, letters, ids, random_set):
+    print(f"{number} - {letter} - {id_} - {symbol}")
+```
+
+You can also reverse the effect of zip() — this is called unzipping. 
+If you have a zip object or a list of tuples, you can unpack it using the * operator to retrieve the original iterables:
+
+```python
+zip_instance = [(1, 'a'), (2, 'b'), (3, 'c')]
+unzipped_numbers, unzipped_letters = zip(*zip_instance)
+print(unzipped_numbers)  # (1, 2, 3)
+print(unzipped_letters)  # ('a', 'b', 'c')
+```
+
+The result of zip() can be passed to the sorted() function to sort the paired elements based on default or custom criteria.
+`sorted_zip_instance = sorted(zip_instance)`
+
+You can use zip() to create a dict by combining two iterables: one for keys and one for values.
+
+```python
+keys = ['name', 'age', 'city']
+values = ['Alice', 30, 'New York']
+
+my_dict = dict(zip(keys, values))
+print(my_dict)
+# Output: {'name': 'Alice', 'age': 30, 'city': 'New York'}
+
+my_dict.update(zip(some_old_keys,new_values)) # To update some keys values
+```python
+
+
