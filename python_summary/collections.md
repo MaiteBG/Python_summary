@@ -7,12 +7,12 @@
     * [1.1. Operations with lists](#11-operations-with-lists)
   * [2. Tuple `my_tuple = (item_1, item_2, item_3)`](#2-tuple-my_tuple--item_1-item_2-item_3)
     * [2.1. Operations with tuples](#21-operations-with-tuples)
-  * [6.2. Set `my_set = {item_1, item_2, item_3}`](#62-set-my_set--item_1-item_2-item_3)
-    * [6.2.1. Operations with sets](#621-operations-with-sets)
-  * [3. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#3-dictionary-my_dictionary--key_1-value_1-key_2-value_2)
-    * [3.1. Operations with dictionaries](#31-operations-with-dictionaries)
-  * [4. List comprehension `[operation for element in iterable if condition]`](#4-list-comprehension-operation-for-element-in-iterable-if-condition)
-  * [5. Unpacking (tuples, lists, strings)](#5-unpacking-tuples-lists-strings)
+  * [3. Set `my_set = {item_1, item_2, item_3}`](#3-set-my_set--item_1-item_2-item_3)
+    * [3.1. Operations with sets](#31-operations-with-sets)
+  * [4. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#4-dictionary-my_dictionary--key_1-value_1-key_2-value_2)
+    * [4.1. Operations with dictionaries](#41-operations-with-dictionaries)
+  * [5. List comprehension `[operation for element in iterable if condition]`](#5-list-comprehension-operation-for-element-in-iterable-if-condition)
+  * [6. Unpacking (tuples, lists, strings)](#6-unpacking-tuples-lists-strings)
 <!-- TOC -->
 
 ## 1. List `my_list = [item_1, item_2, item3]`
@@ -79,9 +79,7 @@ Oly for list and tuples can concatenate `tuple_1 + tuple_2`
 * `my_tuple[index_ini:index_fin+1]` - Slice the list from `index_ini` to `index_fin`  
 
 
----
-
-## 6.2. Set `my_set = {item_1, item_2, item_3}`
+## 3. Set `my_set = {item_1, item_2, item_3}`
 
 - The items can be of different types, but they must all be immutable.
 - Not ordered and unique (no duplicated elements)
@@ -90,7 +88,7 @@ Oly for list and tuples can concatenate `tuple_1 + tuple_2`
 To create an empty set in Python, use the set() constructor. This is important because {} by itself creates an empty dictionary, not an empty set.
 `my_set = set()`.
 
-### 6.2.1. Operations with sets
+### 3.1. Operations with sets
 
 **Consult**  
 - `len(my_set)`  
@@ -111,15 +109,15 @@ To create an empty set in Python, use the set() constructor. This is important b
 - Subset: `set1.issubset(set_2)`
 - Superset: `set1.issuperset(set_2)`
 - Disjoint `set1.isdisjoint(set_2)`
----
 
-## 3. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
+
+## 4. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`
 
 - Items can be of different types (keys are always strings)
 - Ordered and mutable
 - Keys must be unique (like set items and immutable type)
 
-### 3.1. Operations with dictionaries
+### 4.1. Operations with dictionaries
 
 * **Consult:** `my_dictionary['key_x']`
   * `my_dictionary.get(key_x,default_if_not_exist)`  Do not modify diccionariy content
@@ -145,13 +143,43 @@ To create an empty set in Python, use the set() constructor. This is important b
 
 
 
-## 4. List comprehension `[operation for element in iterable if condition]`
+## 5. List comprehension `[operation for element in iterable if condition]`
 
-* Create lists from other iterables (filter or apply expressions to each element)  
-  * Example: `[x**2 for x in numbers] # do square`
-  
+List comprehensions allow you to create lists from other iterables by filtering or applying expressions to each element.
 
-## 5. Unpacking (tuples, lists, strings)
+Apply a condition and operation with list comprehension
+```python
+# Create a list with the square of numbers divisible by both 2 and 3
+squared_numbers = [x**2 for x in range(20) if x % 2 == 0 if x % 3 == 0]
+print(f'Squared numbers divisible by both 2 and 3: {squared_numbers}')
+```
+
+Using list comprehension with conditional statements
+```python
+even_numbers = []
+odd_numbers = []
+[even_numbers.append(number) if number % 2 == 0 else odd_numbers.append(number) for number in range(10)]
+print(f'Even numbers: {even_numbers}')
+print(f'Odd numbers: {odd_numbers}')
+```
+
+List comprehensions allow you to write concise and readable code. You can flatten nested structures and apply conditions all in one line (the line breaks below are only for clarity).
+```python
+# Example: Extract even numbers from a list of lists
+lista_listas = [[1, 2, 3], [4, 5], [6, 7, 8]]
+
+even_numbers = [
+    value
+    for sublist in lista_listas
+    for value in sublist
+    if value % 2 == 0
+]
+
+print(f'Even numbers: {even_numbers}')
+```
+
+
+## 6. Unpacking (tuples, lists, strings)
   * Works with any iterable (tuples, lists, strings)
   * Unpacking is a powerful feature in Python that allows you to assign elements of a sequence (like a tuple) to multiple variables in a single statement.
   * `var_1, var_2, var_3 = (item1, item2, item3)`

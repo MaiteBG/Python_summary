@@ -1,25 +1,25 @@
 #### [Return to README.md](../README.md)
 
 
+# Modules, Functions, and Object-Oriented Design
+
 <!-- TOC -->
-  * [1. Modules](#1-modules)
-    * [1.1. Module content](#11-module-content)
-    * [1.2. Modules characteristics](#12-modules-characteristics)
-    * [1.3. Who run code block only if we execute the module directly](#13-who-run-code-block-only-if-we-execute-the-module-directly)
+
+* [1. Modules](#1-modules)
+  * [1.1. Module content](#11-module-content)
+  * [1.2. Modules characteristics](#12-modules-characteristics)
+  * [1.3. Who run code block only if we execute the module directly](#13-who-run-code-block-only-if-we-execute-the-module-directly)
 * [2. Functions](#2-functions)
   * [2.1. Function Parameters and Arguments](#21-function-parameters-and-arguments)
-  * [Functions as First-Class Citizens](#functions-as-first-class-citizens)
-  * [2.3. Recursive functions](#23-recursive-functions)
-  * [2.4. Nested functions](#24-nested-functions-)
-  * [2.5. Lambda Functions](#25-lambda-functions)
+  * [2.2. Functions as First-Class Citizens](#22-functions-as-first-class-citizens)
 * [3. Class and Objects](#3-class-and-objects)
   * [3.1. Dynamic Context](#31-dynamic-context)
     * [3.1.1. Constructor and Object Methods](#311-constructor-and-object-methods)
-    * [3.1.2. Attribute and Method Encapsulation](#312-attribute-and-method-encapsulation)
-      * [3.1.2.1. Improved Encapsulation (Pythonic with decorators)](#3121-improved-encapsulation-pythonic-with-decorators)
-    * [3.1.3. Adding a New Attribute to a Specific Object (Dynamic Attributes)](#313-adding-a-new-attribute-to-a-specific-object-dynamic-attributes)
+    * [3.1.2. Adding a New Attribute to a Specific Object (Dynamic Attributes)](#312-adding-a-new-attribute-to-a-specific-object-dynamic-attributes)
   * [3.2. Static Context](#32-static-context)
     * [3.2.1. Class Attributes and Methods](#321-class-attributes-and-methods)
+  * [3.3. Attribute and Method Encapsulation](#33-attribute-and-method-encapsulation)
+    * [3.3.1. Improved Encapsulation (Pythonic with decorators)](#331-improved-encapsulation-pythonic-with-decorators)
 * [4. Inheritance and Polymorphism](#4-inheritance-and-polymorphism)
   * [4.1. Polymorphic Function](#41-polymorphic-function)
   * [4.2. Object Class](#42-object-class)
@@ -52,7 +52,7 @@ if __name__ = '__main__':
     # It will NOT run if the module is imported elsewhere
 ```
 
-# 2. Functions
+## 2. Functions
 
 ``` python
 def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
@@ -60,7 +60,7 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
     return retrun_variable
 ```
 
-## 2.1. Function Parameters and Arguments
+### 2.1. Function Parameters and Arguments
 > **Parameters** are the variables listed in the function definition and **arguments** are the actual values passed to the function when it is called.
 * Parameters can have default values: `param = default_value`.
 * Alos, can include variable-length parameters:
@@ -84,7 +84,7 @@ example_function(
 ```
 
 
-## Functions as First-Class Citizens
+### 2.2. Functions as First-Class Citizens
 
 In Python, functions are treated as first-class citizens. This means:
 
@@ -128,78 +128,7 @@ In Python, functions are treated as first-class citizens. This means:
 
 
 
-
-## 2.3. Recursive functions
-* Functions that call themselves.
-* Must reach a base case to avoid infinite loops.
-
-``` python
-def function_recursiva(...):
-    # Base case
-    if condition:
-        ...
-    else:  # Recursive case
-        ...
-        function_recursiva(...)
-```
-
-
-## 2.4. Nested functions  
-* Functions defined inside other functions.  
-* Inner functions can access variables from the outer function (closure).  
-* If a helper function is only needed inside another function, nesting keeps it private and organized.
-* Decorators often use nested functions to modify the behavior of other functions.
-```python
-def outer_function(...):
-    # Outer function logic
-    ...
-
-    def inner_function(...):
-        # Inner function logic
-        ...
-    
-    # Call to inner function
-    inner_function(...)
-    ...
-```
-
-
-A **closure** is an inner function (can be a lambda function) that:
-- Is defined inside another function (the enclosing function).
-- Refers to non-local variables from the environment where it was created.
-- Is returned or used outside its original scope, while still retaining access to those variables even after the outer function has finished executing.
-
-``` python
-def outer():
-    x = 10
-    def inner():
-        return x  # x no es un parámetro ni está en inner
-    return inner
-
-f = outer()
-print(f())  # Output: 10
-``` 
-
-
-##  2.5. Lambda Functions
-
-Anonymous and small functions (one line of code). They can be directly assigned to a variable and called like a regular function with parameters in parentheses.
-* Can be without arguments or with default arguments, variable-length parameters, etc.
-
-`my_lambda_function = lambda arg1, arg2=1: arg1 + arg2`
-
-**Nested Lambda Functions**
-
-You can nest lambda functions inside other lambdas. This allows you to return a lambda from another lambda, or define compact logic in multiple layers.
-
-```python
-multiply = lambda x: (lambda y: x * y)
-double = multiply(2)
-print(double(5))  # Output: 10
-```
-
-
-# 3. Class and Objects
+## 3. Class and Objects
 
 Classes are defined with the first letter capitalized.
 ``` python
@@ -208,10 +137,10 @@ class ClassName:
 
 To get an object's attributes: `object.__dict__`.
 
-## 3.1. Dynamic Context
+### 3.1. Dynamic Context
 Dynamic context refers to things that belong to the instances, like instance variables and methods that use `self`.
-initialization
-### 3.1.1. Constructor and Object Methods
+initialization.
+#### 3.1.1. Constructor and Object Methods
 ``` python
     # Constructor (called when (ClassName()))
     def __init__(self, params...):
@@ -227,39 +156,15 @@ initialization
 In Python, constructor overloading is not allowed; only the last constructor is used.
 To work around this, we can assign default values to optional parameters, usually `None`.
 
-### 3.1.2. Attribute and Method Encapsulation
-For good practice, getter and setter methods created and used to access and modify parameters outside the class.
-
-> It is a convention but python do not check access automatically.
-``` python
-    self.public_attribute # public atribute (+)
-    self._protected_attribute # protected atribute
-    self.__private_attribute # private atribute (-)
-```
-Methods can also be indicated as protected/private using `_`/`__` at the beginning. For example, for data validation functions or methods used only within the class methods.
-
-#### 3.1.2.1. Improved Encapsulation (Pythonic with decorators)
-To modify protected and private attributes as if they were public, use decorators.
-
-```python
-    @property  # Define the getter method in a more Pythonic way
-    def attribute(self):
-        return self._attribute
-    
-    @attribute.setter  # Define the setter method in a more Pythonic way
-    def attribute(self, value):
-        self._attribute = value
-```
-
-### 3.1.3. Adding a New Attribute to a Specific Object (Dynamic Attributes)
+#### 3.1.2. Adding a New Attribute to a Specific Object (Dynamic Attributes)
 
 Only to that object (not all the instances):
 `setattr(object, 'attribute_name', 'value')`
 
 
-## 3.2. Static Context
+### 3.2. Static Context
 
-### 3.2.1. Class Attributes and Methods
+#### 3.2.1. Class Attributes and Methods
 ```python
 class ClassName:
     class_attribute  # Defined outside any method in this class
@@ -287,7 +192,32 @@ Class methods do not take `self` as a parameter.
 ```
 
 
-# 4. Inheritance and Polymorphism
+### 3.3. Attribute and Method Encapsulation
+For good practice, getter and setter methods created and used to access and modify parameters outside the class.
+
+> It is a convention but python do not check access automatically.
+``` python
+    self.public_attribute # public atribute (+)
+    self._protected_attribute # protected atribute
+    self.__private_attribute # private atribute (-)
+```
+Methods can also be indicated as protected/private using `_`/`__` at the beginning. For example, for data validation functions or methods used only within the class methods.
+
+#### 3.3.1. Improved Encapsulation (Pythonic with decorators)
+To modify protected and private attributes as if they were public, use decorators.
+
+```python
+    @property  # Define the getter method in a more Pythonic way
+    def attribute(self):
+        return self._attribute
+    
+    @attribute.setter  # Define the setter method in a more Pythonic way
+    def attribute(self, value):
+        self._attribute = value
+```
+
+
+## 4. Inheritance and Polymorphism
 
 `class Subclass(Superclass):`
 
@@ -302,12 +232,12 @@ Polymorphism: Overriding is used to maintain a standard among different subclass
 
 To access the superclass behavior, use `super().method_name` inside the subclass.
 
-## 4.1. Polymorphic Function
+### 4.1. Polymorphic Function
 
 It can receive different data types (e.g., a parent class or any of its subclasses) as long as they all have the method with the same name and parameters.
 
 
-## 4.2. Object Class
+### 4.2. Object Class
 
 It is the parent class of all classes in Python, either directly (by default) or indirectly.
 We can override the object class methods:
@@ -317,7 +247,7 @@ We can override the object class methods:
 
 
 
-## 4.3. Multiple Inheritance
+### 4.3. Multiple Inheritance
 
 `class Subclass(Superclass1, Superclass2):`
 
@@ -328,7 +258,7 @@ The order of superclasses is important because a method is searched first in the
 To refer to a specific superclass, do not use `super()` to avoid confusion. Instead, use `SuperclassX.method(self,...)`, where `self` refers to the instance of the subclass.
 
 
-## 4.4. Abstract Class
+### 4.4. Abstract Class
 
 To enforce method implementation in subclasses, the parent class must extend `ABC` (Abstract Base Class) and import the `abstractmethod` decorator.
 `from abc import ABC, abstractmethod`  
@@ -343,7 +273,7 @@ class AbstractClass(ABC):
 A class that has an abstract method or extends an abstract class without defining the abstract method becomes an abstract class and cannot be instantiated.
 
 
-## 4.5. Operator Overloading
+### 4.5. Operator Overloading
 To modify or implement the behavior of certain operators, override the following methods:
 ![sobrecarga-operadores1.png](../static_md/sobrecarga-operadores1.png)
 ![sobrecarga-operadores2.png](../static_md/sobrecarga-operadores2.png)
