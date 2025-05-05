@@ -300,7 +300,7 @@ print(title.rjust(10, "-"))  # Output: "-----Hello"
   ```
 
 
-### 3.6. Print Statements
+### 3.6. Print Statements and object representation as string
   - Basic example: `print(x, "y", z)`.
   - Using commas automatically adds spaces between the values in the output.
   - To print a blank line: `print()`.

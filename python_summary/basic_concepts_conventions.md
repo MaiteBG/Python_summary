@@ -111,7 +111,7 @@ By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and sho
 ### 3.4. Other considerations
 
 - Avoid
-  -  Having files and directories with the same name to prevent errors in Python.
+  - Having files, directories, modules... with the same name to prevent errors in Python.
   - Python's reserved keywords.  
   - Single-letter variable names (except for specific cases like indices).
 
