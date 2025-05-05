@@ -25,6 +25,10 @@
   * [4.3. Multiple Inheritance](#43-multiple-inheritance)
   * [4.4. Abstract Class](#44-abstract-class)
   * [4.5. Operator Overloading](#45-operator-overloading)
+* [5. Object representation](#5-object-representation-)
+  * [5.1. `__repr__`](#51-__repr__)
+  * [5.2. `__str__`](#52-__str__)
+  * [5.2 `__format__`](#52-__format__)
 
 <!-- TOC -->
 
@@ -199,7 +203,6 @@ Class methods do not take `self` as a parameter.
 
 ### 3.3. Attribute and Method Encapsulation
 
-
 > It is a convention but python do not check access automatically.
 
 ```python
@@ -252,7 +255,7 @@ In Python, you can dynamically add a new attribute to a single object or a class
 Override: To override a superclass method in a subclass, define the method with the same name and parameters. The method in the subclass will always be called first.
 Polymorphism: Overriding is used to maintain a standard among different subclasses.
 
-To access the superclass behavior, use `super().method_name` inside the subclass.
+To access the superclass behavior (next MRO class on Multiple Inheritance), use `super().method_name` inside the subclass.
 
 ### 4.1. Polymorphic Function
 
@@ -267,15 +270,35 @@ We can override the object class methods:
 * `__str__()`: To change how object information is displayed
 * `__eq__()`: To modify the way equality is determined
 
-### 4.3. Multiple Inheritance
+### 4.3. Multiple Inheritance and MRO
 
 `class Subclass(Superclass1, Superclass2):`
+ 
+If methods are not overridden in the subclass:
+> MRO - Method Resolution Order `Subclass.mro()` *to obtain the order in which method calls are resolved*.
+> 
+**Search Order Priority Example** on Subclass(Superclass1,Superclass2)
 
-MRO - Method Resolution Order `Subclass.mro()` *to obtain the order in which method calls are resolved*.
+* First in the **Subclass**
+* Then in **`Superclass1`**
+* Then in **classes inherited by `Superclass1`**
+* Then in **`Superclass2`**
+* Then in **classes inherited by `Superclass2`**
+* Finally in the **`object` class
 
-The order of superclasses is important because a method is searched first in the subclass, then in `Superclass1`, then in the classes inherited by `Superclass1`, then in `Superclass2`, then in the classes inherited by `Superclass2`, and finally in the `object` class.
+- *Eliminates duplicates by listing superclasses only after their children in the inheritance order.*
 
-To refer to a specific superclass, do not use `super()` to avoid confusion. Instead, use `SuperclassX.method(self,...)`, where `self` refers to the instance of the subclass.
+Python **prohibits circular inheritance** (e.g., `A → B → A`) because it creates an infinite loop in the class hierarchy, making method resolution impossible. *Raises TypeError: Cannot create a consistent method resolution order (MRO).*
+
+
+* If a method exists in multiple superclasses, super().method_x() executes implementations in MRO order.
+  * ⚠️The MRO chain **stops immediately** if any parent's  omits `super().method_x()` ⚠️ (important on **`__init__` Behavior in Inheritance**).
+  
+* To call a **specific superclass method**, avoid `super()` to prevent MRO-based chaining.
+  * `SuperclassX.method(self, ...)'  # Bypasses MRO chai
+
+
+**`isinstance(object, class_name)`** actually checks if any of the classes in the MRO matches the target class. `class_name`can be a tuple of classes names. 
 
 ### 4.4. Abstract Class
 
@@ -299,9 +322,9 @@ To modify or implement the behavior of certain operators, override the following
 ![sobrecarga-operadores3.png](../static_md/sobrecarga-operadores3.png)
 ![sobrecarga-operadores4.png](../static_md/sobrecarga-operadores4.png)
 
-## 5. Object representation 
+## 5. Object representation
 
-### 5.1. __repr__
+### 5.1. `__repr__`
 
 The `__repr__p  method (short for representation) is a special method in Python that defines how an object is represented as a string when:
 
@@ -344,8 +367,7 @@ Use __format__ when you need:
 * Specialized formatting (e.g., units, coordinate systems)
 * Locale-aware representations (currency, dates)
 
-
-```
+```python
 class Price:
     def __format__(self, spec):
         if spec == 'usd': return f"${self.amount:,.2f}"
