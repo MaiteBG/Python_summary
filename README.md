@@ -6,7 +6,7 @@
 * [Operators](python_summary/operators.md)
 * [Basic Sentences](python_summary/sentences.md)
 * [Modules, Functions, and Object-Oriented Design](python_summary/functions_modules_clases.md)
-* [Particular types of functions](python_summary/particular_types_functions.md)
+* [Particular types of functions and Decorators](python_summary/particular_types_functions.md)
 * [Resources and Files Input/Output Management](python_summary/resources_and_files_managment.md)
 * [Exceptions and Logging](python_summary/exceptions_and_logging.md)
 * [Databases](python_summary/databases.md)

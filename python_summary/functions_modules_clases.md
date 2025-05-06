@@ -144,7 +144,7 @@ Classes are defined with the first letter capitalized.
 class ClassName:
 ```
 
-To get an object's attributes: `object.__dict__`.
+To get an object's attributes: `vars(object)` that almost call to `object.__dict__`.
 
 ### 3.1. Dynamic Context
 
