@@ -14,8 +14,9 @@
     * [5.1. Decorating with arguments](#51-decorating-with-arguments)
     * [5.2. Decorating a lambda function (indirectly)](#52-decorating-a-lambda-function-indirectly)
     * [5.3. Class decorators](#53-class-decorators)
-      * [5.3.1. Inspecting a Class and metaprogramacion - Especially for Decorators](#531-inspecting-a-class-and-metaprogramacion---especially-for-decorators)
+      * [5.3.1. Inspecting a Class and metaprogramming - Especially for Decorators](#531-inspecting-a-class-and-metaprogramming---especially-for-decorators)
     * [5.4. Multiple decorators](#54-multiple-decorators)
+    * [6. Data Classes  - Create a faster class](#6-data-classes---create-a-faster-class)
 <!-- TOC -->
 
 ## 1. Recursive functions
@@ -91,8 +92,6 @@ double = multiply(2)
 print(double(5))  # Output: 10
 ```
 
-
-
 ## 4. Generator Function (`yield`)
 
 A generator function is any function that contains the `yield` keyword. Instead of returning a single value using `return`, it yields multiple values one at a time, pausing between each one.
@@ -145,7 +144,6 @@ import math
 sum_result = sum(value * value for value in range(4))
 print(f'Result of sum: {sum_result}')  # 0 + 1 + 4 + 9 = 14
 ```
-
 
 ## 5. Decorators (@func)
 
@@ -222,12 +220,10 @@ class Persona:
     ...
 ```
 
-
 #### 5.3.1. Inspecting a Class and metaprogramming - Especially for Decorators
 
 When a class decorator is applied, the class is already defined and available.
 The code below demonstrates how to access class attributes and inspect the `__init__` method:
-
 
 * **`vars(cls)`** retrieves the class's attributes.
 * The check verifies if `__init__` exists in the class.
@@ -235,7 +231,7 @@ The code below demonstrates how to access class attributes and inspect the `__in
 
 This allows decorators to inspect and interact with the class definition, ensuring methods are correctly defined.
 
-``` python
+```python
 attributes = vars(cls)  # Gets the dictionary of class attributes
 
 # Check if the class has an __init__ method
@@ -248,9 +244,9 @@ print(f'__init__ method signature: {init_signature}')
 init_parameters = list(init_signature.parameters)[1:]
 
 ```
-* **`isinstance(method, decorators)`**  actually checks if the method is an instance of the decorator class —
-this only works if the decorator replaces the method with an instance of a class.
 
+* **`isinstance(method, decorators)`**  actually checks if the method is an instance of the decorator class —
+  this only works if the decorator replaces the method with an instance of a class.
 * `settattr(cls,outside_metohod_name ,decorator_method)`  assigns or overrides a method to the class.
 * `inspect.getsource(...)`  retrieves the source code of the object (to be sure that is the wanted).
 
@@ -272,5 +268,51 @@ The execution will be `decor1(decor2(method()))`. Like MRO, all decorators must 
 * In class decorators, each decorator must `return cls` (the class) to pass it to the next decorator. Each decorator wraps the class or function and modifies it before passing it to the next one.
   If a class decorator doesn’t return cls, the chain is also broken.
 
+### 6. Data Classes  - Create a faster class
 
- retrieves the source code of the object. (to check outside)
+A `dataclass` is a Python class automatically enhanced with boilerplate methods like `__init__`, `__repr__`, and `__eq__`, based only on its attributes.
+
+Use them when:
+
+* The class is mainly used to store data
+* You want auto-generated `__init__`, `__repr__`, `__eq__`, etc.
+* You prefer cleaner, more readable code
+* You need easy conversion to `dict`/`tuple` (`asdict`, `astuple`)
+* You want immutability (`frozen=True`)
+* You want safe defaults for mutable types (`default_factory`)
+
+Options:
+
+* `eq=True` (default): adds comparison (`==`)
+* `frozen=True`: makes instances read-only (e.g., usable in `set` or as `dict` keys)
+
+
+```python
+from dataclasses import dataclass
+
+@dataclass(eq=True, frozen=True )
+class User:
+    name: str
+    age: int
+  
+    def __post_init__(self):   # Runs after __init__
+        if self.age < 0:
+            raise ValueError("Age must be non-negative")
+```
+
+Convert, compare, or copy:
+
+``` python
+from dataclasses import asdict, astuple, replace
+
+p = Point(1, 2)
+print(asdict(p))         # {'x': 1, 'y': 2}
+print(astuple(p))        # (1, 2)
+print(replace(p, x=10))  # Point(x=10, y=2)
+```
+
+Avoid `dataclass` when:
+
+* When the class has a lot of internal logic but few attributes
+* When complex inheritance or advanced metaprogramming is needed
+* If you're already using tools like Pydantic, NamedTuple, or attrs for better control

@@ -4,15 +4,15 @@
 # Basic Concepts and Conventions
 
 <!-- TOC -->
-* [What is Python?](#what-is-python)
-* [What does "Pythonic" mean?](#what-does-pythonic-mean)
-* [1. Comments and Docstrings (Documentation)](#1-comments-and-docstrings-documentation)
-* [2. Python REPL (Read-Eval-Print Loop)](#2-python-repl-read-eval-print-loop)
-* [3. Naming Conventions](#3-naming-conventions)
-  * [3.1. Constants](#31-constants)
-  * [3.2. File names, functions and common variables](#32-file-names-functions-and-common-variables)
-  * [3.3. Class names](#33-class-names)
-  * [3.4. Other considerations](#34-other-considerations)
+  * [What is Python?](#what-is-python)
+  * [What does "Pythonic" mean?](#what-does-pythonic-mean)
+  * [1. Comments and Docstrings (Documentation)](#1-comments-and-docstrings-documentation)
+  * [2. Python REPL (Read-Eval-Print Loop)](#2-python-repl-read-eval-print-loop)
+  * [3. Naming Conventions](#3-naming-conventions)
+    * [3.1. Constants](#31-constants)
+    * [3.2. File names, functions and common variables](#32-file-names-functions-and-common-variables)
+    * [3.3. Class names](#33-class-names)
+    * [3.4. Use of underscore](#34-use-of-underscore)
 <!-- TOC -->
 ## What is Python?
 
@@ -93,6 +93,20 @@ The Python REPL (Read-Eval-Print Loop) is an interactive environment for running
 
 ## 3. Naming Conventions
 
+- Avoid
+  - Having files, directories, modules... with the same name to prevent errors in Python.
+  - Python's reserved keywords.  
+  - Single-letter variable names (except for specific cases like indices).
+
+
+- **Use plural names exclusively** for collections (e.g., `items_list`).
+
+- **Readable and Descriptive Names**:
+  - Always aim for clear and descriptive names to improve code readability.
+  - Be descriptive but concise: the name should clearly indicate the purpose or role of the variable or object.
+  - Avoid abbreviations unless they are widely recognized within your project or field (e.g., `img` for image).
+
+
 ### 3.1. Constants
 By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and should remain unmodified during the program's execution. 
 
@@ -108,26 +122,20 @@ By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and sho
   >- The name begins with an uppercase letter.  
   >    - Each subsequent word also starts with an uppercase letter, without spaces or underscores (e.g., `MyClass`, `UserProfile`).  
 
-### 3.4. Other considerations
 
-- Avoid
-  - Having files, directories, modules... with the same name to prevent errors in Python.
-  - Python's reserved keywords.  
-  - Single-letter variable names (except for specific cases like indices).
+### 3.4. Use of underscore
+- **Protected Attributes** (access in own class and subclasses)  
+  - Protected attributes are used in classes to give more control over reading and writing attributes. By convention, these are prefixed with `_`, but Python does not enforce this.
 
+- **Private attributes and methods** (only accessible in own class)  
+  - Private attributes are prefixed with `__` to prevent unintended overwriting or access.  
+  - The Python interpreter does name mangling: `__var` becomes `_Class__var`.
 
-- **Use plural names exclusively** for collections (e.g., `items_list`).
+- **One underscore at the end**:  
+  - Used to avoid conflicts with keywords: `def_`, `class_`
 
+- **Dunder** (double underscore):  
+  - Name mangling is not applied. This is mostly used for special methods defined by the language (called magic methods) like `__init__()` and attributes like `__name__`.
 
-- **Protected and Private Attributes**:
-  - Protected attributes are used in classes to give more control over reading and writing attributes. By convention, these are prefixed with `_`.
-  - Private attributes are prefixed with `__` to prevent unintended overwriting or access, though Python does not strictly enforce this protection.
-
-
-- On unpacking or loops to iterate a variable that we do not use, like if we never use a variable, this can be indicated with  ` _ `. (e.g. `for _ in ...`)
-
-
-- **Readable and Descriptive Names**:
-  - Always aim for clear and descriptive names to improve code readability.
-  - Be descriptive but concise: the name should clearly indicate the purpose or role of the variable or object.
-  - Avoid abbreviations unless they are widely recognized within your project or field (e.g., `img` for image).
+- **Temporary and unused variables (`_`)** :
+  - Used in unpacking or loops to indicate a variable we do not use. For example: `for _ in ...`. 

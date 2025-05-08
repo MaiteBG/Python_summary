@@ -3,7 +3,6 @@
 # Basic Variable Types
 
 <!-- TOC -->
-* [Basic Variable Types](#basic-variable-types)
   * [Variable in python](#variable-in-python)
   * [1. Numeric variables](#1-numeric-variables)
     * [1.1. Class `int`](#11-class-int)
@@ -28,7 +27,7 @@
       * [3.5.1. Unicode](#351-unicode)
       * [3.5.2. UTF-8](#352-utf-8)
       * [3.5.3. ASCII](#353-ascii)
-    * [3.6. Print Statements](#36-print-statements)
+    * [3.6. Print Statements and object representation as string](#36-print-statements-and-object-representation-as-string)
   * [4. Data type conversion](#4-data-type-conversion)
   * [5. Use of a global/nonlocal variable (~ SCOPE )](#5-use-of-a-globalnonlocal-variable--scope-)
   * [6. Environment variables (`.env` file)](#6-environment-variables-env-file)
@@ -48,6 +47,13 @@
 
 **Initialization**: Variables must be declared with an initial value.
   - `NoneType`: Represents absence of value (`None`).  
+
+**`del var_name`:**
+* **Free memory:** delete big objects (like lists or data) when you don’t need them anymore to save memory.
+* **Clean workspace:** remove variables in interactive environments like Jupyter or the Python shell.
+* **Delete from a list or dict:** use `del` to remove an item from a list by index or from a dictionary by key.
+* **Avoid reuse:** delete a variable to make sure it’s not used again by mistake.
+
 
 ## 1. Numeric variables
 
@@ -174,8 +180,9 @@ In Python:
 	* *Can evaluate expressions inside the string. `f"{num1 + num2}"`*
 
 ** `%` formatting **
-  - Insert values using placeholders (%s, %d, %.xf)
-    - "%s %d %.2f"%(string_var, int_var, float_var)
+  - Insert values using placeholders (%i, %x %s, %d, %.f)
+    - `"%s %d %.2f"%(string_var, int_var, float_var)`
+    - `"%(str_var)s %(int_var)d %(float_var).2f"%{'str_var': string_var,  'int_var':int_var, 'float_var':float_var}`
 
 **`format()` method (more complex and less commonly used)**: `'Hello {}'.format(variable)`
   - You can specify the order of variables using indices `{0} {2} {1}`; otherwise, they are inserted in order.

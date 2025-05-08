@@ -11,9 +11,10 @@
     * [3.1. Operations with sets](#31-operations-with-sets)
   * [4. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#4-dictionary-my_dictionary--key_1-value_1-key_2-value_2)
     * [4.1. Operations with dictionaries](#41-operations-with-dictionaries)
-  * [5. List comprehension `[operation for element in iterable if condition]`](#5-list-comprehension-operation-for-element-in-iterable-if-condition)
-  * [6. Unpacking (tuples, lists, strings)](#6-unpacking-tuples-lists-strings)
-  * [7. Zip function](#7-zip-function)
+  * [5. Collections consisten format on manual definition](#5-collections-consisten-format-on-manual-definition)
+  * [6. List comprehension `[operation for element in iterable if condition]`](#6-list-comprehension-operation-for-element-in-iterable-if-condition)
+  * [7. Unpacking (tuples, lists, strings)](#7-unpacking-tuples-lists-strings)
+  * [8. Zip function](#8-zip-function)
 <!-- TOC -->
 
 ## 1. List `my_list = [item_1, item_2, item3]`
@@ -143,8 +144,20 @@ To create an empty set in Python, use the set() constructor. This is important b
 - `elem_1 is elem_2 `: compare the object reference, not the content.
 
 
+## 5. Collections consisten format on manual definition
 
-## 5. List comprehension `[operation for element in iterable if condition]`
+When defining any collection manually, pay attention to formatting. In long collections, put each element on its own line and end each line with a comma. If you omit the comma, adjacent string literals may be concatenated. To avoid this kind of error, include a trailing comma after the last element as well.
+
+**Simple example:**
+```python
+names = [
+    "Alice",
+    "Bob",
+    "Charlie",  # trailing comma here prevents accidental concatenation
+]
+```
+
+## 6. List comprehension `[operation for element in iterable if condition]`
 
 List comprehensions allow you to create lists from other iterables by filtering or applying expressions to each element.
 
@@ -180,7 +193,7 @@ print(f'Even numbers: {even_numbers}')
 ```
 
 
-## 6. Unpacking (tuples, lists, strings)
+## 7. Unpacking (tuples, lists, strings)
   * Works with any iterable (tuples, lists, strings)
   * Unpacking is a powerful feature in Python that allows you to assign elements of a sequence (like a tuple) to multiple variables in a single statement.
   * `var_1, var_2, var_3 = (item1, item2, item3)`
@@ -195,7 +208,7 @@ print(f'Even numbers: {even_numbers}')
 
 
 
-## 7. Zip function
+## 8. Zip function
 
 The `zip()` function allows us to combine multiple iterables (like lists, tuples, etc.) into a single iterable of tuples.
 Each tuple contains elements from the input iterables that share the same position.

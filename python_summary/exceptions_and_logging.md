@@ -5,7 +5,8 @@
   * [1. Exceptions](#1-exceptions)
     * [1.1. Cath exceptions (try/except block)](#11-cath-exceptions-tryexcept-block)
     * [1.2. Define a new exception class](#12-define-a-new-exception-class)
-  * [2. Logging in Python](#2-logging-in-python)
+  * [Assertions](#assertions)
+  * [3. Logging in Python](#3-logging-in-python)
     * [2.1. Log levels](#21-log-levels)
     * [2.2. Log format](#22-log-format)
 <!-- TOC -->
@@ -54,7 +55,22 @@ raise NewException(message)  # Throws the error to be caught later in the except
 ```
 
 
-## 2. Logging in Python
+## Assertions
+
+Assertions do not replace proper error handling; they are meant for debugging and catching programmer errors. When an assertion fails, Python raises an `AssertionError`.
+
+*Simple example:*
+```python
+def divide(a, b):
+    assert b != 0, "Division by zero"
+    return a / b
+
+print(divide(10, 2))  # 5.0
+print(divide(10, 0))  # AssertionError: Division by zero
+```
+
+
+## 3. Logging in Python
 
 You can configure log messages using the <u>[`logging`](https://docs.python.org/3/howto/logging.html)</u> library.
 
