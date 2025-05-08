@@ -66,6 +66,7 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
     ... # Function body
     return retrun_variable
 ```
+A function always returns a value; if no return is specified, it returns None.”
 
 ### 2.1. Function Parameters and Arguments
 
@@ -133,6 +134,10 @@ In Python, functions are treated as first-class citizens. This means:
   - In functional programming, where functions are passed, returned, and stored dynamically.
   - For creating higher-order functions, decorators, or event handlers.
   - When you need to modify behavior at runtime, like with callbacks or dynamic function generation.
+
+> To know if an object is a function: `callabe(function)`
+> * We can make an object callable adding to the object class the `__call__()` method.
+
 
 ## 3. Class and Objects
 
@@ -239,6 +244,56 @@ In Python, you can dynamically add a new attribute to a single object or a class
 
   - Helpful when the attribute name is dynamic (e.g., stored as a string).
   - Used in metaprogramming or when attribute names are generated at runtime.
+
+
+### 3.5. Copy/Clone of objects 
+
+
+- **Shallow copy:** creates a new container object, but the elements inside are references to the same objects in the original.  
+  - Use `copy.copy(obj)` or slicing (`new_list = old_list[:]`) for built-ins like lists.  
+  - Changes to nested objects (e.g. items in a list) will affect both copies.
+
+- **Deep copy:** creates a new container and recursively copies all nested objects, so the new object is fully independent.  
+  - Use `copy.deepcopy(obj)` from the standard library.  
+  - Safe when you need a completely separate duplicate, unaffected by any changes to the original or its subobjects.
+
+**Examples:**
+
+```python
+import copy
+
+original = [1, [2, 3]]
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)
+
+original[1].append(4)
+print(shallow)  # [1, [2, 3, 4]]  ← shared sublist
+print(deep)     # [1, [2, 3]]     ← independent copy
+```
+
+* Shallow and deep copy works the same way for arbitrary objects and their attributes:
+```python
+import copy
+
+class Node:
+    def __init__(self, value, children=None):
+        self.value = value
+        # children is a list of Node objects
+        self.children = children or []
+
+# Build a simple tree
+root = Node(0, [Node(1), Node(2)])
+shallow_root = copy.copy(root)
+deep_root    = copy.deepcopy(root)
+
+# Mutate a child in the original
+root.children.append(Node(3))
+
+print(len(shallow_root.children))  # 3 → shares the same list!
+print(len(deep_root.children))     # 2 → independent copy
+
+```
+
 
 ## 4. Inheritance and Polymorphism
 

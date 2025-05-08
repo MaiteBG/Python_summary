@@ -44,13 +44,19 @@ x += 5  # Same as x = x + 5
 
 ## 3.3. Conditional and logical operators
 
-- **Return a boolean result**
-- **Conditional**: `< > <= >= == !=`
-  - *Can use multiple operands: `value_min <= value_x <= value_max`.*
+- *Return a boolean result*
+
+- **Conditional operators:** `<  >  <=  >=  ==  !=`
+  - *Can chain comparisons:* `min_val <= x <= max_val`.
   - *For strings, compares based on ASCII values.*
 
-- **Logical**: `and` `or` `not`
-  - *Use `not` to check if a variable is empty. For example: `if not var_x`, returns `True` if `var_x` is empty.*
+- **Identity operators:** `is`, `is not`
+  - *Compare object identity (memory address), not just value.*
+  - *`==` checks equality of value, while `is` checks that both sides are the exact same object (same reference).*
+
+- **Logical operators:** `and`, `or`, `not`
+  - *Use `not` to check for emptiness. For example, `if not var_x:` is `True` when `var_x` is empty.*
+
 
 ## 3.4. Operator Precedence in Python
 Python follows a specific order of precedence for operators:

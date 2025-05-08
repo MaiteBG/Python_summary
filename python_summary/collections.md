@@ -11,7 +11,7 @@
     * [3.1. Operations with sets](#31-operations-with-sets)
   * [4. Dictionary `my_dictionary = {key_1: value_1, key_2: value_2}`](#4-dictionary-my_dictionary--key_1-value_1-key_2-value_2)
     * [4.1. Operations with dictionaries](#41-operations-with-dictionaries)
-  * [5. Collections consisten format on manual definition](#5-collections-consisten-format-on-manual-definition)
+  * [5. Collections consisted format on manual definition](#5-collections-consisted-format-on-manual-definition)
   * [6. List comprehension `[operation for element in iterable if condition]`](#6-list-comprehension-operation-for-element-in-iterable-if-condition)
   * [7. Unpacking (tuples, lists, strings)](#7-unpacking-tuples-lists-strings)
   * [8. Zip function](#8-zip-function)
@@ -35,7 +35,7 @@
   - **Modifies `my_list`**
     - Ascending: `my_list.sort()` - Sorts the list in ascending order (modifies `my_list`).
     - Descending: `my_list.sort(reverse=True)` - Sorts the list in descending order (modifies `my_list`).  
-    - Custom Parameter: `my_list.sort(key=custom_parameter)` (e.g., `key=len` to sort by the length of elements).
+    - Custom Parameter: `my_list.sort(key=custom_parameter)` (e.g., `key=len` to sort by the length of elements or `key=function`]).
     - Reverse: `my_list.reverse()` - Reverses the order of elements in the list, without sorting (modifies `my_list`).  
   - Does not modify `my_list`:
     - `sorted(my_list)` (also `reveres` and `key` parameters)
@@ -144,7 +144,7 @@ To create an empty set in Python, use the set() constructor. This is important b
 - `elem_1 is elem_2 `: compare the object reference, not the content.
 
 
-## 5. Collections consisten format on manual definition
+## 5. Collections consisted format on manual definition
 
 When defining any collection manually, pay attention to formatting. In long collections, put each element on its own line and end each line with a comma. If you omit the comma, adjacent string literals may be concatenated. To avoid this kind of error, include a trailing comma after the last element as well.
 

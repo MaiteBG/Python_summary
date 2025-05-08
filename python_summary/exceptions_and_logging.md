@@ -42,11 +42,15 @@ If we want to end the program `sys.exit()`.
 If variables need to be used after the try/except block, they should be defined before the try block.
 
 ### 1.2. Define a new exception class
+
+Always consider exception class Always consider exception class hierarchy when creating custom exceptions. Inherit from the most specific built-in exception that makes sense (for example, ValueError or IOError) so that your custom exception integrates cleanly with existing exception handling. when creating custom exceptions. 
+* Inherit from the most specific built-in exception that makes sense (for example, ValueError or IOError) so that your custom exception integrates cleanly with existing exception handling.
+
 To define a new exception class:
 
 ```python
 # 10. Define new error
-class NewException(Exception):
+class NewException(Exception): # Exception or other Exception class (hierarchy!) 
     def __init__(self, message):
         self.message = message  # Message to display in the exception
 

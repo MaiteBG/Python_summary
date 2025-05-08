@@ -3,20 +3,22 @@
 # Particular types of functions and Decorators
 
 <!-- TOC -->
-  * [1. Recursive functions](#1-recursive-functions)
-  * [2. Nested functions](#2-nested-functions)
-    * [2.1. Closure](#21-closure)
-  * [3. Lambda Functions](#3-lambda-functions)
-  * [4. Generator Function (`yield`)](#4-generator-function-yield)
-    * [4.1. Generator expression (anonymous generator)](#41-generator-expression-anonymous-generator)
-      * [4.1.1. Passing a Generator Expression to a Function](#411-passing-a-generator-expression-to-a-function)
-  * [5. Decorators (@func)](#5-decorators-func)
-    * [5.1. Decorating with arguments](#51-decorating-with-arguments)
-    * [5.2. Decorating a lambda function (indirectly)](#52-decorating-a-lambda-function-indirectly)
-    * [5.3. Class decorators](#53-class-decorators)
-      * [5.3.1. Inspecting a Class and metaprogramming - Especially for Decorators](#531-inspecting-a-class-and-metaprogramming---especially-for-decorators)
-    * [5.4. Multiple decorators](#54-multiple-decorators)
-    * [6. Data Classes  - Create a faster class](#6-data-classes---create-a-faster-class)
+
+* [1. Recursive functions](#1-recursive-functions)
+* [2. Nested functions](#2-nested-functions)
+  * [2.1. Closure](#21-closure)
+* [3. Lambda Functions](#3-lambda-functions)
+* [4. Generator Function (`yield`)](#4-generator-function-yield)
+  * [4.1. Generator expression (anonymous generator)](#41-generator-expression-anonymous-generator)
+    * [4.1.1. Passing a Generator Expression to a Function](#411-passing-a-generator-expression-to-a-function)
+* [5. Decorators (@func)](#5-decorators-func)
+  * [5.1. Decorating with arguments](#51-decorating-with-arguments)
+  * [5.2. Decorating a lambda function (indirectly)](#52-decorating-a-lambda-function-indirectly)
+  * [5.3. Class decorators](#53-class-decorators)
+    * [5.3.1. Inspecting a Class and metaprogramming - Especially for Decorators](#531-inspecting-a-class-and-metaprogramming---especially-for-decorators)
+  * [5.4. Multiple decorators](#54-multiple-decorators)
+  * [6. Data Classes  - Create a faster class](#6-data-classes---create-a-faster-class)
+
 <!-- TOC -->
 
 ## 1. Recursive functions
@@ -51,7 +53,7 @@ def outer_function(...):
         ...
 
     # Call to inner function
-    inner_function(...)
+    inner_function(...)  # or return  inner_function
     ...
 ```
 
@@ -67,7 +69,7 @@ A **closure** is an inner function (can be a lambda function) that:
 def outer():
     x = 10
     def inner():
-        return x  # x no es un parámetro ni está en inner
+        return x  # x not a parameter or defined in inner()
     return inner
 
 f = outer()
@@ -76,15 +78,19 @@ print(f())  # Output: 10
 
 ## 3. Lambda Functions
 
-Anonymous and small functions (one line of code). They can be directly assigned to a variable and called like a regular function with parameters in parentheses.
+Anonymous, inline functions defined with a single expression. They can be assigned to a variable and called like any other function.
 
-* Can be without arguments or with default arguments, variable-length parameters, etc.
+- Support default arguments and variable-length parameters (`*args`, `**kwargs`).
+- Best for very small, specific operations.
+
 
 `my_lambda_function = lambda arg1, arg2=1: arg1 + arg2`
 
 **Nested Lambda Functions**
 
-You can nest lambda functions inside other lambdas. This allows you to return a lambda from another lambda, or define compact logic in multiple layers.
+You can nest lambda functions inside other lambdas. 
+* This allows you to return a lambda from another lambda, or define compact logic in multiple layers.
+* Lambda functions can also act as closures, accessing variables from an outer scope.
 
 ```python
 multiply = lambda x: (lambda y: x * y)
@@ -92,7 +98,29 @@ double = multiply(2)
 print(double(5))  # Output: 10
 ```
 
-## 4. Generator Function (`yield`)
+Using a lambda here makes the code harder to read and prevents proper use of docstrings, type hints, and decorators. 
+Not recommended to use lambdas in certain cases, such as class methods or as alternatives to list comprehensions.
+
+
+
+## 4. High order functions
+
+Functions that accept other functions as arguments or return them.
+
+- **`map(func, iterable)`:** applies `func` to each item and returns an iterator.
+- **`filter(func, iterable)`**: returns an iterator of items where `func(item)` is truthy.
+- **educe(func, iterable):** cumulatively applies `func` to items, producing a single value (import from `functools`).
+- You can also write your own higher‐order functions:
+```python
+def apply_twice(f, x):
+    return f(f(x))
+print(apply_twice(lambda y: y + 3, 7))  # 13
+```
+
+
+
+
+## 5. Generator Function (`yield`)
 
 A generator function is any function that contains the `yield` keyword. Instead of returning a single value using `return`, it yields multiple values one at a time, pausing between each one.
 
@@ -122,7 +150,7 @@ print(next(gen))  # 3
 
 * After the last value, it raises `StopIteration`.
 
-### 4.1. Generator expression (anonymous generator)
+### 5.1. Generator expression (anonymous generator)
 
 When assigning a generator expression to a variable, you should enclose it in parentheses.
 
@@ -135,7 +163,7 @@ print(next(squares)) #4
 print(next(squares)) #9
 ```
 
-#### 4.1.1. Passing a Generator Expression to a Function
+#### 5.1.1. Passing a Generator Expression to a Function
 
 You can also pass a generator expression directly to a function, without the need for parentheses.
 
@@ -145,7 +173,7 @@ sum_result = sum(value * value for value in range(4))
 print(f'Result of sum: {sum_result}')  # 0 + 1 + 4 + 9 = 14
 ```
 
-## 5. Decorators (@func)
+## 6. Decorators (@func)
 
 Decorators are special functions that modify or enhance the behavior of other functions or methods without changing their code.
 They take a function as input and return another function—usually a new one that adds extra behavior.
@@ -176,7 +204,7 @@ def say_name():
 say_name()
 ```
 
-### 5.1. Decorating with arguments
+### 6.1. Decorating with arguments
 
 ```python
 def decorador(func):
@@ -188,7 +216,7 @@ def decorador(func):
     return envoltura # decorador devuleve funcion decoradora
 ```
 
-### 5.2. Decorating a lambda function (indirectly)
+### 6.2. Decorating a lambda function (indirectly)
 
 Decorating a lambda manually (not with @ syntax)
 
@@ -196,7 +224,7 @@ Decorating a lambda manually (not with @ syntax)
 my_lambda = decorator_fun(lambda x: x + 3)
 ```
 
-### 5.3. Class decorators
+### 6.3. Class decorators
 
 A class decorator works similarly to function decorators but is applied to classes.
 Class decorators are applied after the class definition is created but before the class is fully used or instantiated (they mostly execute when we import the class).
@@ -220,7 +248,7 @@ class Persona:
     ...
 ```
 
-#### 5.3.1. Inspecting a Class and metaprogramming - Especially for Decorators
+#### 6.3.1. Inspecting a Class and metaprogramming - Especially for Decorators
 
 When a class decorator is applied, the class is already defined and available.
 The code below demonstrates how to access class attributes and inspect the `__init__` method:
@@ -250,7 +278,7 @@ init_parameters = list(init_signature.parameters)[1:]
 * `settattr(cls,outside_metohod_name ,decorator_method)`  assigns or overrides a method to the class.
 * `inspect.getsource(...)`  retrieves the source code of the object (to be sure that is the wanted).
 
-### 5.4. Multiple decorators
+### 6.4. Multiple decorators
 
 When you apply multiple decorators to a function, Python will apply them from bottom to top.
 This means the decorator closest to the function is executed first, and the one farthest is executed last.
@@ -268,7 +296,7 @@ The execution will be `decor1(decor2(method()))`. Like MRO, all decorators must 
 * In class decorators, each decorator must `return cls` (the class) to pass it to the next decorator. Each decorator wraps the class or function and modifies it before passing it to the next one.
   If a class decorator doesn’t return cls, the chain is also broken.
 
-### 6. Data Classes  - Create a faster class
+## 7. Data Classes  - Create a faster class
 
 A `dataclass` is a Python class automatically enhanced with boilerplate methods like `__init__`, `__repr__`, and `__eq__`, based only on its attributes.
 
@@ -286,7 +314,6 @@ Options:
 * `eq=True` (default): adds comparison (`==`)
 * `frozen=True`: makes instances read-only (e.g., usable in `set` or as `dict` keys)
 
-
 ```python
 from dataclasses import dataclass
 
@@ -302,7 +329,7 @@ class User:
 
 Convert, compare, or copy:
 
-``` python
+```python
 from dataclasses import asdict, astuple, replace
 
 p = Point(1, 2)
