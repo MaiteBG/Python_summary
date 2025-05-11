@@ -1,34 +1,42 @@
 #### [Return to README.md](../README.md)
 
-# Modules, Functions, and Object-Oriented Design
+# Modules, Classes, and Object-Oriented Programming
 
 <!-- TOC -->
   * [1. Modules](#1-modules)
     * [1.1. Module content](#11-module-content)
-    * [1.2. Modules characteristics](#12-modules-characteristics)
-    * [1.3. Who run code block only if we execute the module directly](#13-who-run-code-block-only-if-we-execute-the-module-directly)
-  * [2. Functions](#2-functions)
-    * [2.1. Function Parameters and Arguments](#21-function-parameters-and-arguments)
-    * [2.2. Functions as First-Class Citizens](#22-functions-as-first-class-citizens)
-  * [3. Class and Objects](#3-class-and-objects)
-    * [3.1. Dynamic Context](#31-dynamic-context)
-      * [3.1.1. Constructor and Object Methods](#311-constructor-and-object-methods)
-    * [3.2. Static Context](#32-static-context)
-      * [3.2.1. Class Attributes and Methods](#321-class-attributes-and-methods)
-    * [3.3. Attribute and Method Encapsulation](#33-attribute-and-method-encapsulation)
-      * [3.3.1. Improved Encapsulation (Pythonic with decorators)](#331-improved-encapsulation-pythonic-with-decorators)
-    * [3.4. Adding a New Attribute to a Specific Object or Class (Dynamic Attributes)](#34-adding-a-new-attribute-to-a-specific-object-or-class-dynamic-attributes)
-  * [4. Inheritance and Polymorphism](#4-inheritance-and-polymorphism)
-    * [4.1. Polymorphic Function](#41-polymorphic-function)
-    * [4.2. Object Class](#42-object-class)
-    * [4.3. Multiple Inheritance and MRO](#43-multiple-inheritance-and-mro)
-    * [4.4. Abstract Class](#44-abstract-class)
-    * [4.5. Operator Overloading](#45-operator-overloading)
-  * [5. Object representation](#5-object-representation)
-    * [5.1. `__repr__`](#51-__repr__)
-    * [5.2. `__str__`](#52-__str__)
-    * [5.2 `__format__`](#52-__format__)
+    * [1.2. Modules Characteristics](#12-modules-characteristics)
+    * [1.3. Conditional Execution with `__name__ == "__main__"`](#13-conditional-execution-with-__name__--__main__)
+  * [2. Classes and Objects](#2-classes-and-objects)
+    * [2.1. Dynamic Context](#21-dynamic-context)
+      * [2.1.1. Constructor and Instance Methods](#211-constructor-and-instance-methods)
+    * [2.2. Static Context](#22-static-context)
+      * [2.2.1. Class Attributes and Methods](#221-class-attributes-and-methods)
+    * [2.3. Attribute and Method Encapsulation](#23-attribute-and-method-encapsulation)
+      * [2.3.1. Improved Encapsulation (Pythonic with decorators)](#231-improved-encapsulation-pythonic-with-decorators)
+    * [2.4. Dynamic Attributes (Adding a New Attribute to a Specific Object or Class)](#24-dynamic-attributes-adding-a-new-attribute-to-a-specific-object-or-class)
+    * [2.5. Copy/Clone of objects](#25-copyclone-of-objects)
+  * [3. Inheritance and Polymorphism](#3-inheritance-and-polymorphism)
+    * [3.1. Polymorphic Function](#31-polymorphic-function)
+    * [3.2. Object Class](#32-object-class)
+    * [3.3. Multiple Inheritance and MRO](#33-multiple-inheritance-and-mro)
+    * [3.4. Abstract Class](#34-abstract-class)
+    * [3.5. Operator Overloading](#35-operator-overloading)
+  * [4. Object representation](#4-object-representation)
+    * [4.1. `__repr__`](#41-__repr__)
+    * [4.2. `__str__`](#42-__str__)
+    * [4.3. `__format__`](#43-__format__)
+  * [5. Cass Metaprogramming](#5-cass-metaprogramming)
+    * [5.1. Class decorators](#51-class-decorators)
+    * [5.2. Inspecting a Class (Especially for Decorators)](#52-inspecting-a-class-especially-for-decorators)
+  * [6. Lightweight Data Structures](#6-lightweight-data-structures)
+    * [6.1. Data Classes (Optimized and Automatic Classes)](#61-data-classes-optimized-and-automatic-classes)
+    * [6.2. Namedtuple](#62-namedtuple)
+      * [6.2.1. Using the collections module (legacy style)](#621-using-the-collections-module-legacy-style)
+      * [6.2.2.  the typing module (modern, recommended)](#622-the-typing-module-modern-recommended)
 <!-- TOC -->
+
+
 
 ## 1. Modules
 
@@ -41,14 +49,14 @@ A **module** in Python is a `.py` file containing:
 - Variables
 - Runnable code
 
-### 1.2. Modules characteristics
+### 1.2. Modules Characteristics
 
 - Designed for code reusability and organization
 - Content can be imported into other Python files using `import`
 - Creates its own namespace to avoid naming conflicts
 - May include documentation (docstrings) at the top
 
-### 1.3. Who run code block only if we execute the module directly
+### 1.3. Conditional Execution with `__name__ == "__main__"`
 
 In Python, every file is considered a module. When we run a Python file, it gets assigned a special built-in variable called '\_\_name__'. This variable helps Python determine whether a module is being imported or executed directly.
 When you run the file directly, Python sets __name__ to '__main__'.
@@ -59,87 +67,8 @@ if __name__ = '__main__':
     # It will NOT run if the module is imported elsewhere
 ```
 
-## 2. Functions
 
-```python
-def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
-    ... # Function body
-    return retrun_variable
-```
-A function always returns a value; if no return is specified, it returns None.”
-
-### 2.1. Function Parameters and Arguments
-
-> **Parameters** are the variables listed in the function definition and **arguments** are the actual values passed to the function when it is called.
-
-* Parameters can have default values: `param = default_value`.
-* Alos, can include variable-length parameters:
-  * `*args`: Receives multiple arguments as a tuple.
-  * `**kwargs`: Receives keyword arguments as a dictionary.
-
-Parameters must be specified in this order: `function(req_arg, default_arg="default", *args, **kwargs)`.
-
-```python
-# Function example
-def example_function(req_arg, default_arg="default", *args, **kwargs):
-    pass
-
-# Calling the function
-example_function(
-    "value1",                      # req_arg
-    "not_default",                 # default_arg
-    "extra1", "extra2", "extra3",  # *args
-    key1="val1", key2="val2"       # **kwargs
-)
-```
-
-### 2.2. Functions as First-Class Citizens
-
-In Python, functions are treated as first-class citizens. This means:
-
-- Functions can be assigned to variables:
-
-  ```python
-  def add(x, y):
-      return x + y
-
-  my_add = add
-  print(my_add(3, 4))  # Output: 7
-  ```
-- Functions can be passed as arguments:
-
-  ```python
-  def apply_func(func, value):
-    return func(value)
-
-  def increment(x):
-      return x + 1
-
-  print(apply_func(increment, 5))  # Output: 6
-  ```
-- Functions can return other functions:
-
-  ```python
-   def outer():
-     def inner(x):
-         return x + 1
-     return inner
-
-  add_one = outer()
-  print(add_one(5))  # Output: 6
-  ```
-- When is it necessary to treat functions as first-class citizens?
-
-  - When flexibility is needed to pass functions as arguments or return them from other functions.
-  - In functional programming, where functions are passed, returned, and stored dynamically.
-  - For creating higher-order functions, decorators, or event handlers.
-  - When you need to modify behavior at runtime, like with callbacks or dynamic function generation.
-
-> To know if an object is a function: `callabe(function)`
-> * We can make an object callable adding to the object class the `__call__()` method.
-
-
-## 3. Class and Objects
+## 2. Classes and Objects
 
 Classes are defined with the first letter capitalized.
 
@@ -149,12 +78,12 @@ class ClassName:
 
 To get an object's attributes: `vars(object)` that almost call to `object.__dict__`.
 
-### 3.1. Dynamic Context
+### 2.1. Dynamic Context
 
 Dynamic context refers to things that belong to the instances, like instance variables and methods that use `self`.
 initialization.
 
-#### 3.1.1. Constructor and Object Methods
+#### 2.1.1. Constructor and Instance Methods
 
 ```python
     # Constructor (called when (ClassName()))
@@ -171,9 +100,9 @@ initialization.
 In Python, constructor overloading is not allowed; only the last constructor is used.
 To work around this, we can assign default values to optional parameters, usually `None`.
 
-### 3.2. Static Context
+### 2.2. Static Context
 
-#### 3.2.1. Class Attributes and Methods
+#### 2.2.1. Class Attributes and Methods
 
 ```python
 class ClassName:
@@ -204,7 +133,7 @@ Class methods do not take `self` as a parameter.
 
 * *If we want to create a new object from the class inside a class method, we can call the constructor like `cls(constructor_arguments...)`.*
 
-### 3.3. Attribute and Method Encapsulation
+### 2.3. Attribute and Method Encapsulation
 
 > It is a convention but python do not check access automatically.
 
@@ -216,7 +145,7 @@ Class methods do not take `self` as a parameter.
 
 Methods can also be indicated as protected/private using `_`/`__` at the beginning. For example, for data validation functions or methods used only within the class methods.
 
-#### 3.3.1. Improved Encapsulation (Pythonic with decorators)
+#### 2.3.1. Improved Encapsulation (Pythonic with decorators)
 
 For good practice, getter and setter methods created and used to access and modify parameters outside the class.
 
@@ -232,7 +161,7 @@ To modify protected and private attributes as if they were public, use decorator
         self._attribute = value
 ```
 
-### 3.4. Adding a New Attribute to a Specific Object or Class (Dynamic Attributes)
+### 2.4. Dynamic Attributes (Adding a New Attribute to a Specific Object or Class)
 
 In Python, you can dynamically add a new attribute to a single object or a class (without affecting other instances of the same class) in two ways:
 
@@ -245,16 +174,15 @@ In Python, you can dynamically add a new attribute to a single object or a class
   - Helpful when the attribute name is dynamic (e.g., stored as a string).
   - Used in metaprogramming or when attribute names are generated at runtime.
 
+### 2.5. Copy/Clone of objects
 
-### 3.5. Copy/Clone of objects 
+- **Shallow copy:** creates a new container object, but the elements inside are references to the same objects in the original.
 
-
-- **Shallow copy:** creates a new container object, but the elements inside are references to the same objects in the original.  
-  - Use `copy.copy(obj)` or slicing (`new_list = old_list[:]`) for built-ins like lists.  
+  - Use `copy.copy(obj)` or slicing (`new_list = old_list[:]`) for built-ins like lists.
   - Changes to nested objects (e.g. items in a list) will affect both copies.
+- **Deep copy:** creates a new container and recursively copies all nested objects, so the new object is fully independent.
 
-- **Deep copy:** creates a new container and recursively copies all nested objects, so the new object is fully independent.  
-  - Use `copy.deepcopy(obj)` from the standard library.  
+  - Use `copy.deepcopy(obj)` from the standard library.
   - Safe when you need a completely separate duplicate, unaffected by any changes to the original or its subobjects.
 
 **Examples:**
@@ -272,6 +200,7 @@ print(deep)     # [1, [2, 3]]     ← independent copy
 ```
 
 * Shallow and deep copy works the same way for arbitrary objects and their attributes:
+
 ```python
 import copy
 
@@ -294,8 +223,7 @@ print(len(deep_root.children))     # 2 → independent copy
 
 ```
 
-
-## 4. Inheritance and Polymorphism
+## 3. Inheritance and Polymorphism
 
 `class Subclass(Superclass):`
 
@@ -310,11 +238,11 @@ Polymorphism: Overriding is used to maintain a standard among different subclass
 
 To access the superclass behavior (next MRO class on Multiple Inheritance), use `super().method_name` inside the subclass.
 
-### 4.1. Polymorphic Function
+### 3.1. Polymorphic Function
 
 It can receive different data types (e.g., a parent class or any of its subclasses) as long as they all have the method with the same name and parameters.
 
-### 4.2. Object Class
+### 3.2. Object Class
 
 It is the parent class of all classes in Python, either directly (by default) or indirectly.
 We can override the object class methods:
@@ -323,13 +251,14 @@ We can override the object class methods:
 * `__str__()`: To change how object information is displayed
 * `__eq__()`: To modify the way equality is determined
 
-### 4.3. Multiple Inheritance and MRO
+### 3.3. Multiple Inheritance and MRO
 
 `class Subclass(Superclass1, Superclass2):`
- 
+
 If methods are not overridden in the subclass:
+
 > MRO - Method Resolution Order `Subclass.mro()` *to obtain the order in which method calls are resolved*.
-> 
+
 **Search Order Priority Example** on Subclass(Superclass1,Superclass2)
 
 * First in the **Subclass**
@@ -343,17 +272,16 @@ If methods are not overridden in the subclass:
 
 Python **prohibits circular inheritance** (e.g., `A → B → A`) because it creates an infinite loop in the class hierarchy, making method resolution impossible. *Raises TypeError: Cannot create a consistent method resolution order (MRO).*
 
-
 * If a method exists in multiple superclasses, super().method_x() executes implementations in MRO order.
+
   * ⚠️The MRO chain **stops immediately** if any parent's  omits `super().method_x()` ⚠️ (important on **`__init__` Behavior in Inheritance**).
-  
 * To call a **specific superclass method**, avoid `super()` to prevent MRO-based chaining.
+
   * `SuperclassX.method(self, ...)'  # Bypasses MRO chai
 
+**`isinstance(object, class_name)`** actually checks if any of the classes in the MRO matches the target class. `class_name`can be a tuple of classes names.
 
-**`isinstance(object, class_name)`** actually checks if any of the classes in the MRO matches the target class. `class_name`can be a tuple of classes names. 
-
-### 4.4. Abstract Class
+### 3.4. Abstract Class
 
 To enforce method implementation in subclasses, the parent class must extend `ABC` (Abstract Base Class) and import the `abstractmethod` decorator.
 `from abc import ABC, abstractmethod`
@@ -367,17 +295,19 @@ class AbstractClass(ABC):
 
 A class that has an abstract method or extends an abstract class without defining the abstract method becomes an abstract class and cannot be instantiated.
 
-### 4.5. Operator Overloading
+### 3.5. Operator Overloading
 
 To modify or implement the behavior of certain operators, override the following methods:
 ![sobrecarga-operadores1.png](../static_md/sobrecarga-operadores1.png)
 ![sobrecarga-operadores2.png](../static_md/sobrecarga-operadores2.png)
 ![sobrecarga-operadores3.png](../static_md/sobrecarga-operadores3.png)
 ![sobrecarga-operadores4.png](../static_md/sobrecarga-operadores4.png)
+      
 
-## 5. Object representation
 
-### 5.1. `__repr__`
+## 4. Object representation
+
+### 4.1. `__repr__`
 
 The `__repr__p  method (short for representation) is a special method in Python that defines how an object is represented as a string when:
 
@@ -391,7 +321,7 @@ Format:
 - The output should ideally be a valid Python expression that could recreate the object.
 - Use `{self.attr!r}` to display strings with quotes (e.g., `'hello'` instead of `hello`).
 
-### 5.2. `__str__`
+### 4.2. `__str__`
 
 The `__str__` method defines the "informal" or user-friendly string representation of an object. It's used when:
 
@@ -405,7 +335,7 @@ The `__str__` method defines the "informal" or user-friendly string representati
 
 * NOTE: *If `__str__` is not defined, Python falls back to `__repr__`*
 
-### 5.2 `__format__`
+### 4.3. `__format__`
 
 The `__format__` method defines how an object should be formatted when:
 
@@ -430,4 +360,187 @@ class Price:
 price = Price(1000)
 print(f"{price:usd}")  # $1,000.00
 print(f"{price:eur}")  # €1,000.00
+```
+
+
+Also, can use pretty print `from pprint import pprint` to print for example dictionary with better format.
+
+
+
+
+
+## 5. Cass Metaprogramming
+### 5.1. Class decorators
+
+A class decorator works similarly to [function decorators](functions.md#7-decorators-func).
+Class decorators are applied after the class definition is created but before the class is fully used or instantiated (they mostly execute when we import the class).
+
+* Class decorators allow us to enhance or modify class methods, instance creation, class-level attributes, etc.
+* They always receive `def decor_func(cls)` as a parameter and must `return cls`.
+
+```python
+def decorador_repr(cls):
+    print('1. Se ejecuta decorador')
+    print(f'Recibimos el objeto de la clase: {cls.__name__}')
+    return cls
+  
+
+@decorador_repr
+class Persona:
+    def __init__(self, nombre, apellido):
+        print('2. Se ejecuta el inicializador al crear una instancia')
+        self._nombre = nombre
+        self._apellido = apellido
+    ...
+```
+
+### 5.2. Inspecting a Class (Especially for Decorators)
+
+When a class decorator is applied, the class is already defined and available.
+The code below demonstrates how to access class attributes and inspect the `__init__` method:
+
+* **`vars(cls)`** retrieves the class's attributes.
+* The check verifies if `__init__` exists in the class.
+* It then uses `inspect.signature` to get the method signature of `__init__` and lists its parameters (excluding `self`).
+
+This allows decorators to inspect and interact with the class definition, ensuring methods are correctly defined.
+
+```python
+attributes = vars(cls)  # Gets the dictionary of class attributes
+
+# Check if the class has an __init__ method
+if '__init__' not in attributes:
+    raise TypeError(f'{cls.__name__} has not overridden the __init__ method')
+
+# Retrieve the parameters of the __init__ method, excluding 'self'
+init_signature = inspect.signature(cls.__init__)
+print(f'__init__ method signature: {init_signature}')
+init_parameters = list(init_signature.parameters)[1:]
+
+```
+
+* **`isinstance(method, decorators)`**  actually checks if the method is an instance of the decorator class —
+  this only works if the decorator replaces the method with an instance of a class.
+* `settattr(cls,outside_metohod_name ,decorator_method)`  assigns or overrides a method to the class.
+* `inspect.getsource(...)`  retrieves the source code of the object (to be sure that is the wanted).
+
+
+
+
+## 6. Lightweight Data Structures
+
+### 6.1. Data Classes (Optimized and Automatic Classes)
+
+A `dataclass` is a Python class automatically enhanced with boilerplate methods like `__init__`, `__repr__`, and `__eq__`, based only on its attributes.
+
+Use them when:
+
+* The class is mainly used to store data
+* You want auto-generated `__init__`, `__repr__`, `__eq__`, etc.
+* You prefer cleaner, more readable code
+* You need easy conversion to `dict`/`tuple` (`asdict`, `astuple`)
+* You want immutability (`frozen=True`)
+* You want safe defaults for mutable types (`default_factory`)
+
+Options:
+
+* `eq=True` (default): adds comparison (`==`)
+* `frozen=True`: makes instances read-only (e.g., usable in `set` or as `dict` keys)
+
+```python
+from dataclasses import dataclass
+
+@dataclass(eq=True, frozen=True )
+class User:
+    name: str
+    age: int
+  
+    def __post_init__(self):   # Runs after __init__
+        if self.age < 0:
+            raise ValueError("Age must be non-negative")
+```
+
+Convert, compare, or copy:
+
+```python
+from dataclasses import asdict, astuple, replace
+
+p = Point(1, 2)
+print(asdict(p))         # {'x': 1, 'y': 2}
+print(astuple(p))        # (1, 2)
+print(replace(p, x=10))  # Point(x=10, y=2)
+```
+
+Avoid `dataclass` when:
+
+* When the class has a lot of internal logic but few attributes
+* When complex inheritance or advanced metaprogramming is needed
+* If you're already using tools like Pydantic, NamedTuple, or attrs for better control
+
+### 6.2. Namedtuple
+
+A `NamedTuple` is an alternative to a class when you need immutable attributes and tuple-like behavior with readable attribute names.
+
+ Use it when:
+
+* You need fast, memory-efficient **immutable** data containers
+* You want to access elements by **index** or by **attribute name**
+* You don’t need custom methods or internal logic
+* You want something more structured than a regular `tuple`, but lighter than a class or `dataclass`
+
+Features:
+
+* **Immutable by default** (safe for use in sets or as dictionary keys)
+* **Behaves like both a tuple and a class**
+* Supports **unpacking**: `x, y = point`
+* Has built-in  class constructor and  methods like `_replace`, `_asdict` (converts to dictionary) , and `_fields` (can be used as inheritance-like)
+
+
+#### 6.2.1. Using the collections module (legacy style)
+``` python 
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(1, 2)
+
+print(p.x)      # 1
+print(p[1])     # 2
+print(p._asdict())  # {'x': 1, 'y': 2}
+```
+Create extended namedtuple with `_fields` (inheritance-like): 
+ ``` python
+ from collections import namedtuple
+
+Point = namedtuple('Point', ['x', 'y'])
+fields = Point._fields + ('color',)
+
+ColoredPoint = namedtuple('ColoredPoint', fields)
+
+cp = ColoredPoint(1, 2, 'red')
+print(cp)  # ColoredPoint(x=1, y=2, color='red')
+```
+
+
+#### 6.2.2.  the typing module (modern, recommended)
+Recomentes for Python 3.6+
+``` python 
+from typing import NamedTuple
+
+class Point(NamedTuple):
+    x: int
+    y: int
+
+p = Point(1, 2)
+
+print(p.x)      # 1
+print(p[1])     # 2
+print(p._asdict())  # {'x': 1, 'y': 2}
+```
+
+Create extended namedtuple (inheritance-like): 
+``` python
+class ColoredPoint(Point):
+    color: str
+
+    def __new__(cls, x, y, color):
+        return super().__new__(cls, x, y, color)
 ```

@@ -1,6 +1,6 @@
 #### [Return to README.md](../README.md)
 
-# Exceptions and Logging
+# Exceptions, Assertions and Logging
 <!-- TOC -->
   * [1. Exceptions](#1-exceptions)
     * [1.1. Cath exceptions (try/except block)](#11-cath-exceptions-tryexcept-block)

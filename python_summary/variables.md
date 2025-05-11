@@ -139,10 +139,8 @@ is_nan = math.isnan(my_var)  # Returns True if the value is NaN
 
 ## 2. Class `bool`
 
-The `bool` class represents Boolean values (`True` and `False`) in Python.
-In Python:
-
-- A value is `False` if is `0` , `None` , An empty string (`""`) or  an empty collection (`[]`, `{}`, `()`).
+The `bool` class represents Boolean values (`True` and `False`).
+- A value is `False` if is `0` , `None`, an empty string (`""`) or an empty collection (`[]`, `{}`, `()`).
 - Any other value is `True` (also NaN)
 
 ## 3. Class `str` ( Strings)

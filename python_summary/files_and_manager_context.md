@@ -4,20 +4,27 @@
 
 <!-- TOC -->
   * [1. Input data](#1-input-data)
-  * [2. Files](#2-files)
-  * [3. Context Manager (resource handling)](#3-context-manager-resource-handling)
-    * [3.1. Manual try/finally](#31-manual-tryfinally)
-    * [3.2. `with` and   `__enter__`/`__exit__` methods](#32-with-and-__enter____exit__-methods)
-    * [3.2. `contextlib` library](#32-contextlib-library)
-  * [4. JSON Handling](#4-json-handling)
+  * [2. Output data](#2-output-data)
+    * [2.1. Print Statements](#21-print-statements)
+  * [3. Files](#3-files)
+  * [4. Context Manager (resource handling)](#4-context-manager-resource-handling)
+    * [4.1. Manual try/finally](#41-manual-tryfinally)
+    * [4.2. `with` and   `__enter__`/`__exit__` methods](#42-with-and-__enter____exit__-methods)
+    * [4.3. `contextlib` library](#43-contextlib-library)
+  * [5. JSON Handling](#5-json-handling)
 <!-- TOC -->
 
 ## 1. Input data
 
 - **User data**: `input("Message")` prompts the user for input and always returns a string. Type conversion is necessary afterward if a different data type is needed.
+## 2. Output data
+### 2.1. Print Statements
+  - Basic example: `print(x, "y", z)`.
+  - Using commas automatically adds spaces between the values in the output.
+  - To print a blank line: `print()`.
+  - To change final character (default break line) and/or separation character(s) `print(var1, end=' ', sep=', ')`
 
-
-## 2. Files
+## 3. Files
 
 - Files can be opened in modes "r" (read), "a" (append), "w" (overwrite), "x" (create), and these can be concatenated with `+`. 
 
@@ -54,11 +61,11 @@ os.remove(path_file)
 ```
 
 
-## 3. Context Manager (resource handling)
+## 4. Context Manager (resource handling)
 
 Context management ensures that resources (files, locks, connections, etc.) are reliably set up before a block of code and always cleaned up afterward, even if errors occur.
 
-### 3.1. Manual try/finally
+### 4.1. Manual try/finally
 ```python
 try:
     file = open("file.txt", "w", encoding='utf8')  # Open or create files
@@ -69,7 +76,7 @@ finally:
     file.close()  # Always close
 ```
 
-### 3.2. `with` and   `__enter__`/`__exit__` methods
+### 4.2. `with` and   `__enter__`/`__exit__` methods
 
 `with` clause manage a resource (e.g., file) using `__enter__` and `__exit__` methods.
 
@@ -100,7 +107,7 @@ with FileHandler("file.txt") as file:
     ...
 ```
 
-### 3.2. `contextlib` library
+### 4.3. `contextlib` library
 
 We can use the `@contextmanager` decorator to create a generator function for resource management.
 
@@ -156,7 +163,7 @@ with fm.use_func() as f:
     f.write('Hello, world!')
 ```
 
-## 4. JSON Handling
+## 5. JSON Handling
 
 JSON (JavaScript Object Notation) is used to store and exchange data in a lightweight, human-readable format, commonly for communication between a server and a web application or for saving structured data.
 
@@ -168,5 +175,3 @@ json_str = json.dumps(data)       # dict -> JSON string
 data_from_str = json.loads(json_str)  # JSON string -> dict
 
 ```
-
-

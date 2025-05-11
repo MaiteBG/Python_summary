@@ -1,27 +1,113 @@
 #### [Return to README.md](../README.md)
 
-# Particular types of functions and Decorators
+# Functions and Functional Programming Concepts
 
 <!-- TOC -->
-
-* [1. Recursive functions](#1-recursive-functions)
-* [2. Nested functions](#2-nested-functions)
-  * [2.1. Closure](#21-closure)
-* [3. Lambda Functions](#3-lambda-functions)
-* [4. Generator Function (`yield`)](#4-generator-function-yield)
-  * [4.1. Generator expression (anonymous generator)](#41-generator-expression-anonymous-generator)
-    * [4.1.1. Passing a Generator Expression to a Function](#411-passing-a-generator-expression-to-a-function)
-* [5. Decorators (@func)](#5-decorators-func)
-  * [5.1. Decorating with arguments](#51-decorating-with-arguments)
-  * [5.2. Decorating a lambda function (indirectly)](#52-decorating-a-lambda-function-indirectly)
-  * [5.3. Class decorators](#53-class-decorators)
-    * [5.3.1. Inspecting a Class and metaprogramming - Especially for Decorators](#531-inspecting-a-class-and-metaprogramming---especially-for-decorators)
-  * [5.4. Multiple decorators](#54-multiple-decorators)
-  * [6. Data Classes  - Create a faster class](#6-data-classes---create-a-faster-class)
-
+  * [1. Functions](#1-functions)
+    * [1.1. Function Parameters and Arguments](#11-function-parameters-and-arguments)
+    * [1.2. Functions as First-Class Citizens](#12-functions-as-first-class-citizens)
+  * [2. Recursive functions](#2-recursive-functions)
+  * [3. Nested functions](#3-nested-functions)
+    * [3.1. Closure](#31-closure)
+  * [4. Lambda Functions](#4-lambda-functions)
+  * [5. High order functions](#5-high-order-functions)
+  * [6. Generator Function (`yield`)](#6-generator-function-yield)
+    * [6.1. Generator expression (anonymous generator)](#61-generator-expression-anonymous-generator)
+      * [6.1.1. Passing a Generator Expression to a Function](#611-passing-a-generator-expression-to-a-function)
+  * [7. Decorators `@func`](#7-decorators-func)
+    * [7.1. Decorating with arguments](#71-decorating-with-arguments)
+    * [7.2. Decorating a lambda function (indirectly)](#72-decorating-a-lambda-function-indirectly)
+    * [7.3. Class decorators](#73-class-decorators)
+      * [7.3.1. Inspecting a Class and metaprogramming - Especially for Decorators](#731-inspecting-a-class-and-metaprogramming---especially-for-decorators)
+    * [7.4. Multiple decorators](#74-multiple-decorators)
 <!-- TOC -->
 
-## 1. Recursive functions
+
+
+
+## 1. Functions
+
+```python
+def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
+    ... # Function body
+    return return_variable
+```
+A function always returns a value; if no return is specified, it returns None.”
+
+### 1.1. Function Parameters and Arguments
+
+> **Parameters** are the variables listed in the function definition and **arguments** are the actual values passed to the function when it is called.
+
+* Parameters can have default values: `param = default_value`.
+* Alos, can include variable-length parameters:
+  * `*args`: Receives multiple arguments as a tuple.
+  * `**kwargs`: Receives keyword arguments as a dictionary.
+
+Parameters must be specified in this order: `function(req_arg, default_arg="default", *args, **kwargs)`.
+
+```python
+# Function example
+def example_function(req_arg, default_arg="default", *args, **kwargs):
+    pass
+
+# Calling the function
+example_function(
+    "value1",                      # req_arg
+    "not_default",                 # default_arg
+    "extra1", "extra2", "extra3",  # *args
+    key1="val1", key2="val2"       # **kwargs
+)
+```
+
+### 1.2. Functions as First-Class Citizens
+
+In Python, functions are treated as first-class citizens. This means:
+
+- Functions can be assigned to variables:
+
+  ```python
+  def add(x, y):
+      return x + y
+
+  my_add = add
+  print(my_add(3, 4))  # Output: 7
+  ```
+- Functions can be passed as arguments:
+
+  ```python
+  def apply_func(func, value):
+    return func(value)
+
+  def increment(x):
+      return x + 1
+
+  print(apply_func(increment, 5))  # Output: 6
+  ```
+- Functions can return other functions:
+
+  ```python
+   def outer():
+     def inner(x):
+         return x + 1
+     return inner
+
+  add_one = outer()
+  print(add_one(5))  # Output: 6
+  ```
+- When is it necessary to treat functions as first-class citizens?
+
+  - When flexibility is needed to pass functions as arguments or return them from other functions.
+  - In functional programming, where functions are passed, returned, and stored dynamically.
+  - For creating higher-order functions, decorators, or event handlers.
+  - When you need to modify behavior at runtime, like with callbacks or dynamic function generation.
+
+> To know if an object is a function: `callabe(function)`
+> * We can make an object callable adding to the object class the `__call__()` method.
+
+inspect (for functions metaprograming)!!!!!!!!!!!!!!????????????????
+
+
+## 2. Recursive functions
 
 * Functions that call themselves.
 * Must reach a base case to avoid infinite loops.
@@ -36,7 +122,7 @@ def function_recursiva(...):
         function_recursiva(...)
 ```
 
-## 2. Nested functions
+## 3. Nested functions
 
 * Functions defined inside other functions.
 * Inner functions can access variables from the outer function (closure).
@@ -57,7 +143,7 @@ def outer_function(...):
     ...
 ```
 
-### 2.1. Closure
+### 3.1. Closure
 
 A **closure** is an inner function (can be a lambda function) that:
 
@@ -76,7 +162,7 @@ f = outer()
 print(f())  # Output: 10
 ```
 
-## 3. Lambda Functions
+## 4. Lambda Functions
 
 Anonymous, inline functions defined with a single expression. They can be assigned to a variable and called like any other function.
 
@@ -103,7 +189,7 @@ Not recommended to use lambdas in certain cases, such as class methods or as alt
 
 
 
-## 4. High order functions
+## 5. High order functions
 
 Functions that accept other functions as arguments or return them.
 
@@ -120,7 +206,7 @@ print(apply_twice(lambda y: y + 3, 7))  # 13
 
 
 
-## 5. Generator Function (`yield`)
+## 6. Generator Function (`yield`)
 
 A generator function is any function that contains the `yield` keyword. Instead of returning a single value using `return`, it yields multiple values one at a time, pausing between each one.
 
@@ -150,7 +236,7 @@ print(next(gen))  # 3
 
 * After the last value, it raises `StopIteration`.
 
-### 5.1. Generator expression (anonymous generator)
+### 6.1. Generator expression (anonymous generator)
 
 When assigning a generator expression to a variable, you should enclose it in parentheses.
 
@@ -163,7 +249,7 @@ print(next(squares)) #4
 print(next(squares)) #9
 ```
 
-#### 5.1.1. Passing a Generator Expression to a Function
+#### 6.1.1. Passing a Generator Expression to a Function
 
 You can also pass a generator expression directly to a function, without the need for parentheses.
 
@@ -173,7 +259,7 @@ sum_result = sum(value * value for value in range(4))
 print(f'Result of sum: {sum_result}')  # 0 + 1 + 4 + 9 = 14
 ```
 
-## 6. Decorators (@func)
+## 7. Decorators `@func`
 
 Decorators are special functions that modify or enhance the behavior of other functions or methods without changing their code.
 They take a function as input and return another function—usually a new one that adds extra behavior.
@@ -204,7 +290,10 @@ def say_name():
 say_name()
 ```
 
-### 6.1. Decorating with arguments
+
+Decorators can also be applied to classes. [Class decorators](modules_and_clases.md#51-class-decorators)
+
+### 7.1. Decorating with arguments
 
 ```python
 def decorador(func):
@@ -216,7 +305,7 @@ def decorador(func):
     return envoltura # decorador devuleve funcion decoradora
 ```
 
-### 6.2. Decorating a lambda function (indirectly)
+### 7.2. Decorating a lambda function (indirectly)
 
 Decorating a lambda manually (not with @ syntax)
 
@@ -224,7 +313,23 @@ Decorating a lambda manually (not with @ syntax)
 my_lambda = decorator_fun(lambda x: x + 3)
 ```
 
-### 6.3. Class decorators
+
+@wraps!!!!!!!!!!!!!!!!!!!!!!!!!!!!!??????
+Cuando decoras una función sin usar @wraps, esa nueva función pierde su identidad original. Esto afecta cosas como:
+
+__name__
+
+__doc__
+
+Herramientas de documentación
+
+Depuración (debugging)
+
+Testeo
+
+
+
+### 7.3. Class decorators
 
 A class decorator works similarly to function decorators but is applied to classes.
 Class decorators are applied after the class definition is created but before the class is fully used or instantiated (they mostly execute when we import the class).
@@ -248,7 +353,7 @@ class Persona:
     ...
 ```
 
-#### 6.3.1. Inspecting a Class and metaprogramming - Especially for Decorators
+#### 7.3.1. Inspecting a Class and metaprogramming - Especially for Decorators
 
 When a class decorator is applied, the class is already defined and available.
 The code below demonstrates how to access class attributes and inspect the `__init__` method:
@@ -278,7 +383,7 @@ init_parameters = list(init_signature.parameters)[1:]
 * `settattr(cls,outside_metohod_name ,decorator_method)`  assigns or overrides a method to the class.
 * `inspect.getsource(...)`  retrieves the source code of the object (to be sure that is the wanted).
 
-### 6.4. Multiple decorators
+### 7.4. Multiple decorators
 
 When you apply multiple decorators to a function, Python will apply them from bottom to top.
 This means the decorator closest to the function is executed first, and the one farthest is executed last.
@@ -295,51 +400,3 @@ The execution will be `decor1(decor2(method()))`. Like MRO, all decorators must 
 
 * In class decorators, each decorator must `return cls` (the class) to pass it to the next decorator. Each decorator wraps the class or function and modifies it before passing it to the next one.
   If a class decorator doesn’t return cls, the chain is also broken.
-
-## 7. Data Classes  - Create a faster class
-
-A `dataclass` is a Python class automatically enhanced with boilerplate methods like `__init__`, `__repr__`, and `__eq__`, based only on its attributes.
-
-Use them when:
-
-* The class is mainly used to store data
-* You want auto-generated `__init__`, `__repr__`, `__eq__`, etc.
-* You prefer cleaner, more readable code
-* You need easy conversion to `dict`/`tuple` (`asdict`, `astuple`)
-* You want immutability (`frozen=True`)
-* You want safe defaults for mutable types (`default_factory`)
-
-Options:
-
-* `eq=True` (default): adds comparison (`==`)
-* `frozen=True`: makes instances read-only (e.g., usable in `set` or as `dict` keys)
-
-```python
-from dataclasses import dataclass
-
-@dataclass(eq=True, frozen=True )
-class User:
-    name: str
-    age: int
-  
-    def __post_init__(self):   # Runs after __init__
-        if self.age < 0:
-            raise ValueError("Age must be non-negative")
-```
-
-Convert, compare, or copy:
-
-```python
-from dataclasses import asdict, astuple, replace
-
-p = Point(1, 2)
-print(asdict(p))         # {'x': 1, 'y': 2}
-print(astuple(p))        # (1, 2)
-print(replace(p, x=10))  # Point(x=10, y=2)
-```
-
-Avoid `dataclass` when:
-
-* When the class has a lot of internal logic but few attributes
-* When complex inheritance or advanced metaprogramming is needed
-* If you're already using tools like Pydantic, NamedTuple, or attrs for better control

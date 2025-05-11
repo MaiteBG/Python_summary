@@ -1,4 +1,21 @@
 # Python Summary
+<!-- TOC -->
+* [Comments, Docstrings and Naming Conventions](python_summary/basic_concepts_conventions.md)
+* [Variables: Basic Types, Scope, and Environment](python_summary/variables.md)
+* [Operators and Sentences](python_summary/basic_operators_and_sentences)
+* [Collections](python_summary/collections.md)
+* [Functions and Functional Programming Concepts](python_summary/functions)
+* [Modules, Classes, and Object-Oriented Programming](python_summary/modules_and_clases)
+* [Input and output data, Files and Context Manager](python_summary/files_and_manager_context)
+* [Exceptions and Logging](python_summary/exceptions_and_logging.md)
+* [Databases](python_summary/databases.md)
+<!-- TOC -->
+
+
+<!-- TOC -->
+* [What is Python?](#what-is-python)
+* [What does "Pythonic" mean?](#what-does-pythonic-mean)
+<!-- TOC -->
 
 ## What is Python?
 
@@ -45,18 +62,5 @@ Writing Pythonic code means:
 
 
 
-
-<!-- TOC -->
-* [Comments, Docstrings and Naming Conventions](python_summary/basic_concepts_conventions.md)
-* [Variables: Basic Types, Scope, and Environment](python_summary/variables.md)
-* [Collection Types](python_summary/collections.md)
-* [Operators](python_summary/operators.md)
-* [Basic Sentences](python_summary/sentences.md)
-* [Modules, Functions, and Object-Oriented Design](python_summary/modules_and_clases)
-* [Particular types of functions and Decorators](python_summary/functions)
-* [Input data, Files and Context Manager](python_summary/files_and_manager_context)
-* [Exceptions and Logging](python_summary/exceptions_and_logging.md)
-* [Databases](python_summary/databases.md)
-<!-- TOC -->
 
 

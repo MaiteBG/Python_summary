@@ -189,10 +189,9 @@ Python applies operations in the following order:
 > `result = "Greater" if x + 5 > y and x % 2 == 0 else "Smaller or Equal"`
 >
 > * **Expression Before `if`**: `x + 5 > y and x % 2 == 0`
-    >
-* First, the arithmetic operation `x + 5` is evaluated.
->   * Then, the condition `x + 5 > y` is checked.
->   * Next, the modulo operation `x % 2 == 0` is evaluated.
+>  * First, the arithmetic operation `x + 5` is evaluated.
+>  * Then, the condition `x + 5 > y` is checked.
+>  * Next, the modulo operation `x % 2 == 0` is evaluated.
 > * The logical operator `and` combines both conditions.
 > * **Result**: If the condition evaluates to `True`, `"Greater"` is assigned. If it evaluates to `False`,
     `"Smaller or Equal"` is assigned.
