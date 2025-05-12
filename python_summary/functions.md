@@ -3,9 +3,11 @@
 # Functions and Functional Programming Concepts
 
 <!-- TOC -->
+
   * [1. Functions](#1-functions)
     * [1.1. Function Parameters and Arguments](#11-function-parameters-and-arguments)
     * [1.2. Functions as First-Class Citizens](#12-functions-as-first-class-citizens)
+    * [1.3. `inspect` and `__annotations__`to Understand Functions at Runtime](#13-inspect-and-__annotations__to-understand-functions-at-runtime)
   * [2. Recursive functions](#2-recursive-functions)
   * [3. Nested functions](#3-nested-functions)
     * [3.1. Closure](#31-closure)
@@ -15,15 +17,14 @@
     * [6.1. Generator expression (anonymous generator)](#61-generator-expression-anonymous-generator)
       * [6.1.1. Passing a Generator Expression to a Function](#611-passing-a-generator-expression-to-a-function)
   * [7. Decorators `@func`](#7-decorators-func)
-    * [7.1. Decorating with arguments](#71-decorating-with-arguments)
-    * [7.2. Decorating a lambda function (indirectly)](#72-decorating-a-lambda-function-indirectly)
-    * [7.3. Class decorators](#73-class-decorators)
-      * [7.3.1. Inspecting a Class and metaprogramming - Especially for Decorators](#731-inspecting-a-class-and-metaprogramming---especially-for-decorators)
-    * [7.4. Multiple decorators](#74-multiple-decorators)
+    * [7.1. Multiple decorators](#71-multiple-decorators)
+    * [7.2. Decorating with arguments](#72-decorating-with-arguments)
+    * [7.3. Decorating a lambda function (indirectly)](#73-decorating-a-lambda-function-indirectly)
+    * [7.4. Preserving metadata with `@wraps`](#74-preserving-metadata-with-wraps)
+    * [7.5. `functools` in Decorators](#75-functools-in-decorators)
+      * [7.5.1. Caching Function Results: `lru_cache`](#751-caching-function-results-lru_cache)
+      * [7.5.2. Creating Functions with Predefined Parameters: `partial`](#752-creating-functions-with-predefined-parameters-partial)
 <!-- TOC -->
-
-
-
 
 ## 1. Functions
 
@@ -32,14 +33,15 @@ def nombre_funcion(param_1, param_2, ...):  # Function name like accion or verb
     ... # Function body
     return return_variable
 ```
-A function always returns a value; if no return is specified, it returns None.”
+
+A function always returns a value; if no return is specified, it returns `None`.”
 
 ### 1.1. Function Parameters and Arguments
 
 > **Parameters** are the variables listed in the function definition and **arguments** are the actual values passed to the function when it is called.
 
 * Parameters can have default values: `param = default_value`.
-* Alos, can include variable-length parameters:
+* Also, can include variable-length parameters:
   * `*args`: Receives multiple arguments as a tuple.
   * `**kwargs`: Receives keyword arguments as a dictionary.
 
@@ -102,11 +104,80 @@ In Python, functions are treated as first-class citizens. This means:
   - When you need to modify behavior at runtime, like with callbacks or dynamic function generation.
 
 > To know if an object is a function: `callabe(function)`
+>
 > * We can make an object callable adding to the object class the `__call__()` method.
 
-inspect (for functions metaprograming)!!!!!!!!!!!!!!????????????????
+### 1.3. `inspect` and `__annotations__`to Understand Functions at Runtime
+
+The `inspect` module in Python allows you to analyze functions at runtime.
+It’s especially useful in metaprogramming, debugging, or building decorators, because it lets you explore a function’s structure—like its parameters, defaults, annotations, and even its source code.
+With inspect, you can write code that adapts to other code.
+
+* **Get a function’s signature and its parameters (`inspect.signature`):**
+  See what arguments a function expects, including names, order, and defaults.
+* **Check if something is a function (`inspect.isfunction`):**
+  Returns `True` if the object is a user-defined function.
+* **Get source code of the function (`inspect.getsource`):**
+  Returns the actual source code as a string.
+* **Find default values, `*args`, `**kwargs`, and parameter names:**
+  Useful for creating wrappers or validating inputs dynamically.
+* **Know where the function is defined (`inspect.getfile`, `inspect.getmodule`):**
+  Find the file and module where the function lives.
+* **Detect if it's a lambda, generator, or method:**
+  Use `islambda`, `isgeneratorfunction`, or `ismethod` to check function types.
+````python
+
+import inspect
+
+# Define an example function
+def add(a: int, b: int = 5) -> int:
+    """
+    Adds two numbers, with a default value for b.
+    """
+    return a + b
+
+signature = inspect.signature(add)
+# Expected output: (a: int, b: int = 5) -> int
+
+is_function = inspect.isfunction(add)
+# Expected output: True
+
+source = inspect.getsource(add)
+# Expected output: The source code of the 'add' function.
+
+params = signature.parameters
+# Expected output: 
+# OrderedDict([('a', <Parameter "a: int">), ('b', <Parameter "b: int = 5">)])
+
+annotations = add.__annotations__
+# Expected output: {'a': <class 'int'>, 'b': <class 'int'>, 'return': <class 'int'>}
+
+file_location = inspect.getfile(add)
+module = inspect.getmodule(add)
+# Expected output: 
+# File Location: /path/to/your/script.py
+# Module: <module 'your_module' from '/path/to/your/script.py'>
 
 
+is_lambda = inspect.islambda(add)
+is_generator = inspect.isgeneratorfunction(add)
+is_method = inspect.ismethod(add)
+# Expected output:
+# Is 'add' a lambda? False
+# Is 'add' a generator function? False
+# Is 'add' a method? False
+````
+
+**Access type annotations (`__annotations__`):**
+* Read the types declared for parameters and return values.
+  * This is helpful for understanding how a function should behave or validating inputs and outputs.
+    ```python
+    def add(a: int, b: int) -> int:
+      return a + b
+
+    annotations = add.__annotations__
+    #annotations: {'a': <class 'int'>, 'b': <class 'int'>, 'return': <class 'int'>}
+    ```
 ## 2. Recursive functions
 
 * Functions that call themselves.
@@ -169,12 +240,12 @@ Anonymous, inline functions defined with a single expression. They can be assign
 - Support default arguments and variable-length parameters (`*args`, `**kwargs`).
 - Best for very small, specific operations.
 
-
 `my_lambda_function = lambda arg1, arg2=1: arg1 + arg2`
 
 **Nested Lambda Functions**
 
-You can nest lambda functions inside other lambdas. 
+You can nest lambda functions inside other lambdas.
+
 * This allows you to return a lambda from another lambda, or define compact logic in multiple layers.
 * Lambda functions can also act as closures, accessing variables from an outer scope.
 
@@ -184,27 +255,23 @@ double = multiply(2)
 print(double(5))  # Output: 10
 ```
 
-Using a lambda here makes the code harder to read and prevents proper use of docstrings, type hints, and decorators. 
+Using a lambda here makes the code harder to read and prevents proper use of docstrings, type hints, and decorators.
 Not recommended to use lambdas in certain cases, such as class methods or as alternatives to list comprehensions.
-
-
 
 ## 5. High order functions
 
 Functions that accept other functions as arguments or return them.
 
 - **`map(func, iterable)`:** applies `func` to each item and returns an iterator.
-- **`filter(func, iterable)`**: returns an iterator of items where `func(item)` is truthy.
-- **educe(func, iterable):** cumulatively applies `func` to items, producing a single value (import from `functools`).
+- **`filter(func, iterable)`:** returns an iterator of items where `func(item)` is truthy.
+- **`educe(func, iterable)`:** cumulatively applies `func` to items, producing a single value (import from `functools`).
 - You can also write your own higher‐order functions:
+
 ```python
 def apply_twice(f, x):
     return f(f(x))
 print(apply_twice(lambda y: y + 3, 7))  # 13
 ```
-
-
-
 
 ## 6. Generator Function (`yield`)
 
@@ -290,100 +357,9 @@ def say_name():
 say_name()
 ```
 
+Decorators can also be applied to classes. [Class decorators](modules_and_classes#51-class-decorators)
 
-Decorators can also be applied to classes. [Class decorators](modules_and_clases.md#51-class-decorators)
-
-### 7.1. Decorating with arguments
-
-```python
-def decorador(func):
-    def envoltura(*args, **kwargs):
-        print("Before func call")
-        resultado = func(*args, **kwargs)
-        print("After func call")
-        return resultado 
-    return envoltura # decorador devuleve funcion decoradora
-```
-
-### 7.2. Decorating a lambda function (indirectly)
-
-Decorating a lambda manually (not with @ syntax)
-
-```python
-my_lambda = decorator_fun(lambda x: x + 3)
-```
-
-
-@wraps!!!!!!!!!!!!!!!!!!!!!!!!!!!!!??????
-Cuando decoras una función sin usar @wraps, esa nueva función pierde su identidad original. Esto afecta cosas como:
-
-__name__
-
-__doc__
-
-Herramientas de documentación
-
-Depuración (debugging)
-
-Testeo
-
-
-
-### 7.3. Class decorators
-
-A class decorator works similarly to function decorators but is applied to classes.
-Class decorators are applied after the class definition is created but before the class is fully used or instantiated (they mostly execute when we import the class).
-
-* Class decorators allow us to enhance or modify class methods, instance creation, class-level attributes, etc.
-* They always receive `def decor_func(cls)` as a parameter and must `return cls`.
-
-```python
-def decorador_repr(cls):
-    print('1. Se ejecuta decorador')
-    print(f'Recibimos el objeto de la clase: {cls.__name__}')
-    return cls
-  
-
-@decorador_repr
-class Persona:
-    def __init__(self, nombre, apellido):
-        print('2. Se ejecuta el inicializador al crear una instancia')
-        self._nombre = nombre
-        self._apellido = apellido
-    ...
-```
-
-#### 7.3.1. Inspecting a Class and metaprogramming - Especially for Decorators
-
-When a class decorator is applied, the class is already defined and available.
-The code below demonstrates how to access class attributes and inspect the `__init__` method:
-
-* **`vars(cls)`** retrieves the class's attributes.
-* The check verifies if `__init__` exists in the class.
-* It then uses `inspect.signature` to get the method signature of `__init__` and lists its parameters (excluding `self`).
-
-This allows decorators to inspect and interact with the class definition, ensuring methods are correctly defined.
-
-```python
-attributes = vars(cls)  # Gets the dictionary of class attributes
-
-# Check if the class has an __init__ method
-if '__init__' not in attributes:
-    raise TypeError(f'{cls.__name__} has not overridden the __init__ method')
-
-# Retrieve the parameters of the __init__ method, excluding 'self'
-init_signature = inspect.signature(cls.__init__)
-print(f'__init__ method signature: {init_signature}')
-init_parameters = list(init_signature.parameters)[1:]
-
-```
-
-* **`isinstance(method, decorators)`**  actually checks if the method is an instance of the decorator class —
-  this only works if the decorator replaces the method with an instance of a class.
-* `settattr(cls,outside_metohod_name ,decorator_method)`  assigns or overrides a method to the class.
-* `inspect.getsource(...)`  retrieves the source code of the object (to be sure that is the wanted).
-
-### 7.4. Multiple decorators
+### 7.1. Multiple decorators
 
 When you apply multiple decorators to a function, Python will apply them from bottom to top.
 This means the decorator closest to the function is executed first, and the one farthest is executed last.
@@ -400,3 +376,87 @@ The execution will be `decor1(decor2(method()))`. Like MRO, all decorators must 
 
 * In class decorators, each decorator must `return cls` (the class) to pass it to the next decorator. Each decorator wraps the class or function and modifies it before passing it to the next one.
   If a class decorator doesn’t return cls, the chain is also broken.
+
+### 7.2. Decorating with arguments
+
+```python
+def decorador(func):
+    def envoltura(*args, **kwargs):
+        print("Before func call")
+        resultado = func(*args, **kwargs)
+        print("After func call")
+        return resultado 
+    return envoltura # decorador devuleve funcion decoradora
+```
+
+### 7.3. Decorating a lambda function (indirectly)
+
+Decorating a lambda manually (not with @ syntax)
+
+```python
+my_lambda = decorator_fun(lambda x: x + 3)
+```
+
+### 7.4. Preserving metadata with `@wraps`
+
+When writing decorators, it's good practice to use `functools.wraps` to preserve the original function’s name, docstring, and other metadata.
+
+````from
+
+def decorador(func):
+    @wraps(func)  # preserves __name__, __doc__, etc.
+    def envoltura(*args, **kwargs):
+        print("Before func call")
+        resultado = func(*args, **kwargs)
+        print("After func call")
+        return resultado
+    return envoltura
+````
+
+When you decorate a function without using `@wraps`, the new function loses its original identity. This affects things like:
+
+* **`__name__`**: The decorated function will have the name of the decorator (`envoltura` in this case) instead of the original function’s name.
+* **`__doc__`**: The decorated function will lose the original docstring, which can be crucial for documentation purposes.
+* **Documentation tools**: Tools that generate docs may use `__name__` and `__doc__`. Without `@wraps`, the function’s metadata will be inaccurate.
+* **Debugging**: During debugging, you may see the wrong function name and docstring, making it harder to trace issues.
+* **Testing**: Test frameworks that inspect function names or docstrings may behave unexpectedly or fail to match the correct function.
+
+By using `@wraps`, you ensure that the decorated function retains its original metadata, making it easier to work with and debug.
+
+### 7.5. `functools` in Decorators
+
+The `functools` module provides a variety of tools that can be very useful when working with decorators, allowing you to optimize and customize functions in Python. Below are two powerful tools often used in decorators:
+
+#### 7.5.1. Caching Function Results: `lru_cache`
+
+`lru_cache` caches the results of function calls to avoid redundant calculations, improving performance.
+*  Best for functions with expensive computations or repeated calls with the same arguments.
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def expensive_function(x):
+    return x * 2
+
+# First call will calculate the result
+print(expensive_function(4))  # Output: Calculating 4... 8
+
+# Second call will return the cached result
+print(expensive_function(4))  # Output: 8 (no calculation)
+
+```
+
+
+#### 7.5.2. Creating Functions with Predefined Parameters: `partial`
+
+`partial` allows you to create new functions with some arguments preset, simplifying code.
+* Create specialized versions of a function with certain arguments fixed.
+```python
+from functools import partial
+
+def power(base, exponent):
+    return base ** exponent
+
+square = partial(power, exponent=2) 
+print(square(5))  # Output: 25
+```

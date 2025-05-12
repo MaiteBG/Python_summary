@@ -2,11 +2,11 @@
 <!-- TOC -->
 * [Comments, Docstrings and Naming Conventions](python_summary/basic_concepts_conventions.md)
 * [Variables: Basic Types, Scope, and Environment](python_summary/variables.md)
-* [Operators and Sentences](python_summary/basic_operators_and_sentences)
+* [Operators and Sentences](python_summary/basic_operators_and_sentences.md)
 * [Collections](python_summary/collections.md)
-* [Functions and Functional Programming Concepts](python_summary/functions)
-* [Modules, Classes, and Object-Oriented Programming](python_summary/modules_and_clases)
-* [Input and output data, Files and Context Manager](python_summary/files_and_manager_context)
+* [Functions and Functional Programming Concepts](python_summary/functions.md)
+* [Modules, Classes, and Object-Oriented Programming](python_summary/modules_and_classes.md)
+* [Input and output data, Files and Context Manager](python_summary/files_and_manager_context.md)
 * [Exceptions and Logging](python_summary/exceptions_and_logging.md)
 * [Databases](python_summary/databases.md)
 <!-- TOC -->
