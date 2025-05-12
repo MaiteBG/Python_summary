@@ -78,7 +78,7 @@ By convention, constants are named in uppercase (e.g., `CONSTANT_VALUE`) and sho
 
 
 ### 3.4. Use of underscore
-- **Protected Attributes** (access in own class and subclasses)  
+- **Protected Attributes and methods ** (access in own class and subclasses)  
   - Protected attributes are used in classes to give more control over reading and writing attributes. By convention, these are prefixed with `_`, but Python does not enforce this.
 
 - **Private attributes and methods** (only accessible in own class)  

@@ -107,7 +107,7 @@ In Python, functions are treated as first-class citizens. This means:
 >
 > * We can make an object callable adding to the object class the `__call__()` method.
 
-### 1.3. `inspect` and `__annotations__`to Understand Functions at Runtime
+### 1.3. Function Introspection (`ìnsepct` and `__annotations__`)
 
 The `inspect` module in Python allows you to analyze functions at runtime.
 It’s especially useful in metaprogramming, debugging, or building decorators, because it lets you explore a function’s structure—like its parameters, defaults, annotations, and even its source code.

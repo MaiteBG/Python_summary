@@ -3,32 +3,30 @@
 # Operators and Sentences
 
 <!-- TOC -->
-
-* [1. Operators](#1-operators)
+  * [1. Operators](#1-operators)
     * [1.1. Arithmetic Operators](#11-arithmetic-operators)
     * [1.2. Relational Operators](#12-relational-operators)
-        * [1.2.1. Comparison (Conditional) Operators](#121-comparison-conditional-operators)
-        * [1.2.2. Logical Operators: `and`, `or`, `not`](#122-logical-operators-and-or-not)
-        * [1.2.3. Identity Operators: `is`, `is not`](#123-identity-operators-is-is-not)
-        * [1.2.4. Membership Operators: `in`, `not in`](#124-membership-operators-in-not-in)
+      * [1.2.1. Comparison (Conditional) Operators](#121-comparison-conditional-operators)
+      * [1.2.2. Logical Operators: `and`, `or`, `not`](#122-logical-operators-and-or-not)
+      * [1.2.3. Identity Operators: `is`, `is not`](#123-identity-operators-is-is-not)
+      * [1.2.4. Membership Operators: `in`, `not in`](#124-membership-operators-in-not-in)
     * [1.3. Bitwise Operators](#13-bitwise-operators)
-    * [1.4. Conditional Expressions:
-      `if-else` (Ternary Conditional Expressions)](#14-conditional-expressions-if-else-ternary-conditional-expressions)
+    * [1.4. Conditional Expressions: `if-else` (Ternary Conditional Expressions)](#14-conditional-expressions-if-else-ternary-conditional-expressions)
     * [1.5. Assignment Operators](#15-assignment-operators)
-        * [1.5.1. Value Exchange without Temporary Variable](#151-value-exchange-without-temporary-variable)
-        * [1.5.2. Compound Assignments](#152-compound-assignments)
-        * [1.5.3. Unpacking Operator](#153-unpacking-operator)
+      * [1.5.1. Value Exchange without Temporary Variable](#151-value-exchange-without-temporary-variable)
+      * [1.5.2. Compound Assignments](#152-compound-assignments)
+      * [1.5.3. Unpacking Operator](#153-unpacking-operator)
     * [1.6. Operator Precedence](#16-operator-precedence)
-* [2. Sentences](#2-sentences)
+  * [2. Sentences](#2-sentences)
     * [2.1. Control Sentences](#21-control-sentences)
-        * [2.1.1. Traditional Control Sentences](#211-traditional-control-sentences)
-        * [2.1.2. Pattern Matching (Python 3.10+)](#212-pattern-matching-python-310)
-        * [2.1.3. Alternative to Switch Statement Using Dictionaries (Before Pattern Matching)](#213-alternative-to-switch-statement-using-dictionaries-before-pattern-matching)
+      * [2.1.1. Traditional Control Sentences](#211-traditional-control-sentences)
+      * [2.1.2. Pattern Matching (Python 3.10+)](#212-pattern-matching-python-310)
+      * [2.1.3. Alternative to Switch Statement Using Dictionaries (Before Pattern Matching)](#213-alternative-to-switch-statement-using-dictionaries-before-pattern-matching)
     * [2.2. Loop Sentences](#22-loop-sentences)
-        * [2.2.1. `while` Loop](#221-while-loop)
-        * [2.2.2. `for` Loop](#222-for-loop)
-        * [2.2.3. Control Flow in Loops](#223-control-flow-in-loops)
-
+      * [2.2.1. `while` Loop](#221-while-loop)
+      * [2.2.2. `for` Loop](#222-for-loop)
+      * [2.2.3. Control Flow in Loops](#223-control-flow-in-loops)
+  * [3. Empty Statements: `pass` and `...`](#3-empty-statements-pass-and-)
 <!-- TOC -->
 
 ## 1. Operators
@@ -354,3 +352,32 @@ for val in range(10):
         continue  # Skip even numbers
     print(val)
 ```
+
+
+## 3. Empty Statements: `pass` and `...`
+
+In Python, **`pass`** and **ellipsis (`...`)** are used as placeholder statements, allowing you to maintain syntactic structure when no operation is needed. Both serve important purposes in different scenarios:
+
+- **`pass`**: A clearer and more explicit placeholder, typically used when defining an empty class, function, or loop. It ensures that Python doesn’t raise an error when the body is left empty.
+  
+  - To define an empty class, use `pass`:
+    ```python
+    class MyClass:
+        pass
+    ```
+
+- **`...` (ellipsis)**: Can be used in more specific contexts, often as a temporary marker or placeholder for future code. It has the same behavior as `pass` in some cases but is used more flexibly.
+  
+  - Example of using `...` as a placeholder:
+    ```python
+    def future_function():
+        ...
+    ```
+
+**Key Uses**:
+- **Avoid errors**: Prevents `IndentationError` or `SyntaxError` when you need an empty block.
+- **Serve as a placeholder**: Marks parts of code that are yet to be implemented.
+- **Maintain syntactic structure**: Keeps your code syntactically valid while awaiting further implementation.
+- **Debugging purposes**: Used temporarily during development to avoid incomplete code from causing issues.
+
+
