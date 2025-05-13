@@ -75,8 +75,8 @@ Dynamic context refers to things that belong to the instances:
 
 * Instance variables, which store data unique to each object.
   * These variables are typically set during initialization in the `__init__` constructor.
-    > In Python, constructor overloading is not supported—only the last defined `__init__` method is used. To simulate overloading, you can use default parameter values (often `None`) and conditional logic.
-    >
+   > In Python, constructor overloading is not supported—only the last defined `__init__` method is used. To simulate overloading, you can use default parameter values (often `None`) and conditional logic.
+    
 * Methods that use `self`, allowing access to the instance's attributes and other methods.
 
 ```python
@@ -91,13 +91,17 @@ class ClassName:
         ... 
 ```
 
+> Instance methods can be called from the class as: `ClassName.instance_method(instance, param_x)`
+> * Passing an instance of the class as the first parameter (`self`)
+
 ### 2.2. Static Context (for class)
 
 Static context refers to things that belong to the class:
 
-* Class variables, shared across all instances (defined outside any method in this class).
-* Static methods, which don't use `self` or `cls`.
-* Class methods, which receive the class (`cls`) as their first argument (instead of `self`).
+* **Class variables**, shared across all instances (defined outside any method in this class).
+* **Static methods**, which don't use `self` or `cls`and they don't access class attributes. 
+  * They are utility methods associated with the class but do not operate on instance-specific data.
+* **Class methods**, which receive the class (`cls`) as their first argument (instead of `self`).
 
 ```python
 class ClassName:
@@ -113,6 +117,8 @@ class ClassName:
 ```
 
 * *If we want to create a new object from the class inside a class method, we can call the constructor like `cls(constructor_arguments)`.*
+
+
 
 ### 2.3. Attribute and Method Encapsulation
 
@@ -492,11 +498,11 @@ The `__repr__p  method (short for representation) is a special method in Python 
 - The object is displayed in Python’s interactive console (when you type the object’s name directly).
 - It serves as the official string representation of an object, primarily intended for developers (should be unambiguous and useful for debugging).
 
-Format:
+- Format:
 
-- Follow the pattern: `ClassName(attr1=value1, attr2=value2, ...)`.
-- The output should ideally be a valid Python expression that could recreate the object.
-- Use `{self.attr!r}` to display strings with quotes (e.g., `'hello'` instead of `hello`).
+  - Follow the pattern: `ClassName(attr1=value1, attr2=value2, ...)`.
+  - The output should ideally be a valid Python expression that could recreate the object.
+  - Use `{self.attr!r}` to display strings with quotes (e.g., `'hello'` instead of `hello`).
 
 #### 5.2.2. `__str__`
 
@@ -505,7 +511,7 @@ The `__str__` method defines the "informal" or user-friendly string representati
 * The `str(obj)` function is called, `print(obj)` or `f"{obj}"`.
 * The object is displayed in user-facing contexts.
 
-1. **Format**:
+* Format:
 
    * Should be human-readable and concise
    * No strict format requirements (unlike `__repr__`)If `__str__` is not defined, Python falls back to `__repr__

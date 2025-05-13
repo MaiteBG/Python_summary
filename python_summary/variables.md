@@ -357,6 +357,8 @@ To convert a variable to another type, we use de constructor of the new class ty
 - `int(x)`, `float(x)`, `str(x)`, `bool(x)`.
 - Other conversions: e.g. `hex(x)` *hexadecimal*.
 
+* [Dynamic String Evaluation](files_and_manager_context.md#12-dynamic-string-evaluation) from string on input data contexts. 
+
 ## 5. Scope of a variable
 
 ### 5.1. Use of a global/nonlocal variable
