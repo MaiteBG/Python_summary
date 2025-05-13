@@ -6,7 +6,7 @@
 * [Collections](python_summary/collections.md)
 * [Functions and Functional Programming Concepts](python_summary/functions.md)
 * [Modules, Classes, and Object-Oriented Programming](python_summary/modules_and_classes.md)
-* [# Input/Output: Prompt, Files and Context Manager](python_summary/files_and_manager_context.md)
+* [Input/Output: Prompt, Files and Context Manager](python_summary/files_and_manager_context.md)
 * [Exceptions, Assertions and Logging](python_summary/exceptions_and_logging.md)
 * [Data Serialization and Databases](python_summary/serialization_and_databases.md)
 <!-- TOC -->
