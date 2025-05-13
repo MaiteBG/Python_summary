@@ -1,6 +1,6 @@
 #### [Return to README.md](../README.md)
 
-# Input/Output: Prompt, Files, Context Manager, and Serialization
+# Input/Output: Prompt, Files and Context Manager
 
 <!-- TOC -->
   * [1. Input Data and Dynamic String Evaluation](#1-input-data-and-dynamic-string-evaluation)
@@ -21,11 +21,6 @@
     * [4.1. Manual `try/finally`](#41-manual-tryfinally)
     * [4.2. `with` and   `__enter__`/`__exit__` methods](#42-with-and-__enter____exit__-methods)
     * [4.3. `contextlib` library](#43-contextlib-library)
-  * [5. Data Serialization](#5-data-serialization)
-    * [5.1. JSON Handling](#51-json-handling)
-      * [5.1.1. Store to file and/or add indentation](#511-store-to-file-andor-add-indentation)
-    * [5.2. Serializing Non-Serializable Objects](#52-serializing-non-serializable-objects)
-    * [5.3. JSON vs. Other Data Formats (e.g., CSV, XML)](#53-json-vs-other-data-formats-eg-csv-xml)
 <!-- TOC -->
 
 ## 1. Input Data and Dynamic String Evaluation
@@ -312,107 +307,3 @@ with fm.use_func() as f:
     f.write('Hello, world!')
 ```
 
-## 5. Data Serialization
-
-### 5.1. JSON Handlin
-JSON (JavaScript Object Notation) is a lightweight, human-readable format used for storing and exchanging data. 
-* It's widely used for communication between servers and web applications or for saving structured data. 
-
-Python provides the `json` module to easily convert between Python objects and JSON format.
-* `json.dumps()`: Converts Python objects into a JSON string. 
-  * `TypeError` occurs when trying to serialize a non-serializable object.
-* `json.loads()`: Parses a JSON string and returns a Python object. 
-  * `JSONDecodeError` occurs when the JSON string is malformed.
-```python
-import json
-
-# Python object to JSON string
-data = {'name': 'John', 'age': 30}
-
-try:
-    json_str = json.dumps(data)  # Convert Python object to JSON string
-    print(json_str)  # {"name": "John", "age": 30}
-except TypeError as e:
-    print(f"Error during serialization: {e}")
-
-# JSON string to Python object
-try:
-    data_from_str = json.loads(json_str)  # Convert JSON string to Python object
-    print(data_from_str)  # {'name': 'John', 'age': 30}
-except json.JSONDecodeError as e:
-    print(f"Error during deserialization: {e}")
-
-```
-
-#### 5.1.1. Store to file and/or add indentation
-* `json.dump(data, file, indent) ` and `json.load(f)`
-  * file:   file where store/read JSON content
-  * indent:  add indentation to print or store JSON in a more readable format
-
-```python
-import json
-
-data = {'name': 'John', 'age': 30}
-
-# Writing JSON data to a file
-with open('data.json', 'w', encoding='utf8') as f:
-    json.dump(data, f, indent=4)  # Write with pretty formatting to data.json file
-
-# Reading JSON data from a file
-with open('data.json', 'r', encoding='utf8') as f:
-    data_from_file = json.load(f)
-    print(data_from_file)  # {'name': 'John', 'age': 30}
-```
-
-
-### 5.2. Serializing Non-Serializable Objects
-
-Not all Python objects can be serialized directly into JSON, like `datetime` or custom Python classes need special handling.
-
-* Provide a custom serializer using the `default` parameter of `json.dumps()`:
-  * The `default=str` argument converts non-serializable objects to strings during serialization.
-
-  ``` python
-  import json
-  from datetime import datetime
-    
-  # Serialize datetime object
-  current_time = datetime.now()
-  data = {'time': current_time}
-  json_str = json.dumps(data, default=str)  # Convert datetime to string
-  print(json_str)
-    
-  # Deserialize back to datetime
-  data_from_str = json.loads(json_str)
-  data_from_str['time'] = datetime.fromisoformat(data_from_str['time'])
-  print(data_from_str)
-  ```
-
-* Implement the `__dict__` method:
-  * `default` parameter: A function that will be used to convert non-serializable objects into a serializable format (e.g., custom objects).
-  ``` python
-  import json
-  class Person:
-      def __init__(self, name, age):
-          self.name = name
-          self.age = age
-    
-      def to_dict(self):
-          return {'name': self.name, 'age': self.age}
-    
-  # Serialize a custom object
-  person = Person('Alice', 28)
-  json_str = json.dumps(person, default=lambda obj: obj.to_dict())
-  print(json_str)  # {"name": "Alice", "age": 28}
-  ```
-
-
-### 5.3. JSON vs. Other Data Formats (e.g., CSV, XML)
-
-| Feature         | JSON                                 | CSV                      | XML                            |
-| --------------- | ------------------------------------ | ------------------------ | ------------------------------ |
-| **Readability** | Human-readable, hierarchical         | Simple, tabular format   | Human-readable, verbose        |
-| **Structure**   | Supports nested structures           | Flat, tabular structure  | Can support nested structures  |
-| **Use cases**   | APIs, web applications, config files | Simple datasets          | Documents, configuration       |
-| **File Size**   | Larger due to flexibility            | Smaller for simple data  | Can be larger due to markup    |
-| **Parsing**     | Easy with built-in libraries         | Simple with `csv` module | More complex, uses `xml.etree` |
