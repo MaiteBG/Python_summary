@@ -1,4 +1,4 @@
-#### [Return to README.md](../README.md)
+#### [Return to README.md](../../README.md)
 
 # Functions and Functional Programming Concepts
 
@@ -357,7 +357,7 @@ def say_name():
 say_name()
 ```
 
-Decorators can also be applied to classes. [Class decorators](modules_and_classes#51-class-decorators)
+Decorators can also be applied to classes. [Class decorators](modules_and_classes.md#51-class-decorators)
 
 ### 7.1. Multiple decorators
 

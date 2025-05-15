@@ -1,4 +1,4 @@
-#### [Return to README.md](../README.md)
+#### [Return to README.md](../../README.md)
 
 # Exceptions, Assertions and Logging
 
@@ -126,7 +126,7 @@ Logging levels define the severity of the messages. Logging levels (in increasin
 
 * `DEBUG` < `INFO` < `WARNING` < `ERROR` < `CRITICAL`
 
-![logging_levels.png](../static_md/logging_levels.png)
+![logging_levels.png](static/logging_levels.png)
 
 The default level is `WARNING`, meaning only messages at `WARNING` level or higher are shown unless reconfigured.
 
