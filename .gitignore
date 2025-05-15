@@ -49,3 +49,4 @@ htmlcov/
 # Ignore settings and config files
 *.config
 *.settings
+migrations/
