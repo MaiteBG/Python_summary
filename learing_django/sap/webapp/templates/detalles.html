@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>Details </title>
 </head>
 <body>
-<h1> Lista de personas </h1>
+<h1> Detalles de la persona </h1>
 
-
-<ul>
-   <li>  Persona {{persona.id}}: {{persona.nombre}} {{persona.apellido}} {{persona.email}}
-
-   </li>
-
-</ul>
+<table>
+     {{persona}}
+</table>
 
 <a href="{% url 'index' %}"> Volver a la pagina inical</a>
 </body>

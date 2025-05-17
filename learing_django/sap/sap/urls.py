@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from webapp.views import index_view, detalles, add_person
+from webapp.views import index_view, detalles, add_person, update_person, delete_person
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_view, name = "index"),
     path('detalles_persona/<int:id>', detalles),
     path('add_persona', add_person),
+    path('update_persona/<int:id>', update_person),
+    path('delete_persona/<int:id>', delete_person),
 ]

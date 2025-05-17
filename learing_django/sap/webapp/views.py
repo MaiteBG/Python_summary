@@ -11,7 +11,9 @@ def index_view(request):
 
 def detalles(request, id):
     persona = get_object_or_404(Persona, pk = id)
-    return render(request, 'detalles.html', {'persona': persona})
+    personaF = PersonaForm(request.POST, instance=persona,  editable = False)
+
+    return render(request, 'detalles.html', {'persona': personaF})
 
 
 def add_person(request):
@@ -25,3 +27,26 @@ def add_person(request):
     else:
         personaF =  PersonaForm()
     return render(request, 'add_person.html', {'persona': personaF})
+
+
+
+def update_person(request, id):
+    persona = get_object_or_404(Persona, pk=id)
+    if request.method == 'POST':
+        personaF = PersonaForm(request.POST, instance=persona)
+        if personaF.is_valid():
+            personaF.save()
+            return redirect("index")
+        else:
+            print(personaF.errors)
+    else:
+        personaF = PersonaForm(instance=persona)
+        return render(request, 'update_person.html', {'persona': personaF})
+
+
+
+def delete_person(request, id):
+    persona = get_object_or_404(Persona, pk=id)
+    if persona:
+        persona.delete()
+    return redirect("index")

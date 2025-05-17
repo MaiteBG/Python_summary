@@ -16,7 +16,8 @@ Cantidad de personas: {{num_personas}}
 {% for persona in personas_data %}
    <li>  Persona {{persona.id}}: {{persona.nombre}} {{persona.apellido}} {{persona.email}}
        <a href="detalles_persona/{{persona.id}}"> Detalles </a>
-
+       <a href="update_persona/{{persona.id}}"> Modificar </a>
+       <a href="delete_persona/{{persona.id}}"> Eliminar </a>
    </li>
 {% endfor %}
 </ul>
