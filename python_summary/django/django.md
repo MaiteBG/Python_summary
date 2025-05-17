@@ -212,8 +212,10 @@ urlpatterns = [
 - `'your-url/'` is the URL path.  
   - If `''` is the URL path it corresponds to the main page (default page) when the URL is empty.
 - `my_view` is the view function to handle requests to this URL.
-- `name` is an optional identifier for reverse URL resolution.
-
+- `name` is an optional identifier used for reverse URL resolution.
+  - For example, `name='index'` can be used to refer to the main page (useful for redirects).
+  - In an HTML template, you can use: `<a href="{% url 'index' %}">`.
+  - It's a good practice to use `name` because if the URL path changes, you won't need to update the links throughout your code.
 
 Now, visiting `/your-url/` in your browser will trigger `your_view` and display the response.
 

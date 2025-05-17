@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+<h1> Lista de personas </h1>
+
+Cantidad de personas: {{num_personas}}
+
+<div> <a href="add_persona"> Agregar nueva persona </a> </div>
+
+
+<ul>
+{% for persona in personas_data %}
+   <li>  Persona {{persona.id}}: {{persona.nombre}} {{persona.apellido}} {{persona.email}}
+       <a href="detalles_persona/{{persona.id}}"> Detalles </a>
+
+   </li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
