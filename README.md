@@ -1,4 +1,13 @@
 # Python Summary
+
+## Python Context
+<!-- TOC -->
+* [What is Python?](#what-is-python)
+* [What does "Pythonic" mean?](#what-does-pythonic-mean)
+<!-- TOC -->
+
+
+## Core Python Concepts
 <!-- TOC -->
 * [Comments, Docstrings and Naming Conventions](python_summary/general/basic_concepts_conventions.md)
 * [Variables: Basic Types, Scope, and Environment](python_summary/general/variables.md)
@@ -12,10 +21,12 @@
 <!-- TOC -->
 
 
+## Python Frameworks for Web and GUI Development
 <!-- TOC -->
-* [What is Python?](#what-is-python)
-* [What does "Pythonic" mean?](#what-does-pythonic-mean)
+* [Django](python_summary/django/django.md)
 <!-- TOC -->
+
+
 
 ## What is Python?
 

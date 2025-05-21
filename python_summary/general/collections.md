@@ -14,7 +14,7 @@
     * [4.1. Set-specific operations](#41-set-specific-operations)
   * [5. Dictionaries](#5-dictionaries)
     * [5.1. Dict-specific operations](#51-dict-specific-operations)
-    * [5.2. 4.2 Special dictionary types](#52-42-special-dictionary-types)
+    * [5.2. Special dictionary types](#52-special-dictionary-types)
   * [6. Generic collection features](#6-generic-collection-features)
     * [6.1. Collections consisted format on manual definition](#61-collections-consisted-format-on-manual-definition)
     * [6.2. Common iterable/collection operations](#62-common-iterablecollection-operations)
@@ -148,7 +148,7 @@ A dictionary is a **key-value** structure.
 * **Delete**
   `del my_dict['k']` or `my_dict.pop('k')`
 
-### 5.2. 4.2 Special dictionary types
+### 5.2. Special dictionary types
 
 * **Special types**
   * `OrderedDict` (preserves insertion order)
